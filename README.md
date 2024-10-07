@@ -24,11 +24,11 @@
 - **Duration**: 
 
 ## Team Member 👥
-- **강민규** (M1nkyu)[https://github.com/M1nKyu]:
+- **강민규** ([M1nkyu](https://github.com/M1nKyu)):
 	- roles
-- **전재억** (eokjae)[https://github.com/eokjae]:
+- **전재억** ([eokjae](https://github.com/eokjae)):
 	- roles
-- **최강희** (kangheechoi)[https://github.com/kangheechoi]:
+- **최강희** ([kangheechoi](https://github.com/kangheechoi)):
 	- roles
 
 ## Insatll ⚙️
