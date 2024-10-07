@@ -35,3 +35,6 @@
 ### Prerequisites 📦
 
 ### Getting Started 🚀
+
+## Convention
+- [GitHub Commit Message Convention](https://github.com/M1nKyu/weather-clothes/wiki/Commit-Convention)
