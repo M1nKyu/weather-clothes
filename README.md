@@ -1,30 +1,29 @@
-# 프로젝트명
+# 프로젝트명 👗 
 ` 기술 스택 뱃지 `
 >한줄 소개
 
 - 사진
-## Description
+## Description 🌟
 - 자세한 설명
 
-
-## Demo
+## Demo 📱
 - 데모 사진
 
-## Main Feature
+## Main Feature 🔧
 
 
-## Technology Stack
+## Technology Stack 💻
 - **Front-end**: 
 - **Back-end**:
 - **Database**:
 - 
 
-## Development Timeline
+## Development Timeline ⏳
 - **Start Date**: 
 - **End Date**:
 - **Duration**: 
 
-## Team Member
+## Team Member 👥
 - **강민규** (M1nkyu)[https://github.com/M1nKyu]:
 	- roles
 - **전재억** (eokjae)[https://github.com/eokjae]:
@@ -32,7 +31,7 @@
 - **최강희** (kangheechoi)[https://github.com/kangheechoi]:
 	- roles
 
-## Insatll
-### Prerequisites
+## Insatll ⚙️
+### Prerequisites 📦
 
-### Getting Started
+### Getting Started 🚀
