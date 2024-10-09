@@ -36,5 +36,5 @@
 
 ### Getting Started 🚀
 
-## Convention 📜
-- [GitHub Commit Message Convention](https://github.com/M1nKyu/weather-clothes/wiki/Commit-Convention)
+## Wiki 📖
+- [Developer Menual](https://github.com/M1nKyu/weather-clothes/wiki/%F0%9F%91%A8%F0%9F%8F%BC%E2%80%8D%F0%9F%92%BB-Developer-Menual))
