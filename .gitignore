@@ -1,0 +1,32 @@
+# Maven 빌드 결과물
+weather-clothes/weather-clothes/target
+
+# IntelliJ IDEA
+/.idea
+
+# Eclipse
+/.project
+/.classpath
+/.settings/
+
+# 환경 설정 파일
+weather-clothes/weather-clothes/src/main/resources/application.properties
+
+
+# 로그 및 임시 파일
+*.log
+/tmp/
+
+# 패키징된 결과물
+*.jar
+*.war
+
+# 테스트 결과 및 커버리지 파일
+/test-output/
+/coverage/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
