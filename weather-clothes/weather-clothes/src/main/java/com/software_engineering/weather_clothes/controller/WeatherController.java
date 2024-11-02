@@ -6,19 +6,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * WeatherController는 날씨 데이터를 요청받고 처리합니다.
+ * WeatherController는 날씨 데이터를 요청받고 처리.
  */
 @RestController
 public class WeatherController {
 
-    // 생성자 주입 방식: WeatherService 객체를 주입받아 사용합니다.
+    // WeatherService 객체를 주입받아 사용.
     private final WeatherService weatherService;
     public WeatherController(WeatherService weatherService) {
         this.weatherService = weatherService;
     }
 
     /**
-     * /weather 엔드포인트로 날씨 데이터를 가져옵니다.
+     * /weather 엔드포인트로 날씨 데이터를 가져옴.
      * @param nx 예보 지점 X 좌표
      * @param ny 예보 지점 Y 좌표
      * @return 처리 결과 메시지
