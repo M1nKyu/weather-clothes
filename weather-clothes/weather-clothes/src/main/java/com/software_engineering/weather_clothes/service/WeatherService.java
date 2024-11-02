@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * WeatherService는 날씨 데이터를 API로부터 받아 파싱하고 DB에 저장합니다.
+ * WeatherService는 날씨 데이터를 API로부터 받아 파싱하고 DB에 저장.
  */
 @Service
 public class WeatherService {
@@ -26,7 +26,7 @@ public class WeatherService {
     }
 
     /**
-     * 주어진 nx, ny 좌표에 해당하는 날씨 데이터를 API에서 가져와 DB에 저장합니다.
+     * 주어진 nx, ny 좌표에 해당하는 날씨 데이터를 API에서 가져와 DB에 저장.
      * @param nx 예보 지점 X 좌표
      * @param ny 예보 지점 Y 좌표
      * @throws Exception
@@ -39,7 +39,7 @@ public class WeatherService {
     }
 
     /**
-     * API로부터 받은 JSON 데이터를 Weather 객체로 변환하여 하나의 로우로 저장합니다.
+     * API로부터 받은 JSON 데이터를 Weather 객체로 변환하여 하나의 로우로 저장.
      * @param jsonNode API 응답 JSON 노드
      * @param nx 예보 지점 X 좌표
      * @param ny 예보 지점 Y 좌표
