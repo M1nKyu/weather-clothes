@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,8 +26,28 @@
     </style>
 </head>
 <body>
-    <h1>메인페이지 입니다.</h1>
-    <span>지역 선택으로 이동:</span>
-    <a href="/location/select" class="button">Go</a>
+<h1>메인페이지 입니다.</h1>
+<span>지역 선택으로 이동:</span>
+<a href="/location/select" class="button">Go</a>
+
+<!-- 날씨 데이터 가져오기 버튼 추가 -->
+<button id="fetchWeatherBtn" class="button">Fetch Weather Data</button>
+<div id="message"></div>
+
+<script>
+    document.getElementById("fetchWeatherBtn").onclick = function() {
+        fetch('/weather/fetchData', {
+            method: 'POST',
+            credentials: 'include' // 쿠키를 포함하여 요청
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("message").innerText = data.message;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    };
+</script>
 </body>
 </html>
