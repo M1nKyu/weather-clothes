@@ -93,6 +93,13 @@ public class LocationController {
         nxCookie.setMaxAge(maxAge);
         nyCookie.setMaxAge(maxAge);
 
+        // 쿠키의 Path 설정
+        regionCookie.setPath("/"); // 모든 경로에서 유효하도록 설정
+        districtCookie.setPath("/");
+        townCookie.setPath("/");
+        nxCookie.setPath("/");
+        nyCookie.setPath("/");
+
         response.addCookie(regionCookie);
         response.addCookie(districtCookie);
         response.addCookie(townCookie);
