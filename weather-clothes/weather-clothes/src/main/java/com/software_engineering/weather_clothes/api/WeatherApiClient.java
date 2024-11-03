@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -32,12 +33,16 @@ public class WeatherApiClient {
      */
     public String getWeatherData(String nx, String ny) throws Exception {
 
-        // 현재 날짜와 시간을 요청 변수로 전달하기 위한 변수 today, nowTime
+// 현재 날짜와 시간을 요청 변수로 전달하기 위한 변수 today, nowTime
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
-        SimpleDateFormat sdf2 = new SimpleDateFormat("HH00");
-        Date now = new Date();
-        String today = sdf1.format(now);
-        String nowTime = sdf2.format(now);
+        SimpleDateFormat sdf2 = new SimpleDateFormat("HHmm"); // HH00에서 HHMM으로 수정
+        Calendar calendar = Calendar.getInstance();
+
+        // 현재 시간에서 1시간을 빼기
+        calendar.add(Calendar.HOUR_OF_DAY, -1); // 1시간 전으로 설정
+
+        String today = sdf1.format(calendar.getTime()); // 수정된 시간으로 날짜 가져오기
+        String nowTime = sdf2.format(calendar.getTime()); // 수정된 시간으로 시간 가져오기
 
         // API 요청할 URL을 조합합니다.
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst");
