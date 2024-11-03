@@ -6,8 +6,12 @@ import com.software_engineering.weather_clothes.api.WeatherApiClient;
 import com.software_engineering.weather_clothes.model.Weather;
 import com.software_engineering.weather_clothes.repository.WeatherRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * WeatherService는 날씨 데이터를 API로부터 받아 파싱하고 DB에 저장.
@@ -31,11 +35,16 @@ public class WeatherService {
      * @param ny 예보 지점 Y 좌표
      * @throws Exception
      */
+    @Transactional
     public void fetchAndStoreWeatherData(String nx, String ny) throws Exception {
         String response = weatherApiClient.getWeatherData(nx, ny);
         JsonNode jsonNode = objectMapper.readTree(response);
-        Weather weather = parseWeatherData(jsonNode, nx, ny);
-        weatherRepository.save(weather);
+
+        // items 배열을 순회하면서 각각의 Weather 객체를 생성하고 DB에 저장
+        List<Weather> weatherList = parseWeatherData(jsonNode, nx, ny);
+
+        // Weather 객체를 DB에 저장
+        weatherRepository.saveAll(weatherList);
     }
 
     /**
@@ -45,33 +54,45 @@ public class WeatherService {
      * @param ny 예보 지점 Y 좌표
      * @return Weather 객체
      */
-    private Weather parseWeatherData(JsonNode jsonNode, String nx, String ny) {
-        Weather weather = new Weather();
+    private List<Weather> parseWeatherData(JsonNode jsonNode, String nx, String ny) {
+        List<Weather> weatherList = new ArrayList<>();
         JsonNode items = jsonNode.path("response").path("body").path("items").path("item");
 
-        // 기본 정보 설정
-        weather.setBaseDate(items.get(0).path("baseDate").asText());
-        weather.setBaseTime(items.get(0).path("baseTime").asText());
-        weather.setNx(Integer.parseInt(nx));
-        weather.setNy(Integer.parseInt(ny));
+        // 예보 데이터를 카테고리별로 그룹화
+        Map<String, Weather> weatherMap = new HashMap<>();
 
-        // 카테고리별로 데이터를 매핑하여 하나의 Weather 객체에 설정
+        // items 배열의 각 예보 데이터를 파싱하여 Weather 객체로 변환
         for (JsonNode item : items) {
-            String category = item.path("category").asText();
-            double value = item.path("obsrValue").asDouble();
+            String fcstDate = item.path("fcstDate").asText();  // 예보 날짜
+            String fcstTime = item.path("fcstTime").asText();  // 예보 시간
+            String key = fcstDate + "_" + fcstTime; // 고유 키 생성
 
+            Weather weather = weatherMap.computeIfAbsent(key, k -> new Weather());
+            weather.setBaseDate(item.path("baseDate").asText());
+            weather.setBaseTime(item.path("baseTime").asText());
+            weather.setNx(Integer.parseInt(nx));
+            weather.setNy(Integer.parseInt(ny));
+            weather.setFcstDate(fcstDate);
+            weather.setFcstTime(fcstTime);
+
+            String category = item.path("category").asText();
+            double fcstValue = item.path("fcstValue").asDouble();  // 예보 값
+
+            // 카테고리별로 데이터를 매핑하여 Weather 객체에 설정
             switch (category) {
-                case "T1H": weather.setT1h(value); break;
-                case "RN1": weather.setRn1(value); break;
-                case "UUU": weather.setUuu(value); break;
-                case "VVV": weather.setVvv(value); break;
-                case "REH": weather.setReh((int) value); break;
-                case "PTY": weather.setPty((int) value); break;
-                case "VEC": weather.setVec(value); break;
-                case "WSD": weather.setWsd(value); break;
+                case "T1H": weather.setT1h(fcstValue); break; // 기온
+                case "RN1": weather.setRn1(fcstValue); break; // 1시간 강수량
+                case "UUU": weather.setUuu(fcstValue); break; // 동서바람성분
+                case "VVV": weather.setVvv(fcstValue); break; // 남북바람성분
+                case "REH": weather.setReh((int) fcstValue); break; // 습도
+                case "PTY": weather.setPty((int) fcstValue); break; // 강수형태
+                case "VEC": weather.setVec(fcstValue); break; // 풍향
+                case "WSD": weather.setWsd(fcstValue); break; // 풍속
             }
         }
 
-        return weather;
+        // 고유 Weather 객체들을 리스트에 추가
+        weatherList.addAll(weatherMap.values());
+        return weatherList;
     }
 }
