@@ -17,6 +17,9 @@ public class Weather {
     private int nx;            // 예보 지점 X 좌표
     private int ny;            // 예보 지점 Y 좌표
 
+    private String fcstDate;   // 예보 날짜
+    private String fcstTime;   // 예보 시간
+
     private double t1h;   // 기온 (℃)
     private double rn1;   // 1시간 강수량 (mm)
     private double uuu;   // 동서바람성분 (m/s)
