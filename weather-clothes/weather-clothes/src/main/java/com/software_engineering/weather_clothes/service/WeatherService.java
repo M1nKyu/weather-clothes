@@ -43,8 +43,23 @@ public class WeatherService {
         // items 배열을 순회하면서 각각의 Weather 객체를 생성하고 DB에 저장
         List<Weather> weatherList = parseWeatherData(jsonNode, nx, ny);
 
-        // Weather 객체를 DB에 저장
-        weatherRepository.saveAll(weatherList);
+        List<Weather> filteredWeatherList = new ArrayList<>();
+
+        for (Weather weather : weatherList) {
+            // 중복 여부 확인
+            if (!weatherRepository.existsByBaseDateAndBaseTimeAndFcstDateAndFcstTimeAndNxAndNy(
+                    weather.getBaseDate(),
+                    weather.getBaseTime(),
+                    weather.getFcstDate(),
+                    weather.getFcstTime(),
+                    weather.getNx(),
+                    weather.getNy())) {
+                filteredWeatherList.add(weather);
+            }
+        }
+
+        // 중복되지 않은 Weather 객체들을 DB에 저장
+        weatherRepository.saveAll(filteredWeatherList);
     }
 
     /**

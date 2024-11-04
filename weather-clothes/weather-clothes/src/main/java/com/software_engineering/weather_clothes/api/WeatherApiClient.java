@@ -13,13 +13,13 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * WeatherApiClient는 기상청 API와의 통신을 담당하는 클래스입니다.
- * API 요청을 보내고, 응답 데이터를 문자열로 반환합니다.
+ * WeatherApiClient는 기상청 API와의 통신을 담당하는 클래스.
+ * API 요청을 보내고, 응답 데이터를 문자열로 반환.
  */
 @Component
 public class WeatherApiClient {
 
-    // application.properties 에서 서비스키를 가져옵니다.
+    // application.properties 에서 API키를 가져옴.
     @Value("${weather.api.key}")
     private String serviceKey;
 
@@ -36,13 +36,10 @@ public class WeatherApiClient {
 // 현재 날짜와 시간을 요청 변수로 전달하기 위한 변수 today, nowTime
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
         SimpleDateFormat sdf2 = new SimpleDateFormat("HHmm"); // HH00에서 HHMM으로 수정
-        Calendar calendar = Calendar.getInstance();
 
-        // 현재 시간에서 1시간을 빼기
-        calendar.add(Calendar.HOUR_OF_DAY, -1); // 1시간 전으로 설정
-
-        String today = sdf1.format(calendar.getTime()); // 수정된 시간으로 날짜 가져오기
-        String nowTime = sdf2.format(calendar.getTime()); // 수정된 시간으로 시간 가져오기
+        Date now = new Date();
+        String today = sdf1.format(now);
+        String nowTime = sdf2.format(now);
 
         // API 요청할 URL을 조합합니다.
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst");
