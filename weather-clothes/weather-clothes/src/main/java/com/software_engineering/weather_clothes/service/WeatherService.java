@@ -29,8 +29,10 @@ public class WeatherService {
         this.objectMapper = objectMapper;
     }
 
+
     /**
      * 주어진 nx, ny 좌표에 해당하는 날씨 데이터를 API에서 가져와 DB에 저장.
+     * 중복되지 않은 데이터만 저장됩니다.
      * @param nx 예보 지점 X 좌표
      * @param ny 예보 지점 Y 좌표
      * @throws Exception
@@ -39,12 +41,35 @@ public class WeatherService {
     public void fetchAndStoreWeatherData(String nx, String ny) throws Exception {
         String response = weatherApiClient.getWeatherData(nx, ny);
         JsonNode jsonNode = objectMapper.readTree(response);
-
-        // items 배열을 순회하면서 각각의 Weather 객체를 생성하고 DB에 저장
         List<Weather> weatherList = parseWeatherData(jsonNode, nx, ny);
 
-        // Weather 객체를 DB에 저장
-        weatherRepository.saveAll(weatherList);
+        // 중복되지 않은 데이터만 필터링하여 저장
+        List<Weather> newWeatherList = new ArrayList<>();
+        for (Weather weather : weatherList) {
+            if (!isWeatherDataExists(weather)) {
+                newWeatherList.add(weather);
+            }
+        }
+
+        if (!newWeatherList.isEmpty()) {
+            weatherRepository.saveAll(newWeatherList);
+        }
+    }
+
+    /**
+     * 날씨 데이터의 중복 여부를 확인합니다.
+     * @param weather 확인할 날씨 데이터
+     * @return 중복 여부 (true: 중복, false: 중복 아님)
+     */
+    private boolean isWeatherDataExists(Weather weather) {
+        return weatherRepository.existsByBaseDateAndBaseTimeAndFcstDateAndFcstTimeAndNxAndNy(
+                weather.getBaseDate(),
+                weather.getBaseTime(),
+                weather.getFcstDate(),
+                weather.getFcstTime(),
+                weather.getNx(),
+                weather.getNy()
+        );
     }
 
     /**
@@ -95,4 +120,9 @@ public class WeatherService {
         weatherList.addAll(weatherMap.values());
         return weatherList;
     }
+
+    public List<Weather> getWeatherData(String baseDate, String baseTime, int nx, int ny) {
+        return weatherRepository.findTop6ByBaseDateAndBaseTimeAndNxAndNy(baseDate, baseTime, nx, ny);
+    }
+
 }
