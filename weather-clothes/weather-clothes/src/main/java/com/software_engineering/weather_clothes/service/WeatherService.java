@@ -121,6 +121,8 @@ public class WeatherService {
         return weatherList;
     }
 
-
+    public List<Weather> getWeatherData(String baseDate, String baseTime, int nx, int ny) {
+        return weatherRepository.findTop6ByBaseDateAndBaseTimeAndNxAndNy(baseDate, baseTime, nx, ny);
+    }
 
 }

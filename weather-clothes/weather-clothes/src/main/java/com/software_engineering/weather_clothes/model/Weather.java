@@ -14,11 +14,12 @@ public class Weather {
 
     private String baseDate;   // 기준 날짜
     private String baseTime;   // 기준 시간
-    private int nx;            // 예보 지점 X 좌표
-    private int ny;            // 예보 지점 Y 좌표
 
     private String fcstDate;   // 예보 날짜
     private String fcstTime;   // 예보 시간
+
+    private int nx;            // 예보 지점 X 좌표
+    private int ny;            // 예보 지점 Y 좌표
 
     private double t1h;   // 기온 (℃)
     private double rn1;   // 1시간 강수량 (mm)
