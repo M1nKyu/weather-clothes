@@ -122,7 +122,7 @@ public class WeatherService {
     }
 
     public List<Weather> getWeatherData(String baseDate, String baseTime, int nx, int ny) {
-        return weatherRepository.findTop6ByBaseDateAndBaseTimeAndNxAndNy(baseDate, baseTime, nx, ny);
+        return weatherRepository.findTop6ByBaseDateAndBaseTimeAndNxAndNyOrderByFcstDateAscFcstTimeAsc(baseDate, baseTime, nx, ny);
     }
 
 }
