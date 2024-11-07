@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -74,12 +75,21 @@ public class WeatherController {
         String nx = null;
         String ny = null;
 
+        // baseDate, baseTime 구함
+        Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
-        SimpleDateFormat sdf2 = new SimpleDateFormat("HH30");
 
-        Date now = new Date();
-        String baseDate = sdf1.format(now);
-        String baseTime = sdf2.format(now);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+
+        if (minute < 30) {
+            cal.add(Calendar.HOUR_OF_DAY, -1);
+            hour = cal.get(Calendar.HOUR_OF_DAY);
+        }
+
+        String baseTime = String.format("%02d30", hour);
+        String baseDate = sdf1.format(cal.getTime());
+
 
         // 쿠키에서 nx, ny 정보 가져오기
         Cookie[] cookies = request.getCookies();
