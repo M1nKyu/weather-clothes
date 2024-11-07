@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page</title>
     <style>
+<style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -27,54 +25,60 @@
             color: red;
             margin-top: 20px;
         }
-    </style>
+    </style>    </style>
+    <title>Main Weather Page</title>
 </head>
 <body>
 <h1>메인페이지 입니다.</h1>
 <span>지역 선택으로 이동:</span>
 <a href="/location/select" class="button">Go</a>
 
-<div id="message"></div>
-<div id="weatherOutput"></div>
+<!-- 날씨 데이터가 존재할 때 -->
+<div th:if="${weatherData != null}">
+    <h2>Weather Forecast</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Base Date</th>
+            <th>Base Time</th>
+            <th>Forecast Date</th>
+            <th>Forecast Time</th>
+            <th>NX</th>
+            <th>NY</th>
+            <th>Temperature (°C)</th>
+            <th>Precipitation (mm)</th>
+            <th>East-West Wind (m/s)</th>
+            <th>North-South Wind (m/s)</th>
+            <th>Humidity (%)</th>
+            <th>Precipitation Type</th>
+            <th>Wind Direction (°)</th>
+            <th>Wind Speed (m/s)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="weather : ${weatherData}">
+            <td th:text="${weather.baseDate}"></td>
+            <td th:text="${weather.baseTime}"></td>
+            <td th:text="${weather.fcstDate}"></td>
+            <td th:text="${weather.fcstTime}"></td>
+            <td th:text="${weather.nx}"></td>
+            <td th:text="${weather.ny}"></td>
+            <td th:text="${weather.t1h}"></td>
+            <td th:text="${weather.rn1}"></td>
+            <td th:text="${weather.uuu}"></td>
+            <td th:text="${weather.vvv}"></td>
+            <td th:text="${weather.reh}"></td>
+            <td th:text="${weather.pty}"></td>
+            <td th:text="${weather.vec}"></td>
+            <td th:text="${weather.wsd}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
-<script>
-    window.onload = function() {
-        fetch('/weather/fetchData', {
-            method: 'POST',
-            credentials: 'include' // 쿠키를 포함하여 요청
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("message").innerText = data.message;
-
-            // fetchWeather 요청을 fetchData 요청의 성공 콜백 안으로 이동
-            fetch('/weather/fetchWeather', {
-                method: 'GET',
-                credentials: 'include' // 쿠키를 포함하여 요청
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (Array.isArray(data)) {
-                    // 날씨 데이터를 출력할 div 요소에 추가
-                    const weatherOutput = document.getElementById("weatherOutput");
-                    weatherOutput.innerHTML = ""; // 기존 내용 삭제
-                    data.forEach(weather => {
-                        const weatherInfo = document.createElement("div");
-                        weatherInfo.innerText = `Date: ${weather.baseDate}, Time: ${weather.baseTime}, NX: ${weather.nx}, NY: ${weather.ny}, time: ${weather.fcstTime}, 온도: ${weather.t1h}`;
-                        weatherOutput.appendChild(weatherInfo);
-                    });
-                } else {
-                    document.getElementById("message").innerText = data.message; // 오류 메시지 출력
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    };
-</script>
+<!-- 날씨 데이터가 없을 때 -->
+<div th:if="${weatherData == null}" class="error-message">
+    <p th:text="${message}">Location data not found in cookies.</p>
+</div>
 </body>
 </html>
