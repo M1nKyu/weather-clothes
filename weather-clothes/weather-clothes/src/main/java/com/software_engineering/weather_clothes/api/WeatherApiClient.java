@@ -32,14 +32,22 @@ public class WeatherApiClient {
      * @throws Exception
      */
     public String getWeatherData(String nx, String ny) throws Exception {
-
-// 현재 날짜와 시간을 요청 변수로 전달하기 위한 변수 today, nowTime
+        Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
-        SimpleDateFormat sdf2 = new SimpleDateFormat("HHmm"); // HH00에서 HHMM으로 수정
 
-        Date now = new Date();
-        String today = sdf1.format(now);
-        String nowTime = sdf2.format(now);
+        // 현재 시간과 분을 구합니다
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+
+        // 30분 이전이면 한 시간 전 데이터를 요청
+        if (minute < 30) {
+            cal.add(Calendar.HOUR_OF_DAY, -1);
+            hour = cal.get(Calendar.HOUR_OF_DAY);
+        }
+
+        // baseTime 형식을 "HH30"으로 맞춤
+        String baseTime = String.format("%02d30", hour);
+        String today = sdf1.format(cal.getTime());
 
         // API 요청할 URL을 조합합니다.
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst");
@@ -48,7 +56,7 @@ public class WeatherApiClient {
         urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8"));
         urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8"));
         urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + today);
-        urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + nowTime);
+        urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + baseTime);
         urlBuilder.append("&" + URLEncoder.encode("nx", "UTF-8") + "=" + nx);
         urlBuilder.append("&" + URLEncoder.encode("ny", "UTF-8") + "=" + ny);
 
