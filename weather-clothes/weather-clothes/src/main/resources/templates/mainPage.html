@@ -2,12 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <style>
-<style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 50px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
         }
+
+        /* 계절별 배경 이미지 */
+        body[data-season='spring'] {
+            background-image: url('/images/spring.jpg');
+        }
+        body[data-season='summer'] {
+            background-image: url('/images/summer.jpg');
+        }
+        body[data-season='autumn'] {
+            background-image: url('/images/autumn.jpg');
+        }
+        body[data-season='winter'] {
+            background-image: url('/images/winter.jpg');
+        }
+
         .button {
             padding: 10px 20px;
             font-size: 16px;
@@ -25,10 +43,17 @@
             color: red;
             margin-top: 20px;
         }
-    </style>    </style>
+
+        /* 테이블과 텍스트의 가독성을 위한 스타일 */
+        table, h1, h2, span {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
     <title>Main Weather Page</title>
 </head>
-<body>
+<body th:data-season="${season}">
 <h1>메인페이지 입니다.</h1>
 <span>지역 선택으로 이동:</span>
 <a href="/location/select" class="button">Go</a>

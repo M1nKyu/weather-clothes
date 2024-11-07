@@ -58,6 +58,20 @@ public class WeatherPageController {
             }
         }
 
+        // 현재 계절 결정
+        int month = cal.get(Calendar.MONTH) + 1; // 0-based 이므로 1을 더함
+        String season;
+        if (month >= 3 && month <= 5) {
+            season = "spring";
+        } else if (month >= 6 && month <= 8) {
+            season = "summer";
+        } else if (month >= 9 && month <= 11) {
+            season = "autumn";
+        } else {
+            season = "winter";
+        }
+        model.addAttribute("season", season);
+
         if (nx != null && ny != null) {
             // 날씨 데이터를 저장하고 조회
             weatherService.fetchAndStoreWeatherData(nx, ny);
