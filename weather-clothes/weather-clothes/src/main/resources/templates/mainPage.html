@@ -47,32 +47,29 @@
         .then(data => {
             document.getElementById("message").innerText = data.message;
 
-            // 메시지에 "Location data not found"가 포함되어 있으면 추가 동작을 하지 않음
-            // 입력 칸을 제거하거나 나타나게 하는 로직을 여기에서 처리하지 않음
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-
-
-        fetch('/weather/fetchWeather', {
-            method: 'GET',
-            credentials: 'include' // 쿠키를 포함하여 요청
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (Array.isArray(data)) {
-                // 날씨 데이터를 출력할 div 요소에 추가
-                const weatherOutput = document.getElementById("weatherOutput");
-                weatherOutput.innerHTML = ""; // 기존 내용 삭제
-                data.forEach(weather => {
-                    const weatherInfo = document.createElement("div");
-                    weatherInfo.innerText = `Date: ${weather.baseDate}, Time: ${weather.baseTime}, NX: ${weather.nx}, NY: ${weather.ny}, time: ${weather.fcstTime}, ${weather.t1h}`;
-                    weatherOutput.appendChild(weatherInfo);
-                });
-            } else {
-                document.getElementById("message").innerText = data.message; // 오류 메시지 출력
-            }
+            // fetchWeather 요청을 fetchData 요청의 성공 콜백 안으로 이동
+            fetch('/weather/fetchWeather', {
+                method: 'GET',
+                credentials: 'include' // 쿠키를 포함하여 요청
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (Array.isArray(data)) {
+                    // 날씨 데이터를 출력할 div 요소에 추가
+                    const weatherOutput = document.getElementById("weatherOutput");
+                    weatherOutput.innerHTML = ""; // 기존 내용 삭제
+                    data.forEach(weather => {
+                        const weatherInfo = document.createElement("div");
+                        weatherInfo.innerText = `Date: ${weather.baseDate}, Time: ${weather.baseTime}, NX: ${weather.nx}, NY: ${weather.ny}, time: ${weather.fcstTime}, 온도: ${weather.t1h}`;
+                        weatherOutput.appendChild(weatherInfo);
+                    });
+                } else {
+                    document.getElementById("message").innerText = data.message; // 오류 메시지 출력
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         })
         .catch(error => {
             console.error('Error:', error);

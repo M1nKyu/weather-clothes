@@ -2,7 +2,6 @@ package com.software_engineering.weather_clothes.repository;
 
 import com.software_engineering.weather_clothes.model.Weather;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,8 +20,10 @@ public interface WeatherRepository extends JpaRepository <Weather, Long> {
             int ny
     );
 
-    // 주어진 baseDate, baseTime, nx, ny에 해당하는 날씨 데이터 6개를 조회하는 메서드 추가
-    List<Weather> findTop6ByBaseDateAndBaseTimeAndNxAndNy(String baseDate, String baseTime, int nx, int ny);
+    /**
+     * 주어진 baseDate, baseTime, nx, ny에 해당하는 날씨 데이터 6개를 조회하는 메서드 추가
+     */
+    List<Weather> findTop6ByBaseDateAndBaseTimeAndNxAndNyOrderByFcstDateAscFcstTimeAsc(String baseDate, String baseTime, int nx, int ny);
 
 
 }
