@@ -43,9 +43,6 @@ public class WeatherService {
         JsonNode jsonNode = objectMapper.readTree(response);
         List<Weather> weatherList = parseWeatherData(jsonNode, nx, ny);
 
-        // TODO: baseTime 추출
-
-
         // 중복되지 않은 데이터만 필터링하여 저장
         List<Weather> newWeatherList = new ArrayList<>();
         for (Weather weather : weatherList) {
