@@ -46,6 +46,7 @@ public class WeatherPageController {
         String baseTime = String.format("%02d30", hour);
         String baseDate = sdf1.format(cal.getTime());
 
+
         // 쿠키에서 nx, ny 정보 가져오기
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -58,6 +59,7 @@ public class WeatherPageController {
             }
         }
 
+        // TODO: 분리
         // 현재 계절 결정
         int month = cal.get(Calendar.MONTH) + 1; // 0-based 이므로 1을 더함
         String season;
@@ -76,7 +78,13 @@ public class WeatherPageController {
             // 날씨 데이터를 저장하고 조회
             weatherService.fetchAndStoreWeatherData(nx, ny);
             List<Weather> weatherData = weatherService.getWeatherData(baseDate, baseTime, Integer.parseInt(nx), Integer.parseInt(ny));
-            model.addAttribute("weatherData", weatherData);  // 모델에 데이터 추가
+            if (!weatherData.isEmpty()) {
+                Weather nowWeather = weatherData.get(0);
+                List<String> clothingRecommendations = weatherService.getClothingRecommendations(nowWeather);
+                model.addAttribute("clothingRecommendations", clothingRecommendations);
+
+                model.addAttribute("weatherData", weatherData);  // 모델에 데이터 추가
+            }
             return "mainPage";  // mainPage.html 템플릿 렌더링
         } else {
             model.addAttribute("message", "지역 정보를 설정해야 합니다!");
