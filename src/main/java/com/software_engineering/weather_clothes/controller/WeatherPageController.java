@@ -59,6 +59,7 @@ public class WeatherPageController {
             }
         }
 
+        // TODO: 분리
         // 현재 계절 결정
         int month = cal.get(Calendar.MONTH) + 1; // 0-based 이므로 1을 더함
         String season;

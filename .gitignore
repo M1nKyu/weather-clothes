@@ -2,7 +2,7 @@
 !.mvn/wrapper/maven-wrapper.jar
 
 # Maven 빌드 결과물
-weather-clothes/weather-clothes/target
+weather-clothes1/weather-clothes/target
 
 # IntelliJ IDEA
 /.idea
@@ -16,7 +16,7 @@ weather-clothes/weather-clothes/target
 /.settings/
 
 # 환경 설정 파일
-weather-clothes/weather-clothes/src/main/resources/application.properties
+src/main/resources/application.properties
 
 
 # 로그 및 임시 파일
