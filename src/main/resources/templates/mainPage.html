@@ -22,17 +22,13 @@
             <span>지역 선택으로 이동:</span>
             <a href="/location/select" class="button">Go</a>
         </ul>
-    </nav>
-
-    <main>
         <div th:if="${weatherData == null}" class="error-message">
             <p th:text="${message}">Location data not found in cookies.</p>
         </div>
+    </nav>
 
+    <main>
         <div class="main-content" th:if="${weatherData != null}">
-            <div class="image-placeholder">
-                이미지
-            </div>
             <div class="weather-info">
                 <div class="weather-box">
                     <h2>City</h2>
@@ -55,6 +51,9 @@
                         <li th:text="${clothingRecommendations}"></li>
                     </ul>
                 </div>
+            </div>
+            <div class="image-placeholder">
+                이미지
             </div>
         </div>
     </main>
