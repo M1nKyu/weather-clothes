@@ -22,13 +22,13 @@
             <span>지역 선택으로 이동:</span>
             <a href="/location/select" class="button">Go</a>
         </ul>
-        <div th:if="${weatherData == null}" class="error-message">
+        <div th:if="${fcstWeather == null}" class="error-message">
             <p th:text="${message}">Location data not found in cookies.</p>
         </div>
     </nav>
 
     <main>
-        <div class="main-content" th:if="${weatherData != null}">
+        <div class="main-content" th:if="${fcstWeather != null}">
             <div class="weather-info">
                 <div class="weather-box">
                     <h2>City</h2>
@@ -78,7 +78,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="weather : ${weatherData}">
+        <tr th:each="weather : ${fcstWeather}">
             <td th:text="${weather.baseDate}"></td>
             <td th:text="${weather.baseTime}"></td>
             <td th:text="${weather.fcstDate}"></td>
@@ -96,14 +96,6 @@
         </tr>
         </tbody>
     </table>
-
-
-
-<!-- 날씨 데이터가 존재할 때 -->
-<div th:if="${weatherData != null}">
-    <h2>Weather Forecast</h2>
-
     <span th:text="${clothingRecommendations}"></span>
-</div>
 </body>
 </html>
