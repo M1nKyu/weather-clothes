@@ -27,7 +27,7 @@ public class WeatherPageController {
      *
      * @param request HTTP 요청 객체
      * @param model   모델 객체
-     * @return 날씨 데이터를 포함한 mainPage.html 페이지
+     * @return 날씨 데이터를 포함한 mainPage.css 페이지
      */
     @GetMapping("/")
     public String fetchWeather(HttpServletRequest request, Model model) throws Exception {
@@ -81,11 +81,12 @@ public class WeatherPageController {
             if (!weatherData.isEmpty()) {
                 Weather nowWeather = weatherData.get(0);
                 List<String> clothingRecommendations = weatherService.getClothingRecommendations(nowWeather);
-                model.addAttribute("clothingRecommendations", clothingRecommendations);
 
-                model.addAttribute("weatherData", weatherData);  // 모델에 데이터 추가
+                model.addAttribute("weatherData", weatherData);
+                model.addAttribute("nowWeather", nowWeather);
+                model.addAttribute("clothingRecommendations", clothingRecommendations);
             }
-            return "mainPage";  // mainPage.html 템플릿 렌더링
+            return "mainPage";  // mainPage.css 템플릿 렌더링
         } else {
             model.addAttribute("message", "지역 정보를 설정해야 합니다!");
             return "mainPage";

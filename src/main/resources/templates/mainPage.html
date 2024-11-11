@@ -1,66 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: 100vh;
-        }
-
-        /* 계절별 배경 이미지 */
-        body[data-season='spring'] {
-            background-image: url('/images/spring.jpg');
-        }
-        body[data-season='summer'] {
-            background-image: url('/images/summer.jpg');
-        }
-        body[data-season='autumn'] {
-            background-image: url('/images/autumn.jpg');
-        }
-        body[data-season='winter'] {
-            background-image: url('/images/winter.jpg');
-        }
-
-        .button {
-            padding: 10px 20px;
-            font-size: 16px;
-            color: white;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-        .error-message {
-            color: red;
-            margin-top: 20px;
-        }
-
-        /* 테이블과 텍스트의 가독성을 위한 스타일 */
-        table, h1, h2, span {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 5px;
-        }
-    </style>
-    <title>Main Weather Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otneul</title>
+    <link rel="stylesheet" href="/css/mainPage.css">
 </head>
-<body th:data-season="${season}">
-<h1>메인페이지 입니다.</h1>
-<span>지역 선택으로 이동:</span>
-<a href="/location/select" class="button">Go</a>
+<body>
+    <header>
+        <div class="header-left">
+            <h1>옷늘</h1>
+            <span class="subtitle">오늘 날씨엔 어떤 옷?</span>
+        </div>
+        <div class="header-right">
+            <img src="/images/profile.svg" alt="사용자 아이콘" class="user-icon">
+        </div>
+    </header>
 
-<!-- 날씨 데이터가 존재할 때 -->
-<div th:if="${weatherData != null}">
-    <h2>Weather Forecast</h2>
+    <nav>
+        <ul class="menu">
+            <span>지역 선택으로 이동:</span>
+            <a href="/location/select" class="button">Go</a>
+        </ul>
+    </nav>
+
+    <main>
+        <div th:if="${weatherData == null}" class="error-message">
+            <p th:text="${message}">Location data not found in cookies.</p>
+        </div>
+
+        <div class="main-content" th:if="${weatherData != null}">
+            <div class="image-placeholder">
+                이미지
+            </div>
+            <div class="weather-info">
+                <div class="weather-box">
+                    <h2>City</h2>
+                    <h1 class="date-time" th:text="${nowWeather.t1h} + '°'"></h1>
+
+                    <div class="temperature-info">
+                        <div class="weather-image">
+                            <img src="/images/sun.svg" alt="날씨 아이콘">
+                        </div>
+                    </div>
+
+                    <div class="weather-details">
+                        <!-- -->
+                    </div>
+                </div>
+
+                <div class="outfit-suggestions">
+                    <h3>이런 날씨엔..</h3>
+                    <ul>
+                        <li th:text="${clothingRecommendations}"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
     <table border="1">
         <thead>
         <tr>
@@ -99,12 +97,14 @@
         </tr>
         </tbody>
     </table>
-    <span th:text="${clothingRecommendations}"></span>
-</div>
 
-<!-- 날씨 데이터가 없을 때 -->
-<div th:if="${weatherData == null}" class="error-message">
-    <p th:text="${message}">Location data not found in cookies.</p>
+
+
+<!-- 날씨 데이터가 존재할 때 -->
+<div th:if="${weatherData != null}">
+    <h2>Weather Forecast</h2>
+
+    <span th:text="${clothingRecommendations}"></span>
 </div>
 </body>
 </html>
