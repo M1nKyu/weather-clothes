@@ -42,7 +42,7 @@
                 </div>
                 <div class="hourly-forecast">
                     <div class="hour-item" th:each="weather : ${fcstWeather}">
-                        <p th:text="${weather.fcstTime} + '시'">10시</p>
+                        <p th:text="${weather.fcstTime}">10시</p>
                         <img src="/images/weather-icons/sun.svg" alt="맑음">
                         <p th:text="${weather.t1h} + '°'">15°</p>
                     </div>
@@ -75,7 +75,7 @@
             <th>NY</th>
             <th>Temperature (°C)</th>
             <th>Precipitation (mm)</th>
-            <th>Sky (mm)</th>
+            <th>Sky</th>
             <th>Humidity (%)</th>
             <th>Precipitation Type</th>
             <th>Wind Direction (°)</th>
