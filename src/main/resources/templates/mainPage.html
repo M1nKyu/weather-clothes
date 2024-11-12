@@ -29,31 +29,37 @@
 
     <main>
         <div class="main-content" th:if="${fcstWeather != null}">
+            <!-- 날씨 정보  -->
             <div class="weather-info">
-                <div class="weather-box">
-                    <h2>City</h2>
-                    <h1 class="date-time" th:text="${nowWeather.t1h} + '°'"></h1>
-
-                    <div class="temperature-info">
-                        <div class="weather-image">
-                            <img src="/images/sun.svg" alt="날씨 아이콘">
-                        </div>
+                <div class="current-weather">
+                    <h2>서울</h2>
+                    <div class="current-temperature">
+                        <img src="/images/weather-icons/sun.svg" class="weather-icon" alt="현재 날씨 아이콘">
+                        <span class="temperature" th:text="${nowWeather.t1h} + '°'"></span>
                     </div>
-
-                    <div class="weather-details">
-                        <!-- -->
-                    </div>
+                    <p class="weather-description">맑음</p>
+                    <p class="high-low">최고 10도 | 최저 8</p>
                 </div>
-
-                <div class="outfit-suggestions">
-                    <h3>이런 날씨엔..</h3>
-                    <ul>
-                        <li th:text="${clothingRecommendations}"></li>
-                    </ul>
+                <div class="hourly-forecast">
+                    <div class="hour-item" th:each="weather : ${fcstWeather}">
+                        <p th:text="${weather.fcstTime} + '시'">10시</p>
+                        <img src="/images/weather-icons/sun.svg" alt="맑음">
+                        <p th:text="${weather.t1h} + '°'">15°</p>
+                    </div>
                 </div>
             </div>
-            <div class="image-placeholder">
-                이미지
+            <div class="category-suggestions">
+                <h2>카테고리 추천</h2>
+                <p>이런 날씨에 어울리는 옷</p>
+                <ul>
+                    <li th:text="${clothingRecommendations}"></li>
+                </ul>
+            </div>
+            <div class="outfit-display">
+                <h2>상품 목록</h2>
+                <div class="outfit-images">
+                    <div class="outfit-item">옷 이미지</div>
+                </div>
             </div>
         </div>
     </main>
