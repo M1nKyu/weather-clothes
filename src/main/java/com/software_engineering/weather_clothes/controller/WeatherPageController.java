@@ -1,6 +1,7 @@
 package com.software_engineering.weather_clothes.controller;
 
 import com.software_engineering.weather_clothes.model.Weather;
+import com.software_engineering.weather_clothes.service.ImageService;
 import com.software_engineering.weather_clothes.service.WeatherService;
 import com.software_engineering.weather_clothes.util.date.CookieUtil;
 import com.software_engineering.weather_clothes.util.date.DateTimeUtil;
@@ -14,10 +15,12 @@ import java.util.List;
 @Controller
 public class WeatherPageController {
     private final WeatherService weatherService;
+    private final ImageService imageService;
 
     @Autowired
-    public WeatherPageController(WeatherService weatherService){
+    public WeatherPageController(WeatherService weatherService, ImageService imageService){
         this.weatherService = weatherService;
+        this.imageService = imageService;
     }
 
     /**
@@ -41,14 +44,28 @@ public class WeatherPageController {
 
         if (nx != null && ny != null) {
 
+            // 날씨 정보를 데이터베이스에 저장하고 weatherData로 가져옴.
             weatherService.fetchAndStoreWeatherData(nx, ny);
             List<Weather> weatherData = weatherService.getWeatherData(baseDate, baseTime, Integer.parseInt(nx), Integer.parseInt(ny));
 
+            // 성공적으로 가져왔을 때
             if (!weatherData.isEmpty()) {
-                Weather nowWeather = weatherData.get(0);
-                List<Weather> fcstWeather = weatherData.subList(1, weatherData.size());
-                List<String> clothingRecommendations = weatherService.getClothingRecommendations(nowWeather);
+                Weather nowWeather = weatherData.get(0); // 현재 시간의 날씨 정보 (1 row)
+                List<Weather> fcstWeather = weatherData.subList(1, weatherData.size()); // 예보된 날씨 정보 (5 rows)
 
+                List<String> clothingRecommendations = weatherService.getClothingRecommendations(nowWeather); // 추천된 옷 카테고리
+
+                nowWeather.setIcon(imageService.selectWeatherIcon(nowWeather));
+
+                // 각 예보의 fcstTime을 포맷팅 (ex: "1600" -> "오후 4시")
+                fcstWeather.forEach(weather -> {
+                    weather.setIcon(imageService.selectWeatherIcon(weather));
+
+                    String formattedTime = DateTimeUtil.formatTime(weather.getFcstTime());
+                    weather.setFcstTime(formattedTime); // 포맷팅된 fcstTime 값으로 변경
+                });
+
+                // model 객체 전달
                 model.addAttribute("nowWeather", nowWeather);
                 model.addAttribute("fcstWeather", fcstWeather);
                 model.addAttribute("clothingRecommendations", clothingRecommendations);

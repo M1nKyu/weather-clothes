@@ -33,13 +33,26 @@ public class DateTimeUtil {
 
     /**
      *  전달할 날씨 데이터의 포맷을 변환.
-     *
+     *  @return 포맷팅된 String (ex: "오전 7시")
      */
     public static String formatTime(String fcstTime) {
+
         int hour = Integer.parseInt(fcstTime.substring(0, 2));
+
         String period = hour < 12 ? "오전" : "오후";
         hour = (hour % 12 == 0) ? 12 : (hour % 12); // 0을 12로 변환
+
         return period + " " + hour + "시";
+    }
+
+    /**
+     * 주어진 시간대가 낮인지 밤인지를 판별하는 메서드
+     * @param fcstTime 예보 시간 (HHmm 형식)
+     * @return 낮이면 true, 밤이면 false
+     */
+    public static boolean isDaytime(String fcstTime){
+        int hour = Integer.parseInt(fcstTime.substring(0, 2)); // 시간 부분 추출
+        return hour >= 6 && hour < 18;  // 낮 시간대라면 true 반환
     }
 
 

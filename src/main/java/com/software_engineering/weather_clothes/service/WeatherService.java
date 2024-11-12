@@ -22,11 +22,13 @@ public class WeatherService {
     private final WeatherApiClient weatherApiClient;
     private final WeatherRepository weatherRepository;
     private final ObjectMapper objectMapper;
+    private final ClothingRecommendationService clothingRecommendationService;
 
-    public WeatherService(WeatherApiClient weatherApiClient, WeatherRepository weatherRepository, ObjectMapper objectMapper) {
+    public WeatherService(WeatherApiClient weatherApiClient, WeatherRepository weatherRepository, ObjectMapper objectMapper, ClothingRecommendationService clothingRecommendationService) {
         this.weatherApiClient = weatherApiClient;
         this.weatherRepository = weatherRepository;
         this.objectMapper = objectMapper;
+        this.clothingRecommendationService = clothingRecommendationService;
     }
 
 
@@ -110,7 +112,7 @@ public class WeatherService {
             switch (category) {
                 case "T1H": weather.setT1h(fcstValue); break; // 기온
                 case "RN1": weather.setRn1(fcstValue); break; // 1시간 강수량
-                case "SKY": weather.setSky(fcstValue); break; // 1시간 강수량
+                case "SKY": weather.setSky((int) fcstValue); break; // 1시간 강수량
                 case "REH": weather.setReh((int) fcstValue); break; // 습도
                 case "PTY": weather.setPty((int) fcstValue); break; // 강수형태
                 case "VEC": weather.setVec(fcstValue); break; // 풍향
@@ -127,67 +129,7 @@ public class WeatherService {
         return weatherRepository.findTop6ByBaseDateAndBaseTimeAndNxAndNyOrderByFcstDateAscFcstTimeAsc(baseDate, baseTime, nx, ny);
     }
 
-    /**
-     * 온도 값에 따른 여러 옷 카테고리를 추천합니다.
-     *
-     * @param nowWeather
-     * @return 옷 카테고리 리스트
-     */
     public List<String> getClothingRecommendations(Weather nowWeather) {
-        List<String> recommendations = new ArrayList<>();
-
-        double temp = nowWeather.getT1h();
-
-        if (temp >= 28) {
-            recommendations.add("민소매");
-            recommendations.add("반팔");
-            recommendations.add("반바지");
-            recommendations.add("짧은 치마");
-            recommendations.add("린넨 옷");
-        } else if (temp >= 23) {
-            recommendations.add("반팔");
-            recommendations.add("얇은 셔츠");
-            recommendations.add("반바지");
-            recommendations.add("면바지");
-        } else if (temp >= 20) {
-            recommendations.add("블라우스");
-            recommendations.add("긴팔 티");
-            recommendations.add("면바지");
-            recommendations.add("슬랙스");
-        } else if (temp >=17) {
-            recommendations.add("얇은 가디건");
-            recommendations.add("얇은 니트");
-            recommendations.add("맨투맨");
-            recommendations.add("후드");
-            recommendations.add("긴 바지");
-        } else if (temp >= 12){
-            recommendations.add("자켓");
-            recommendations.add("가디건");
-            recommendations.add("청자켓");
-            recommendations.add("니트");
-            recommendations.add("스타킹");
-            recommendations.add("청바지");
-        } else if (temp >= 9){
-            recommendations.add("트렌치 코트");
-            recommendations.add("야상");
-            recommendations.add("점퍼");
-            recommendations.add("스타킹");
-            recommendations.add("기모바지");
-        }
-        else if (temp >= 5){
-            recommendations.add("울 코트");
-            recommendations.add("가죽 옷");
-            recommendations.add("기모");
-        }else {
-            recommendations.add("패딩");
-            recommendations.add("두꺼운 코트");
-            recommendations.add("기모");
-            recommendations.add("목도리");
-        }
-
-        return recommendations;
+        return clothingRecommendationService.getClothingRecommendations(nowWeather);
     }
-
-
-
 }
