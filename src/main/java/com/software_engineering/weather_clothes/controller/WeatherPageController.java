@@ -47,6 +47,13 @@ public class WeatherPageController {
             if (!weatherData.isEmpty()) {
                 Weather nowWeather = weatherData.get(0);
                 List<Weather> fcstWeather = weatherData.subList(1, weatherData.size());
+
+                // 각 예보의 fcstTime을 포맷팅
+                fcstWeather.forEach(weather -> {
+                    String formattedTime = DateTimeUtil.formatTime(weather.getFcstTime());
+                    weather.setFcstTime(formattedTime); // 포맷팅된 fcstTime 값을 설정
+                });
+
                 List<String> clothingRecommendations = weatherService.getClothingRecommendations(nowWeather);
 
                 model.addAttribute("nowWeather", nowWeather);

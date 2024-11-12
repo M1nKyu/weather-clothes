@@ -33,12 +33,15 @@ public class DateTimeUtil {
 
     /**
      *  전달할 날씨 데이터의 포맷을 변환.
-     *
+     *  @return 포맷팅된 String (ex: "오전 7시")
      */
     public static String formatTime(String fcstTime) {
+
         int hour = Integer.parseInt(fcstTime.substring(0, 2));
+
         String period = hour < 12 ? "오전" : "오후";
         hour = (hour % 12 == 0) ? 12 : (hour % 12); // 0을 12로 변환
+
         return period + " " + hour + "시";
     }
 
