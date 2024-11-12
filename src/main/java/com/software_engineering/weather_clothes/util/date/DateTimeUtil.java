@@ -45,6 +45,16 @@ public class DateTimeUtil {
         return period + " " + hour + "시";
     }
 
+    /**
+     * 주어진 시간대가 낮인지 밤인지를 판별하는 메서드
+     * @param fcstTime 예보 시간 (HHmm 형식)
+     * @return 낮이면 true, 밤이면 false
+     */
+    public static boolean isDaytime(String fcstTime){
+        int hour = Integer.parseInt(fcstTime.substring(0, 2)); // 시간 부분 추출
+        return hour >= 6 && hour < 18;  // 낮 시간대라면 true 반환
+    }
+
 
     /**
      * 현재 월을 기반으로 계절을 반환.
