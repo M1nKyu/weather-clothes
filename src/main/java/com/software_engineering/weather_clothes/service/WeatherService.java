@@ -110,8 +110,7 @@ public class WeatherService {
             switch (category) {
                 case "T1H": weather.setT1h(fcstValue); break; // 기온
                 case "RN1": weather.setRn1(fcstValue); break; // 1시간 강수량
-                case "UUU": weather.setUuu(fcstValue); break; // 동서바람성분
-                case "VVV": weather.setVvv(fcstValue); break; // 남북바람성분
+                case "SKY": weather.setSky(fcstValue); break; // 1시간 강수량
                 case "REH": weather.setReh((int) fcstValue); break; // 습도
                 case "PTY": weather.setPty((int) fcstValue); break; // 강수형태
                 case "VEC": weather.setVec(fcstValue); break; // 풍향
