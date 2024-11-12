@@ -34,7 +34,7 @@
                 <div class="current-weather">
                     <h2>서울</h2>
                     <div class="current-temperature">
-                        <img src="/images/weather-icons/sun.svg" class="weather-icon" alt="현재 날씨 아이콘">
+                        <img th:src="@{${nowWeather.icon}}" class="weather-icon" alt="현재 날씨 아이콘">
                         <span class="temperature" th:text="${nowWeather.t1h} + '°'"></span>
                     </div>
                     <p class="weather-description">맑음</p>
@@ -43,16 +43,15 @@
                 <div class="hourly-forecast">
                     <div class="hour-item" th:each="weather : ${fcstWeather}">
                         <p th:text="${weather.fcstTime}">10시</p>
-                        <img src="/images/weather-icons/sun.svg" alt="맑음">
+                        <img th:src="@{${weather.icon}}" alt="날씨 아이콘">
                         <p th:text="${weather.t1h} + '°'">15°</p>
                     </div>
                 </div>
             </div>
             <div class="category-suggestions">
-                <h2>카테고리 추천</h2>
-                <p>이런 날씨에 어울리는 옷</p>
-                <ul>
-                    <li th:text="${clothingRecommendations}"></li>
+                <h2>지금 날씨에는</h2>
+                <ul th:each="cloth: ${clothingRecommendations}">
+                    <li th:text="${cloth}"></li>
                 </ul>
             </div>
             <div class="outfit-display">
