@@ -1,4 +1,4 @@
-package com.software_engineering.weather_clothes.util.date;
+package com.software_engineering.weather_clothes.util;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
