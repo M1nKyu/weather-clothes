@@ -1,8 +1,10 @@
 package com.software_engineering.weather_clothes.controller;
 
 import com.software_engineering.weather_clothes.model.Weather;
+import com.software_engineering.weather_clothes.service.ImageService;
 import com.software_engineering.weather_clothes.service.WeatherService;
-import jakarta.servlet.http.Cookie;
+import com.software_engineering.weather_clothes.util.date.CookieUtil;
+import com.software_engineering.weather_clothes.util.date.DateTimeUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +18,12 @@ import java.util.Arrays;
 @Controller
 public class WeatherPageController {
     private final WeatherService weatherService;
+    private final ImageService imageService;
 
     @Autowired
-    public WeatherPageController(WeatherService weatherService){
+    public WeatherPageController(WeatherService weatherService, ImageService imageService){
         this.weatherService = weatherService;
+        this.imageService = imageService;
     }
 
     /**
@@ -27,65 +31,49 @@ public class WeatherPageController {
      *
      * @param request HTTP 요청 객체
      * @param model   모델 객체
-     * @return 날씨 데이터를 포함한 mainPage.html 페이지
+     * @return 날씨 데이터를 포함한 mainPage.css 페이지
      */
     @GetMapping("/")
     public String fetchWeather(HttpServletRequest request, Model model) throws Exception {
-        String nx = null;
-        String ny = null;
 
-        // baseDate, baseTime 구함
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
-        int hour = cal.get(Calendar.HOUR_OF_DAY);
-        int minute = cal.get(Calendar.MINUTE);
-        if (minute < 30) {
-            cal.add(Calendar.HOUR_OF_DAY, -1);
-            hour = cal.get(Calendar.HOUR_OF_DAY);
-        }
-        String baseTime = String.format("%02d30", hour);
-        String baseDate = sdf1.format(cal.getTime());
+        String baseDate = DateTimeUtil.getBaseDateTime()[0];
+        String baseTime = DateTimeUtil.getBaseDateTime()[1];
 
+        String nx = CookieUtil.getNxNyFromCookies(request)[0];
+        String ny = CookieUtil.getNxNyFromCookies(request)[1];
 
-        // 쿠키에서 nx, ny 정보 가져오기
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("userNx".equals(cookie.getName())) {
-                    nx = cookie.getValue();
-                } else if ("userNy".equals(cookie.getName())) {
-                    ny = cookie.getValue();
-                }
-            }
-        }
-
-        // TODO: 분리
-        // 현재 계절 결정
-        int month = cal.get(Calendar.MONTH) + 1; // 0-based 이므로 1을 더함
-        String season;
-        if (month >= 3 && month <= 5) {
-            season = "spring";
-        } else if (month >= 6 && month <= 8) {
-            season = "summer";
-        } else if (month >= 9 && month <= 11) {
-            season = "autumn";
-        } else {
-            season = "winter";
-        }
+        String season = DateTimeUtil.getSeason();
         model.addAttribute("season", season);
 
         if (nx != null && ny != null) {
-            // 날씨 데이터를 저장하고 조회
+
+            // 날씨 정보를 데이터베이스에 저장하고 weatherData로 가져옴.
             weatherService.fetchAndStoreWeatherData(nx, ny);
             List<Weather> weatherData = weatherService.getWeatherData(baseDate, baseTime, Integer.parseInt(nx), Integer.parseInt(ny));
-            if (!weatherData.isEmpty()) {
-                Weather nowWeather = weatherData.get(0);
-                List<String> clothingRecommendations = weatherService.getClothingRecommendations(nowWeather);
-                model.addAttribute("clothingRecommendations", clothingRecommendations);
 
-                model.addAttribute("weatherData", weatherData);  // 모델에 데이터 추가
+            // 성공적으로 가져왔을 때
+            if (!weatherData.isEmpty()) {
+                Weather nowWeather = weatherData.get(0); // 현재 시간의 날씨 정보 (1 row)
+                List<Weather> fcstWeather = weatherData.subList(1, weatherData.size()); // 예보된 날씨 정보 (5 rows)
+
+                List<String> clothingRecommendations = weatherService.getClothingRecommendations(nowWeather); // 추천된 옷 카테고리
+
+                nowWeather.setIcon(imageService.selectWeatherIcon(nowWeather));
+
+                // 각 예보의 fcstTime을 포맷팅 (ex: "1600" -> "오후 4시")
+                fcstWeather.forEach(weather -> {
+                    weather.setIcon(imageService.selectWeatherIcon(weather));
+
+                    String formattedTime = DateTimeUtil.formatTime(weather.getFcstTime());
+                    weather.setFcstTime(formattedTime); // 포맷팅된 fcstTime 값으로 변경
+                });
+
+                // model 객체 전달
+                model.addAttribute("nowWeather", nowWeather);
+                model.addAttribute("fcstWeather", fcstWeather);
+                model.addAttribute("clothingRecommendations", clothingRecommendations);
             }
-            return "mainPage";  // mainPage.html 템플릿 렌더링
+            return "mainPage";  // mainPage.css 템플릿 렌더링
         } else {
             model.addAttribute("message", "지역 정보를 설정해야 합니다!");
             return "mainPage";

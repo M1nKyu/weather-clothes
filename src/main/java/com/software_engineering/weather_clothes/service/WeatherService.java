@@ -23,11 +23,13 @@ public class WeatherService {
     private final WeatherApiClient weatherApiClient;
     private final WeatherRepository weatherRepository;
     private final ObjectMapper objectMapper;
+    private final ClothingRecommendationService clothingRecommendationService;
 
-    public WeatherService(WeatherApiClient weatherApiClient, WeatherRepository weatherRepository, ObjectMapper objectMapper) {
+    public WeatherService(WeatherApiClient weatherApiClient, WeatherRepository weatherRepository, ObjectMapper objectMapper, ClothingRecommendationService clothingRecommendationService) {
         this.weatherApiClient = weatherApiClient;
         this.weatherRepository = weatherRepository;
         this.objectMapper = objectMapper;
+        this.clothingRecommendationService = clothingRecommendationService;
     }
 
     /**
@@ -110,8 +112,7 @@ public class WeatherService {
             switch (category) {
                 case "T1H": weather.setT1h(fcstValue); break; // 기온
                 case "RN1": weather.setRn1(fcstValue); break; // 1시간 강수량
-                case "UUU": weather.setUuu(fcstValue); break; // 동서바람성분
-                case "VVV": weather.setVvv(fcstValue); break; // 남북바람성분
+                case "SKY": weather.setSky((int) fcstValue); break; // 1시간 강수량
                 case "REH": weather.setReh((int) fcstValue); break; // 습도
                 case "PTY": weather.setPty((int) fcstValue); break; // 강수형태
                 case "VEC": weather.setVec(fcstValue); break; // 풍향
@@ -128,12 +129,6 @@ public class WeatherService {
         return weatherRepository.findTop6ByBaseDateAndBaseTimeAndNxAndNyOrderByFcstDateAscFcstTimeAsc(baseDate, baseTime, nx, ny);
     }
 
-    /**
-     * 온도 값에 따른 여러 옷 카테고리를 추천합니다.
-     *
-     * @param nowWeather
-     * @return 옷 카테고리 리스트
-     */
     public List<String> getClothingRecommendations(Weather nowWeather) {
         double temp = nowWeather.getT1h();
 

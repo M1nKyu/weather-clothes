@@ -33,7 +33,7 @@ public class LocationController {
     @GetMapping("/select")
     public String selectLocationPage(Model model) {
         model.addAttribute("regions", locationService.getAllRegions());
-        return "location/select-location";
+        return "select-location";
     }
 
     /**

@@ -23,10 +23,11 @@ public class Weather {
 
     private double t1h;   // 기온 (℃)
     private double rn1;   // 1시간 강수량 (mm)
-    private double uuu;   // 동서바람성분 (m/s)
-    private double vvv;   // 남북바람성분 (m/s)
+    private int sky;   // 하늘 상태
     private int reh;      // 습도 (%)
     private int pty;      // 강수형태 (코드값)
     private double vec;   // 풍향 (deg)
     private double wsd;   // 풍속 (m/s)
+
+    private String icon;
 }

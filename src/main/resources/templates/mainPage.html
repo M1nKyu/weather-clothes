@@ -1,66 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: 100vh;
-        }
-
-        /* 계절별 배경 이미지 */
-        body[data-season='spring'] {
-            background-image: url('/images/spring.jpg');
-        }
-        body[data-season='summer'] {
-            background-image: url('/images/summer.jpg');
-        }
-        body[data-season='autumn'] {
-            background-image: url('/images/autumn.jpg');
-        }
-        body[data-season='winter'] {
-            background-image: url('/images/winter.jpg');
-        }
-
-        .button {
-            padding: 10px 20px;
-            font-size: 16px;
-            color: white;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-        .error-message {
-            color: red;
-            margin-top: 20px;
-        }
-
-        /* 테이블과 텍스트의 가독성을 위한 스타일 */
-        table, h1, h2, span {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 5px;
-        }
-    </style>
-    <title>Main Weather Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otneul</title>
+    <link rel="stylesheet" href="/css/mainPage.css">
 </head>
-<body th:data-season="${season}">
-<h1>메인페이지 입니다.</h1>
-<span>지역 선택으로 이동:</span>
-<a href="/location/select" class="button">Go</a>
+<body>
+    <header>
+        <div class="header-left">
+            <h1>옷늘</h1>
+            <span class="subtitle">오늘 날씨엔 어떤 옷?</span>
+        </div>
+        <div class="header-right">
+            <img src="/images/profile.svg" alt="사용자 아이콘" class="user-icon">
+        </div>
+    </header>
 
-<!-- 날씨 데이터가 존재할 때 -->
-<div th:if="${weatherData != null}">
-    <h2>Weather Forecast</h2>
+    <nav>
+        <ul class="menu">
+            <span>지역 선택으로 이동:</span>
+            <a href="/location/select" class="button">Go</a>
+        </ul>
+        <div th:if="${fcstWeather == null}" class="error-message">
+            <p th:text="${message}">Location data not found in cookies.</p>
+        </div>
+    </nav>
+
+    <main>
+        <div class="main-content" th:if="${fcstWeather != null}">
+            <!-- 날씨 정보  -->
+            <div class="weather-info">
+                <div class="current-weather">
+                    <h2>서울</h2>
+                    <div class="current-temperature">
+                        <img th:src="@{${nowWeather.icon}}" class="weather-icon" alt="현재 날씨 아이콘">
+                        <span class="temperature" th:text="${nowWeather.t1h} + '°'"></span>
+                    </div>
+                    <p class="weather-description">맑음</p>
+                    <p class="high-low">최고 10도 | 최저 8</p>
+                </div>
+                <div class="hourly-forecast">
+                    <div class="hour-item" th:each="weather : ${fcstWeather}">
+                        <p th:text="${weather.fcstTime}">10시</p>
+                        <img th:src="@{${weather.icon}}" alt="날씨 아이콘">
+                        <p th:text="${weather.t1h} + '°'">15°</p>
+                    </div>
+                </div>
+            </div>
+            <div class="category-suggestions">
+                <h2>지금 날씨에는</h2>
+                <ul th:each="cloth: ${clothingRecommendations}">
+                    <li th:text="${cloth}"></li>
+                </ul>
+            </div>
+            <div class="outfit-display">
+                <h2>상품 목록</h2>
+                <div class="outfit-images">
+                    <div class="outfit-item">옷 이미지</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
     <table border="1">
         <thead>
         <tr>
@@ -72,8 +74,7 @@
             <th>NY</th>
             <th>Temperature (°C)</th>
             <th>Precipitation (mm)</th>
-            <th>East-West Wind (m/s)</th>
-            <th>North-South Wind (m/s)</th>
+            <th>Sky</th>
             <th>Humidity (%)</th>
             <th>Precipitation Type</th>
             <th>Wind Direction (°)</th>
@@ -81,7 +82,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="weather : ${weatherData}">
+        <tr th:each="weather : ${fcstWeather}">
             <td th:text="${weather.baseDate}"></td>
             <td th:text="${weather.baseTime}"></td>
             <td th:text="${weather.fcstDate}"></td>
@@ -90,8 +91,7 @@
             <td th:text="${weather.ny}"></td>
             <td th:text="${weather.t1h}"></td>
             <td th:text="${weather.rn1}"></td>
-            <td th:text="${weather.uuu}"></td>
-            <td th:text="${weather.vvv}"></td>
+            <td th:text="${weather.sky}"></td>
             <td th:text="${weather.reh}"></td>
             <td th:text="${weather.pty}"></td>
             <td th:text="${weather.vec}"></td>
