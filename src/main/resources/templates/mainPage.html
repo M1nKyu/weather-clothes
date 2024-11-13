@@ -99,6 +99,17 @@
         </tr>
         </tbody>
     </table>
-    <span th:text="${clothingRecommendations}"></span>
+    <div th:each="clothing : ${clothingRecommendations}">
+        <a th:href="@{/clothing/detail(type=${clothing})}" 
+           th:text="${clothing}"
+           style="text-decoration: none; color: #007bff; cursor: pointer;">
+        </a>
+    </div>
+</div>
+
+<!-- 날씨 데이터가 없을 때 -->
+<div th:if="${weatherData == null}" class="error-message">
+    <p th:text="${message}">Location data not found in cookies.</p>
+</div>
 </body>
 </html>
