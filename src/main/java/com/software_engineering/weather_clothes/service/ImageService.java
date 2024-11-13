@@ -1,7 +1,7 @@
 package com.software_engineering.weather_clothes.service;
 
 import com.software_engineering.weather_clothes.model.Weather;
-import com.software_engineering.weather_clothes.util.date.DateTimeUtil;
+import com.software_engineering.weather_clothes.util.DateTimeUtil;
 import org.springframework.stereotype.Service;
 
 @Service

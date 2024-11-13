@@ -22,9 +22,9 @@ public class WeatherService {
     private final WeatherApiClient weatherApiClient;
     private final WeatherRepository weatherRepository;
     private final ObjectMapper objectMapper;
-    private final ClothingRecommendationService clothingRecommendationService;
+    private final ClothingCategoryService clothingRecommendationService;
 
-    public WeatherService(WeatherApiClient weatherApiClient, WeatherRepository weatherRepository, ObjectMapper objectMapper, ClothingRecommendationService clothingRecommendationService) {
+    public WeatherService(WeatherApiClient weatherApiClient, WeatherRepository weatherRepository, ObjectMapper objectMapper, ClothingCategoryService clothingRecommendationService) {
         this.weatherApiClient = weatherApiClient;
         this.weatherRepository = weatherRepository;
         this.objectMapper = objectMapper;
