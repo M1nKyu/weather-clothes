@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>의류 추천</title>
+    <style>
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        .product-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .product-name {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .product-price {
+            color: #e44d26;
+            font-weight: bold;
+        }
+        .product-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .product-link:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div th:if="${error}" class="error-message" th:text="${error}"></div>
+    
+    <div th:if="${products}" class="product-grid">
+        <div th:each="product : ${products}" class="product-card">
+            <a th:href="${product.productUrl}" class="product-link" target="_blank">
+                <img th:src="${product.imageUrl}" th:alt="${product.name}" class="product-image">
+                <h3 class="product-name" th:text="${product.name}"></h3>
+                <p class="product-price" th:text="${product.price}"></p>
+            </a>
+        </div>
+    </div>
+</body>
+</html> 

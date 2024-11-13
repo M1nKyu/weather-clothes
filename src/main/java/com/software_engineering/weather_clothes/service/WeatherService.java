@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Arrays;
 
 /**
  * WeatherService는 날씨 데이터를 API로부터 받아 파싱하고 DB에 저장.
@@ -28,7 +29,6 @@ public class WeatherService {
         this.weatherRepository = weatherRepository;
         this.objectMapper = objectMapper;
     }
-
 
     /**
      * 주어진 nx, ny 좌표에 해당하는 날씨 데이터를 API에서 가져와 DB에 저장.
@@ -135,60 +135,25 @@ public class WeatherService {
      * @return 옷 카테고리 리스트
      */
     public List<String> getClothingRecommendations(Weather nowWeather) {
-        List<String> recommendations = new ArrayList<>();
-
         double temp = nowWeather.getT1h();
 
         if (temp >= 28) {
-            recommendations.add("민소매");
-            recommendations.add("반팔");
-            recommendations.add("반바지");
-            recommendations.add("짧은 치마");
-            recommendations.add("린넨 옷");
+            return Arrays.asList("민소매", "반팔", "반바지", "린넨 옷");
         } else if (temp >= 23) {
-            recommendations.add("반팔");
-            recommendations.add("얇은 셔츠");
-            recommendations.add("반바지");
-            recommendations.add("면바지");
+            return Arrays.asList("반팔", "얇은 셔츠", "반바지", "면바지");
         } else if (temp >= 20) {
-            recommendations.add("블라우스");
-            recommendations.add("긴팔 티");
-            recommendations.add("면바지");
-            recommendations.add("슬랙스");
-        } else if (temp >=17) {
-            recommendations.add("얇은 가디건");
-            recommendations.add("얇은 니트");
-            recommendations.add("맨투맨");
-            recommendations.add("후드");
-            recommendations.add("긴 바지");
-        } else if (temp >= 12){
-            recommendations.add("자켓");
-            recommendations.add("가디건");
-            recommendations.add("청자켓");
-            recommendations.add("니트");
-            recommendations.add("스타킹");
-            recommendations.add("청바지");
-        } else if (temp >= 9){
-            recommendations.add("트렌치 코트");
-            recommendations.add("야상");
-            recommendations.add("점퍼");
-            recommendations.add("스타킹");
-            recommendations.add("기모바지");
+            return Arrays.asList("얇은 가디건", "긴팔", "면바지");
+        } else if (temp >= 17) {
+            return Arrays.asList("얇은 니트", "맨투맨", "얇은 자켓", "청바지");
+        } else if (temp >= 12) {
+            return Arrays.asList("자켓", "가디건", "청바지");
+        } else if (temp >= 9) {
+            return Arrays.asList("트렌치코트", "니트", "청바지");
+        } else if (temp >= 5) {
+            return Arrays.asList("코트", "가죽자켓", "니트", "기모바지");
+        } else {
+            return Arrays.asList("패딩", "두꺼운 코트", "목도리", "기모바지");
         }
-        else if (temp >= 5){
-            recommendations.add("울 코트");
-            recommendations.add("가죽 옷");
-            recommendations.add("기모");
-        }else {
-            recommendations.add("패딩");
-            recommendations.add("두꺼운 코트");
-            recommendations.add("기모");
-            recommendations.add("목도리");
-        }
-
-        return recommendations;
     }
-
-
 
 }
