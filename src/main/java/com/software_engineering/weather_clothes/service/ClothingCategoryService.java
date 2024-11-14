@@ -1,13 +1,20 @@
 package com.software_engineering.weather_clothes.service;
 
 import com.software_engineering.weather_clothes.model.Weather;
+import com.software_engineering.weather_clothes.repository.ClothingProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ClothingRecommendationService {
+public class ClothingCategoryService {
+
+    private final ClothingProductRepository clothingProductRepository;
+
+    public ClothingCategoryService(ClothingProductRepository clothingProductRepository){
+        this.clothingProductRepository = clothingProductRepository;
+    }
 
     /**
      * 온도 값에 따른 여러 옷 카테고리를 추천합니다.
