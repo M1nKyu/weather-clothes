@@ -1,6 +1,6 @@
 package com.software_engineering.weather_clothes.controller;
 
-import com.software_engineering.weather_clothes.service.CrwalingClothingProductService;
+import com.software_engineering.weather_clothes.service.CrawlingClothingProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClothingProductController {
 
     @Autowired
-    private CrwalingClothingProductService crwalingClothingProductService;
+    private CrawlingClothingProductService crwalingClothingProductService;
 
     @GetMapping("/scrape-clothing-products")
     public String scrapeAndSaveClothingProducts() {
