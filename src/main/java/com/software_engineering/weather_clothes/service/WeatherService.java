@@ -130,25 +130,7 @@ public class WeatherService {
     }
 
     public List<String> getClothingRecommendations(Weather nowWeather) {
-        double temp = nowWeather.getT1h();
-
-        if (temp >= 28) {
-            return Arrays.asList("민소매", "반팔", "반바지", "린넨 옷");
-        } else if (temp >= 23) {
-            return Arrays.asList("반팔", "얇은 셔츠", "반바지", "면바지");
-        } else if (temp >= 20) {
-            return Arrays.asList("얇은 가디건", "긴팔", "면바지");
-        } else if (temp >= 17) {
-            return Arrays.asList("얇은 니트", "맨투맨", "얇은 자켓", "청바지");
-        } else if (temp >= 12) {
-            return Arrays.asList("자켓", "가디건", "청바지");
-        } else if (temp >= 9) {
-            return Arrays.asList("트렌치코트", "니트", "청바지");
-        } else if (temp >= 5) {
-            return Arrays.asList("코트", "가죽자켓", "니트", "기모바지");
-        } else {
-            return Arrays.asList("패딩", "두꺼운 코트", "목도리", "기모바지");
-        }
+        return clothingRecommendationService.getClothingRecommendations(nowWeather);
     }
 
 }
