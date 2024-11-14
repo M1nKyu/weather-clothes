@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Arrays;
 
 /**
  * WeatherService는 날씨 데이터를 API로부터 받아 파싱하고 DB에 저장.
@@ -22,15 +23,14 @@ public class WeatherService {
     private final WeatherApiClient weatherApiClient;
     private final WeatherRepository weatherRepository;
     private final ObjectMapper objectMapper;
-    private final ClothingRecommendationService clothingRecommendationService;
+    private final ClothingCategoryService clothingRecommendationService;
 
-    public WeatherService(WeatherApiClient weatherApiClient, WeatherRepository weatherRepository, ObjectMapper objectMapper, ClothingRecommendationService clothingRecommendationService) {
+    public WeatherService(WeatherApiClient weatherApiClient, WeatherRepository weatherRepository, ObjectMapper objectMapper, ClothingCategoryService clothingRecommendationService) {
         this.weatherApiClient = weatherApiClient;
         this.weatherRepository = weatherRepository;
         this.objectMapper = objectMapper;
         this.clothingRecommendationService = clothingRecommendationService;
     }
-
 
     /**
      * 주어진 nx, ny 좌표에 해당하는 날씨 데이터를 API에서 가져와 DB에 저장.
@@ -132,4 +132,5 @@ public class WeatherService {
     public List<String> getClothingRecommendations(Weather nowWeather) {
         return clothingRecommendationService.getClothingRecommendations(nowWeather);
     }
+
 }

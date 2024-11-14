@@ -3,14 +3,15 @@ package com.software_engineering.weather_clothes.controller;
 import com.software_engineering.weather_clothes.model.Weather;
 import com.software_engineering.weather_clothes.service.ImageService;
 import com.software_engineering.weather_clothes.service.WeatherService;
-import com.software_engineering.weather_clothes.util.date.CookieUtil;
-import com.software_engineering.weather_clothes.util.date.DateTimeUtil;
+import com.software_engineering.weather_clothes.util.CookieUtil;
+import com.software_engineering.weather_clothes.util.DateTimeUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
+
 
 @Controller
 public class WeatherPageController {

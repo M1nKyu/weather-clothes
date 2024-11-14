@@ -15,6 +15,16 @@ weather-clothes1/weather-clothes/target
 /.classpath
 /.settings/
 
+# VSCODE
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/
+*.vsix
+
 # 환경 설정 파일
 src/main/resources/application.properties
 
@@ -48,3 +58,5 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
+
+
