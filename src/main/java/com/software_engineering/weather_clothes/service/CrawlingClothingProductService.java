@@ -35,7 +35,15 @@ public class CrawlingClothingProductService {
 
     // 카테고리 ID 리스트 (샘플)
     private static final List<String> categories = List.of(
-             "001006"
+            // 상의
+            "001005", "001002", "001004", "001006", "001003", "001010", "001001", "001011",
+            // 신발
+            "103002", "103004", "103001", "103003", "103007",
+            // 바지
+            "003002", "003007", "003008", "003004", "003009", "003005", "003010", "002022",
+            // 아우터
+            "002001", "002002", "002025", "002017", "002003", "002020", "002019", "002023", "002018", "002004",
+            "002008", "002007", "002024", "002013", "002012", "002016", "002021", "002014", "002006", "002015"
     );
 
     public void process() {
@@ -94,7 +102,16 @@ public class CrawlingClothingProductService {
                 String productImageUrl = productElement.findElement(By.xpath(".//a/div/img")).getAttribute("src");
 
                 // 좋아요 정보 추출
-                String likes = productElement.findElement(By.xpath(".//div[2]/div/div[2]/div[1]/span")).getText();
+                String likes;
+                try {
+                    likes = productElement.findElement(By.xpath(".//div[2]/div[1]/span")).getText();
+
+                    if(likes.equals("남성") || likes.equals("여성")){
+                        likes = "0";
+                    }
+                } catch (Exception e) {
+                    likes = "0";
+                }
 
                 // 마지막 업데이트 시간 (현재 시간 기준)
                 String lastUpdated = getCurrentTimeFormatted();
