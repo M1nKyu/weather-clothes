@@ -50,9 +50,12 @@
             </div>
             <div class="category-suggestions">
                 <h2>지금 날씨에는</h2>
-                <ul th:each="cloth: ${clothingRecommendations}">
-                    <li th:text="${cloth}"></li>
-                </ul>
+                <div th:each="category : ${clothingRecommendations}" class="recommendation-category">
+                    <h3 th:text="${category.key}" class="category-title"></h3>
+                    <ul class="recommendation-list">
+                        <li th:each="item : ${category.value}" th:text="${item}"></li>
+                    </ul>
+                </div>
             </div>
             <div class="outfit-display">
                 <h2>상품 목록</h2>

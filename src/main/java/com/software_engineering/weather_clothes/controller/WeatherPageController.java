@@ -1,6 +1,7 @@
 package com.software_engineering.weather_clothes.controller;
 
 import com.software_engineering.weather_clothes.model.Weather;
+import com.software_engineering.weather_clothes.service.ClothingCategoryService;
 import com.software_engineering.weather_clothes.service.ImageService;
 import com.software_engineering.weather_clothes.service.WeatherService;
 import com.software_engineering.weather_clothes.util.CookieUtil;
@@ -11,17 +12,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
 public class WeatherPageController {
     private final WeatherService weatherService;
     private final ImageService imageService;
+    private final ClothingCategoryService clothingCategoryService;
 
     @Autowired
-    public WeatherPageController(WeatherService weatherService, ImageService imageService){
+    public WeatherPageController(WeatherService weatherService, ImageService imageService, ClothingCategoryService clothingCategoryService){
         this.weatherService = weatherService;
         this.imageService = imageService;
+        this.clothingCategoryService = clothingCategoryService;
     }
 
     /**
@@ -54,7 +58,7 @@ public class WeatherPageController {
                 Weather nowWeather = weatherData.get(0); // 현재 시간의 날씨 정보 (1 row)
                 List<Weather> fcstWeather = weatherData.subList(1, weatherData.size()); // 예보된 날씨 정보 (5 rows)
 
-                List<String> clothingRecommendations = weatherService.getClothingRecommendations(nowWeather); // 추천된 옷 카테고리
+                Map<String, List<String>> clothingRecommendations = clothingCategoryService.getClothingCategoryId(nowWeather); // 추천된 옷 카테고리
 
                 nowWeather.setIcon(imageService.selectWeatherIcon(nowWeather));
 
@@ -70,6 +74,7 @@ public class WeatherPageController {
                 model.addAttribute("nowWeather", nowWeather);
                 model.addAttribute("fcstWeather", fcstWeather);
                 model.addAttribute("clothingRecommendations", clothingRecommendations);
+
             }
             return "mainPage";  // mainPage.css 템플릿 렌더링
         } else {
