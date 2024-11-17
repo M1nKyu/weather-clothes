@@ -11,14 +11,18 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ClothingCategoryService {
 
     private final ClothingProductRepository clothingProductRepository;
+    private final ClothingCategoryRepository clothingCategoryRepository;
 
-    public ClothingCategoryService(ClothingProductRepository clothingProductRepository){
+    public ClothingCategoryService(ClothingProductRepository clothingProductRepository, ClothingCategoryRepository clothingCategoryRepository){
         this.clothingProductRepository = clothingProductRepository;
+        this.clothingCategoryRepository = clothingCategoryRepository;
     }
 
     /**
@@ -184,5 +188,29 @@ public class ClothingCategoryService {
         recommendations.entrySet().removeIf(entry -> entry.getValue().isEmpty());
 
         return recommendations;
+    }
+
+    @Transactional
+    public void syncCategories(){
+        // ClothingProduct에서 고유한 카테고리 정보 추출
+        List<ClothingProduct> products = clothingProductRepository.findAll();
+
+        // categoryId와 categoryName을 기준으로 중복 제거
+        List<ClothingCategory> categories = products.stream()
+                .map(product -> {
+                    ClothingCategory category = new ClothingCategory();
+                    category.setCategoryId(product.getCategoryId());
+                    category.setCategoryName(product.getCategoryName());
+                    return category;
+                })
+                .distinct() // Lombok의 @Data가 equals와 hashCode를 제공하므로 동작함
+                .filter(category -> category.getCategoryId() != null && category.getCategoryName() != null)
+                .filter(category -> !clothingCategoryRepository.existsByCategoryId(category.getCategoryId()))
+                .collect(Collectors.toList());
+
+        // 새로운 카테고리들 저장
+        if (!categories.isEmpty()) {
+            clothingCategoryRepository.saveAll(categories);
+        }
     }
 }
