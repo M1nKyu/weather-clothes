@@ -129,8 +129,4 @@ public class WeatherService {
         return weatherRepository.findTop6ByBaseDateAndBaseTimeAndNxAndNyOrderByFcstDateAscFcstTimeAsc(baseDate, baseTime, nx, ny);
     }
 
-    public List<String> getClothingRecommendations(Weather nowWeather) {
-        return clothingRecommendationService.getClothingRecommendations(nowWeather);
-    }
-
 }

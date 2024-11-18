@@ -15,7 +15,8 @@ public class ClothingProduct {
     @Column(nullable = false, unique = true)  // productId는 유일해야 하므로 unique 제약을 추가
     private String productId;  // 상품 ID (data-item-id)
 
-    private String category;   // 상품 카테고리
+    private String categoryId;   // 상품 카테고리 ID
+    private String categoryName; // 상품 카테고리명
     private String link;       // 상품 상세 링크
     private String imageUrl;   // 이미지 URL
     private String likes;     // 상품 좋아요 수
