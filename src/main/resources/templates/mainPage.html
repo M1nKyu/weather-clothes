@@ -50,10 +50,10 @@
             </div>
             <div class="category-suggestions">
                 <h2>지금 날씨에는</h2>
-                <div th:each="category : ${clothingRecommendations}" class="recommendation-category">
+                <div th:each="category : ${clothingCategory}" class="recommendation-category">
                     <h3 th:text="${category.key}" class="category-title"></h3>
                     <ul class="recommendation-list">
-                        <li th:each="item : ${category.value}" th:text="${item}"></li>
+                        <li th:each="clothing : ${category.value}" th:text="${clothing.categoryName}"></li> <!-- ClothingCategory의 CategoryName 출력 -->
                     </ul>
                 </div>
             </div>
@@ -66,44 +66,43 @@
         </div>
     </main>
 
-    <table border="1">
-        <thead>
-        <tr>
-            <th>Base Date</th>
-            <th>Base Time</th>
-            <th>Forecast Date</th>
-            <th>Forecast Time</th>
-            <th>NX</th>
-            <th>NY</th>
-            <th>Temperature (°C)</th>
-            <th>Precipitation (mm)</th>
-            <th>Sky</th>
-            <th>Humidity (%)</th>
-            <th>Precipitation Type</th>
-            <th>Wind Direction (°)</th>
-            <th>Wind Speed (m/s)</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="weather : ${fcstWeather}">
-            <td th:text="${weather.baseDate}"></td>
-            <td th:text="${weather.baseTime}"></td>
-            <td th:text="${weather.fcstDate}"></td>
-            <td th:text="${weather.fcstTime}"></td>
-            <td th:text="${weather.nx}"></td>
-            <td th:text="${weather.ny}"></td>
-            <td th:text="${weather.t1h}"></td>
-            <td th:text="${weather.rn1}"></td>
-            <td th:text="${weather.sky}"></td>
-            <td th:text="${weather.reh}"></td>
-            <td th:text="${weather.pty}"></td>
-            <td th:text="${weather.vec}"></td>
-            <td th:text="${weather.wsd}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <span th:text="${clothingRecommendations}"></span>
-</div>
+<!--    <table border="1">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Base Date</th>-->
+<!--            <th>Base Time</th>-->
+<!--            <th>Forecast Date</th>-->
+<!--            <th>Forecast Time</th>-->
+<!--            <th>NX</th>-->
+<!--            <th>NY</th>-->
+<!--            <th>Temperature (°C)</th>-->
+<!--            <th>Precipitation (mm)</th>-->
+<!--            <th>Sky</th>-->
+<!--            <th>Humidity (%)</th>-->
+<!--            <th>Precipitation Type</th>-->
+<!--            <th>Wind Direction (°)</th>-->
+<!--            <th>Wind Speed (m/s)</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="weather : ${fcstWeather}">-->
+<!--            <td th:text="${weather.baseDate}"></td>-->
+<!--            <td th:text="${weather.baseTime}"></td>-->
+<!--            <td th:text="${weather.fcstDate}"></td>-->
+<!--            <td th:text="${weather.fcstTime}"></td>-->
+<!--            <td th:text="${weather.nx}"></td>-->
+<!--            <td th:text="${weather.ny}"></td>-->
+<!--            <td th:text="${weather.t1h}"></td>-->
+<!--            <td th:text="${weather.rn1}"></td>-->
+<!--            <td th:text="${weather.sky}"></td>-->
+<!--            <td th:text="${weather.reh}"></td>-->
+<!--            <td th:text="${weather.pty}"></td>-->
+<!--            <td th:text="${weather.vec}"></td>-->
+<!--            <td th:text="${weather.wsd}"></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--    <span th:text="${clothingCategory}"></span>-->
 
 <!-- 날씨 데이터가 없을 때 -->
 <div th:if="${weatherData == null}" class="error-message">
