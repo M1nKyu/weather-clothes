@@ -1,6 +1,7 @@
 package com.software_engineering.weather_clothes.controller;
 
 import com.software_engineering.weather_clothes.model.ClothingCategory;
+import com.software_engineering.weather_clothes.model.ClothingProduct;
 import com.software_engineering.weather_clothes.model.Weather;
 import com.software_engineering.weather_clothes.service.ClothingCategoryService;
 import com.software_engineering.weather_clothes.service.ImageService;
@@ -60,6 +61,7 @@ public class WeatherPageController {
                 List<Weather> fcstWeather = weatherData.subList(1, weatherData.size()); // 예보된 날씨 정보 (5 rows)
 
                 Map<String, List<ClothingCategory>> clothingCategory = clothingCategoryService.getClothingCategory(nowWeather); // 추천된 옷 카테고리
+                Map<String, Map<String, List<ClothingProduct>>> clothingProducts = clothingCategoryService.getClothingProductsFromCategories(clothingCategory);
 
                 nowWeather.setIcon(imageService.selectWeatherIcon(nowWeather));
 
@@ -75,6 +77,7 @@ public class WeatherPageController {
                 model.addAttribute("nowWeather", nowWeather);
                 model.addAttribute("fcstWeather", fcstWeather);
                 model.addAttribute("clothingCategory", clothingCategory);
+                model.addAttribute("clothingProducts", clothingProducts);
 
             }
             return "mainPage";  // mainPage.css 템플릿 렌더링

@@ -61,15 +61,14 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* 화면 전체 높이 */
     padding: 20px;
 }
 
 .main-content {
     display: flex;
-    flex-direction: column; /* 세로 정렬 */
+    flex-direction: column;
     align-items: center;
-    max-width: 600px; /* 최대 너비 */
+    max-width: 1200px; /* 최대 너비 확대 */
     width: 100%;
     gap: 30px;
 }
@@ -165,20 +164,48 @@ main {
     margin: 10px 0;
 }
 
-.outfit-display .outfit-images {
+.outfit-display .product-categories {
+    max-height: 400px; /* 최대 높이 설정 */
+    overflow-y: auto; /* 수직 스크롤 활성화 */
+    padding: 10px;
+}
+
+.category-products {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
     justify-content: center;
 }
 
-.outfit-item {
-    width: 120px;
-    height: 180px;
-    background-color: #ddd;
+.product-item {
+    width: 150px; /* 고정된 가로 크기 */
+    height: 200px; /* 고정된 세로 크기 */
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    color: #666;
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-item img {
+    width: 100%;
+    height: 150px; /* 이미지 높이 고정 */
+    object-fit: cover; /* 이미지 크기에 맞게 조정 */
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
+}
+
+.product-item a {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.product-item a:hover {
+    color: #6a5acd;
 }

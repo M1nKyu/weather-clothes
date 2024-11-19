@@ -222,4 +222,51 @@ public class ClothingCategoryService {
             clothingCategoryRepository.saveAll(categories);
         }
     }
+
+    public Map<String, Map<String, List<ClothingProduct>>> getClothingProductsFromCategories(
+            Map<String, List<ClothingCategory>> clothingCategories) {
+
+        Map<String, Map<String, List<ClothingProduct>>> result = new HashMap<>();
+
+        // 각 대분류(상의, 바지, 아우터, 기타)별로 처리
+        for (Map.Entry<String, List<ClothingCategory>> entry : clothingCategories.entrySet()) {
+            String mainCategory = entry.getKey();
+            List<ClothingCategory> categories = entry.getValue();
+
+            // 대분류별 맵 초기화
+            Map<String, List<ClothingProduct>> categoryProducts = new HashMap<>();
+
+            // 각 카테고리별로 상품 조회 및 정렬
+            for (ClothingCategory category : categories) {
+                // 해당 카테고리의 상품들을 likes 내림차순으로 최대 10개 조회
+                List<ClothingProduct> products = clothingProductRepository
+                        .findByCategoryId(category.getCategoryId())
+                        .stream()
+                        .sorted((p1, p2) -> {
+                            // null 체크 및 예외 처리
+                            try {
+                                int likes1 = p1.getLikes() != null ? Integer.parseInt(p1.getLikes()) : 0;
+                                int likes2 = p2.getLikes() != null ? Integer.parseInt(p2.getLikes()) : 0;
+                                return Integer.compare(likes2, likes1); // 내림차순
+                            } catch (NumberFormatException e) {
+                                // 숫자로 변환할 수 없는 경우 0으로 처리
+                                return 0;
+                            }
+                        })
+                        .limit(10)
+                        .collect(Collectors.toList());
+
+                // 결과가 있는 경우만 맵에 추가
+                if (!products.isEmpty()) {
+                    categoryProducts.put(category.getCategoryName(), products);
+                }
+            }
+
+            // 해당 대분류에 상품이 있는 경우만 결과 맵에 추가
+            if (!categoryProducts.isEmpty()) {
+                result.put(mainCategory, categoryProducts);
+            }
+        }
+        return result;
+    }
 }
