@@ -1,6 +1,8 @@
 package com.software_engineering.weather_clothes.controller;
 
+import com.software_engineering.weather_clothes.model.ClothingProduct;
 import com.software_engineering.weather_clothes.service.ClothingCategoryService;
+import com.software_engineering.weather_clothes.service.ClothingProductService;
 import com.software_engineering.weather_clothes.service.CrawlingClothingProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +21,10 @@ public class ClothingProductController {
             // 1. 크롤링 후 DB에 저장
             crwalingClothingProductService.process();  // 크롤링 메서드 호출
 
-            // 2. 카테고리 정보 동기화
+            // 2. 모든 데이터의 좋아요 형태 변환 (String -> 정수)
+            clothingProductService.updateLikesForAllProducts();
+
+            // 3. clothing_category 테이블에 카테고리 정보 동기화
             clothingCategoryService.syncCategories();
 
             return "크롤링 완료 및 DB 저장됨!";
