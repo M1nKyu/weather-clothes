@@ -30,7 +30,7 @@ public class ClothingCategoryService {
      */
     public Map<String, List<ClothingCategory>> getClothingCategory(Weather weather){
 
-        Map<String, List<ClothingCategory>> recommendations = new HashMap<>();
+        Map<String, List<ClothingCategory>> recommendations = new LinkedHashMap<>();
 
         // 상의, 바지, 아우터, 기타 카테고리 초기화
         recommendations.put("상의", new ArrayList<>());
@@ -226,7 +226,7 @@ public class ClothingCategoryService {
     public Map<String, Map<String, List<ClothingProduct>>> getClothingProductsFromCategories(
             Map<String, List<ClothingCategory>> clothingCategories) {
 
-        Map<String, Map<String, List<ClothingProduct>>> result = new HashMap<>();
+        Map<String, Map<String, List<ClothingProduct>>> result = new LinkedHashMap<>();
 
         // 각 대분류(상의, 바지, 아우터, 기타)별로 처리
         for (Map.Entry<String, List<ClothingCategory>> entry : clothingCategories.entrySet()) {
@@ -234,7 +234,7 @@ public class ClothingCategoryService {
             List<ClothingCategory> categories = entry.getValue();
 
             // 대분류별 맵 초기화
-            Map<String, List<ClothingProduct>> categoryProducts = new HashMap<>();
+            Map<String, List<ClothingProduct>> categoryProducts = new LinkedHashMap<>();
 
             // 각 카테고리별로 상품 조회 및 정렬
             for (ClothingCategory category : categories) {
