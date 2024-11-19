@@ -114,8 +114,8 @@ public class WeatherService {
                 case "SKY": weather.setSky((int) fcstValue); break; // 1시간 강수량
                 case "REH": weather.setReh((int) fcstValue); break; // 습도
                 case "PTY": weather.setPty((int) fcstValue); break; // 강수형태
-                case "VEC": weather.setVec(fcstValue); break; // 풍향
-                case "WSD": weather.setWsd(fcstValue); break; // 풍속
+                case "VEC": weather.setVec((int)fcstValue); break; // 풍향
+                case "WSD": weather.setWsd((int)fcstValue); break; // 풍속
             }
         }
 

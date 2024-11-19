@@ -26,8 +26,8 @@ public class Weather {
     private int sky;   // 하늘 상태
     private int reh;      // 습도 (%)
     private int pty;      // 강수형태 (코드값)
-    private double vec;   // 풍향 (deg)
-    private double wsd;   // 풍속 (m/s)
+    private int vec;   // 풍향 (deg)
+    private int wsd;   // 풍속 (m/s)
 
     @Transient
     private String icon;
