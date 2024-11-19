@@ -32,7 +32,7 @@
             <!-- 날씨 정보  -->
             <div class="weather-info">
                 <div class="current-weather">
-                    <h2>서울</h2>
+                    <h2 th:text ="${userLocation[1]} + ' ' + ${userLocation[2]}">서울</h2>
                     <div class="current-temperature">
                         <img th:src="@{${nowWeather.icon}}" class="weather-icon" alt="현재 날씨 아이콘">
                         <span class="temperature" th:text="${nowWeather.t1h} + '°'"></span>

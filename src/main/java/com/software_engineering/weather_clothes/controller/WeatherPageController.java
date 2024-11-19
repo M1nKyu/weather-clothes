@@ -46,6 +46,12 @@ public class WeatherPageController {
         String nx = CookieUtil.getNxNyFromCookies(request)[0];
         String ny = CookieUtil.getNxNyFromCookies(request)[1];
 
+        // 사용자 위치명 { 시/도, 군/구, 읍/면/동 }
+        String[] userLocation = CookieUtil.getLocationFromCookies(request);
+        if(userLocation != null)
+            model.addAttribute("userLocation", userLocation); 
+
+        // 계절 정보
         String season = DateTimeUtil.getSeason();
         model.addAttribute("season", season);
 
