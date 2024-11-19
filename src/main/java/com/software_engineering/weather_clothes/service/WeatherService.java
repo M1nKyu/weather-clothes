@@ -128,4 +128,57 @@ public class WeatherService {
         return weatherRepository.findTop6ByBaseDateAndBaseTimeAndNxAndNyOrderByFcstDateAscFcstTimeAsc(baseDate, baseTime, nx, ny);
     }
 
+    public String getSkyCondition(int sky){
+        if (sky >= 0 && sky <= 5) {
+            return "맑음";
+        }
+        else if (sky >= 6 && sky <= 8) {
+            return "구름많음";
+        }
+        else if (sky >= 9 && sky <= 10) {
+            return "흐림";
+        }
+        else{
+            return "하늘상태 불러오기 실패";
+        }
+    }
+
+    public String getWindSpeedCondition(int wsd) {
+        if (wsd < 4) {
+            return "약한 바람";
+        }
+        else if (wsd >= 4 && wsd < 9) {
+            return "약간 강한 바람";
+        }
+        else if (wsd >= 9 && wsd < 10) {
+            return "강한 바람";
+        }
+        else if (wsd >= 14) {
+            return "매우 강한 바람";
+        }
+        else {
+            return "풍속 불러오기 실패";  
+        }
+    }
+
+    public String getPrecipitationType(int pty) {
+        switch (pty) {
+            case 0:
+                return "";
+            case 1:
+                return "비";
+            case 2:
+                return "비/눈";
+            case 3:
+                return "눈";
+            case 5:
+                return "빗방울";
+            case 6:
+                return "빗방울눈날림";
+            case 7:
+                return "눈날림";
+            default:
+                return "강수형태 불러오기 실패";
+        }
+    }
 }

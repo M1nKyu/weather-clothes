@@ -78,8 +78,17 @@ public class WeatherPageController {
                     String formattedTime = DateTimeUtil.formatTime(weather.getFcstTime());
                     weather.setFcstTime(formattedTime); // 포맷팅된 fcstTime 값으로 변경
                 });
+
+                // 추가 날씨 정보 (하늘 상태, 풍속, 강수 형태)
+                Map<String, String> weatherDetails = Map.of(
+                        "sky", weatherService.getSkyCondition(nowWeather.getSky()),
+                        "wsd", weatherService.getWindSpeedCondition(nowWeather.getWsd()),
+                        "pty", weatherService.getPrecipitationType(nowWeather.getPty()),
+                        "reh", String.valueOf(nowWeather.getReh())
+                );
                 
                 model.addAttribute("nowWeather", nowWeather); // 현재 날씨
+                model.addAttribute("weatherDetails", weatherDetails);
                 model.addAttribute("fcstWeather", fcstWeather); // 예보 날씨
                 model.addAttribute("clothingCategory", clothingCategory); // 추천 카테고리
                 model.addAttribute("clothingProducts", clothingProducts); // 추천 카테고리별 상품

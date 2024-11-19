@@ -37,8 +37,10 @@
                         <img th:src="@{${nowWeather.icon}}" class="weather-icon" alt="현재 날씨 아이콘">
                         <span class="temperature" th:text="${nowWeather.t1h} + '°'"></span>
                     </div>
-                    <p class="weather-description">맑음</p>
-                    <p class="high-low">최고 10도 | 최저 8</p>
+                    <p th:text="'하늘상태: ' + ${weatherDetails.sky}" class="weather-description">맑음</p>
+                    <p th:text="'풍속: ' + ${weatherDetails.wsd}" class="weather-description">풍속</p>
+                    <p th:text="'강수형태: ' + ${weatherDetails.pty}" class="weather-description">강수형태</p>
+                    <p th:text="'습도: ' + ${weatherDetails.reh} + '%'" class="weather-description">-</p>
                 </div>
                 <div class="hourly-forecast">
                     <div class="hour-item" th:each="weather : ${fcstWeather}">
