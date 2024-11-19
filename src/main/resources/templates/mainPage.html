@@ -57,10 +57,21 @@
                     </ul>
                 </div>
             </div>
+
             <div class="outfit-display">
-                <h2>상품 목록</h2>
-                <div class="outfit-images">
-                    <div class="outfit-item">옷 이미지</div>
+                <h2>추천 상품</h2>
+                <div class="product-categories" th:each="mainCategory : ${clothingProducts}">
+                    <h3 th:text="${mainCategory.key}" class="main-category-title"></h3>
+                    <div class="category-products" th:each="category : ${mainCategory.value}">
+                        <h4 th:text="${category.key}" class="sub-category-title"></h4>
+                        <div class="product-list" style="display: flex; flex-wrap: wrap; gap: 15px;"> <!-- Flexbox 적용 -->
+                            <div class="product-item" th:each="product : ${category.value}" style="width: 150px; height: 200px; text-align: center;">
+                                <a th:href="${product.link}" target="_blank" class="product-link">
+                                    <img th:src="${product.imageUrl}" th:alt="이미지" class="product-image" style="width: 100%; height: auto;">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
