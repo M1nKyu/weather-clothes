@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Arrays;
 
 /**
  * WeatherService는 날씨 데이터를 API로부터 받아 파싱하고 DB에 저장.
@@ -110,7 +109,7 @@ public class WeatherService {
 
             // 카테고리별로 데이터를 매핑하여 Weather 객체에 설정
             switch (category) {
-                case "T1H": weather.setT1h(fcstValue); break; // 기온
+                case "T1H": weather.setT1h((int) fcstValue); break; // 기온
                 case "RN1": weather.setRn1(fcstValue); break; // 1시간 강수량
                 case "SKY": weather.setSky((int) fcstValue); break; // 1시간 강수량
                 case "REH": weather.setReh((int) fcstValue); break; // 습도

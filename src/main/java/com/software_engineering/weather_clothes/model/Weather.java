@@ -21,7 +21,7 @@ public class Weather {
     private int nx;            // 예보 지점 X 좌표
     private int ny;            // 예보 지점 Y 좌표
 
-    private double t1h;   // 기온 (℃)
+    private int t1h;   // 기온 (℃)
     private double rn1;   // 1시간 강수량 (mm)
     private int sky;   // 하늘 상태
     private int reh;      // 습도 (%)
@@ -29,5 +29,6 @@ public class Weather {
     private double vec;   // 풍향 (deg)
     private double wsd;   // 풍속 (m/s)
 
+    @Transient
     private String icon;
 }
