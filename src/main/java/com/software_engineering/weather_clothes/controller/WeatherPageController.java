@@ -78,13 +78,11 @@ public class WeatherPageController {
                     String formattedTime = DateTimeUtil.formatTime(weather.getFcstTime());
                     weather.setFcstTime(formattedTime); // 포맷팅된 fcstTime 값으로 변경
                 });
-
-                // model 객체 전달
-                model.addAttribute("nowWeather", nowWeather);
-                model.addAttribute("fcstWeather", fcstWeather);
-                model.addAttribute("clothingCategory", clothingCategory);
-                model.addAttribute("clothingProducts", clothingProducts);
-
+                
+                model.addAttribute("nowWeather", nowWeather); // 현재 날씨
+                model.addAttribute("fcstWeather", fcstWeather); // 예보 날씨
+                model.addAttribute("clothingCategory", clothingCategory); // 추천 카테고리
+                model.addAttribute("clothingProducts", clothingProducts); // 추천 카테고리별 상품
             }
             return "mainPage";  // mainPage.css 템플릿 렌더링
         } else {

@@ -26,9 +26,6 @@ public class CookieUtil {
                 }
             }
         }
-
-//        System.out.println("nx: " + nx);
-//        System.out.println("ny: " + ny);
         return new String[] { nx, ny };
     }
 
