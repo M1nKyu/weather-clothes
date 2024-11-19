@@ -26,9 +26,29 @@ public class CookieUtil {
                 }
             }
         }
-
-//        System.out.println("nx: " + nx);
-//        System.out.println("ny: " + ny);
         return new String[] { nx, ny };
+    }
+
+    public static String[] getLocationFromCookies(HttpServletRequest request){
+        String region = null;
+        String district = null;
+        String town = null;
+
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("userRegion".equals(cookie.getName())) {
+                    region = cookie.getValue();
+                }
+                else if ("userDistrict".equals(cookie.getName())) {
+                    district = cookie.getValue();
+                }
+                else if ("userTown".equals(cookie.getName())) {
+                    town = cookie.getValue();
+                }
+            }
+        }
+        return new String[] {region, district, town};
     }
 }
