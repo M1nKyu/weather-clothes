@@ -149,6 +149,7 @@ public class WeatherService {
         };
     }
 
+    // 강수 형태
     public String getPrecipitationType(int value) {
         PrecipitationType pty = PrecipitationType.from(value);
         return switch(pty){
@@ -163,6 +164,7 @@ public class WeatherService {
 
     }
 
+    // 강수량
     public String getRainfallOneHour(double value){
         RainfallOneHour rn1 = RainfallOneHour.from(value);
         return switch(rn1){
