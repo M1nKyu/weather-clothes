@@ -147,6 +147,8 @@ main {
     border-radius: 15px;
     width: 100%;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    max-height: 800px; /* 전체 섹션의 높이를 제한 */
+    overflow-y: auto; /* 하나의 스크롤 사용 */
 }
 
 .category-suggestions h2, .outfit-display h2 {
@@ -162,19 +164,6 @@ main {
 .category-suggestions ul li {
     font-size: 18px;
     margin: 10px 0;
-}
-
-.outfit-display .product-categories {
-    max-height: 400px; /* 최대 높이 설정 */
-    overflow-y: auto; /* 수직 스크롤 활성화 */
-    padding: 10px;
-}
-
-.category-products {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
 }
 
 .product-item {

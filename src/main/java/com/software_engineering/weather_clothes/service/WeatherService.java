@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Arrays;
 
 /**
  * WeatherService는 날씨 데이터를 API로부터 받아 파싱하고 DB에 저장.
@@ -110,13 +109,13 @@ public class WeatherService {
 
             // 카테고리별로 데이터를 매핑하여 Weather 객체에 설정
             switch (category) {
-                case "T1H": weather.setT1h(fcstValue); break; // 기온
+                case "T1H": weather.setT1h((int) fcstValue); break; // 기온
                 case "RN1": weather.setRn1(fcstValue); break; // 1시간 강수량
                 case "SKY": weather.setSky((int) fcstValue); break; // 1시간 강수량
                 case "REH": weather.setReh((int) fcstValue); break; // 습도
                 case "PTY": weather.setPty((int) fcstValue); break; // 강수형태
-                case "VEC": weather.setVec(fcstValue); break; // 풍향
-                case "WSD": weather.setWsd(fcstValue); break; // 풍속
+                case "VEC": weather.setVec((int)fcstValue); break; // 풍향
+                case "WSD": weather.setWsd((int)fcstValue); break; // 풍속
             }
         }
 
@@ -129,4 +128,57 @@ public class WeatherService {
         return weatherRepository.findTop6ByBaseDateAndBaseTimeAndNxAndNyOrderByFcstDateAscFcstTimeAsc(baseDate, baseTime, nx, ny);
     }
 
+    public String getSkyCondition(int sky){
+        if (sky >= 0 && sky <= 5) {
+            return "맑음";
+        }
+        else if (sky >= 6 && sky <= 8) {
+            return "구름많음";
+        }
+        else if (sky >= 9 && sky <= 10) {
+            return "흐림";
+        }
+        else{
+            return "하늘상태 불러오기 실패";
+        }
+    }
+
+    public String getWindSpeedCondition(int wsd) {
+        if (wsd < 4) {
+            return "약한 바람";
+        }
+        else if (wsd >= 4 && wsd < 9) {
+            return "약간 강한 바람";
+        }
+        else if (wsd >= 9 && wsd < 10) {
+            return "강한 바람";
+        }
+        else if (wsd >= 14) {
+            return "매우 강한 바람";
+        }
+        else {
+            return "풍속 불러오기 실패";  
+        }
+    }
+
+    public String getPrecipitationType(int pty) {
+        switch (pty) {
+            case 0:
+                return "";
+            case 1:
+                return "비";
+            case 2:
+                return "비/눈";
+            case 3:
+                return "눈";
+            case 5:
+                return "빗방울";
+            case 6:
+                return "빗방울눈날림";
+            case 7:
+                return "눈날림";
+            default:
+                return "강수형태 불러오기 실패";
+        }
+    }
 }

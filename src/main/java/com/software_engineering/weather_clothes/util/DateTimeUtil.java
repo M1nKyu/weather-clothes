@@ -25,9 +25,6 @@ public class DateTimeUtil {
         String baseDate = sdf1.format(cal.getTime());
         String baseTime = String.format("%02d30", hour);
 
-//        System.out.println("baseDate"+baseDate);
-//        System.out.println("baseTime"+baseTime);
-
         return new String[] {baseDate, baseTime};
     }
 
