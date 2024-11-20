@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -86,13 +88,15 @@ public class WeatherPageController {
                 });
 
                 // 추가 날씨 정보 (하늘 상태, 풍속, 강수 형태)
-                Map<String, String> weatherDetails = Map.of(
-                        "sky", weatherService.getSkyCondition(nowWeather.getSky()),
-                        "wsd", weatherService.getWindSpeedCondition(nowWeather.getWsd()),
-                        "pty", weatherService.getPrecipitationType(nowWeather.getPty()),
-                        "reh", String.valueOf(nowWeather.getReh())
-                );
-                
+                Map<String, String> weatherDetails = new HashMap<>();
+                weatherDetails.put("sky", weatherService.getSkyCondition(nowWeather.getSky()));
+                weatherDetails.put("wsd", weatherService.getWindSpeedCondition(nowWeather.getWsd()));
+                weatherDetails.put("pty", weatherService.getPrecipitationType(nowWeather.getPty()));
+                weatherDetails.put("rn1", weatherService.getRainfallOneHour(nowWeather.getRn1()));
+                weatherDetails.put("reh", String.valueOf(nowWeather.getReh()));
+                weatherDetails.entrySet().removeIf(entry -> "없음".equals(entry.getValue()));
+
+
                 model.addAttribute("nowWeather", nowWeather); // 현재 날씨
                 model.addAttribute("weatherDetails", weatherDetails);
                 model.addAttribute("fcstWeather", fcstWeather); // 예보 날씨
