@@ -1,6 +1,10 @@
 $(document).ready(function() {
+    // 이어도 옵션 제거
+    $('#region option[value="이어도"]').remove();
+
     $('#region').change(function() {
         const region = $(this).val();
+        
         if (region) {
             $.get('/location/districts', { region: region })
                 .done(function(districts) {
@@ -27,6 +31,13 @@ $(document).ready(function() {
     $('#district').change(function() {
         const region = $('#region').val();
         const district = $(this).val();
+        
+        if (region === '이어도' && district) {
+            $('#town').prop('disabled', true);
+            $('#saveButton').prop('disabled', false);
+            return;
+        }
+
         if (district) {
             $.get('/location/towns', {
                 region: region,
