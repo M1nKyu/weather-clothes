@@ -32,13 +32,15 @@
             <!-- 날씨 정보  -->
             <div class="weather-info">
                 <div class="current-weather">
-                    <h2>서울</h2>
+                    <h2 th:text ="${userLocation[1]} + ' ' + ${userLocation[2]}">서울</h2>
                     <div class="current-temperature">
                         <img th:src="@{${nowWeather.icon}}" class="weather-icon" alt="현재 날씨 아이콘">
                         <span class="temperature" th:text="${nowWeather.t1h} + '°'"></span>
                     </div>
-                    <p class="weather-description">맑음</p>
-                    <p class="high-low">최고 10도 | 최저 8</p>
+                    <p th:text="'하늘상태: ' + ${weatherDetails.sky}" class="weather-description">맑음</p>
+                    <p th:text="'풍속: ' + ${weatherDetails.wsd}" class="weather-description">풍속</p>
+                    <p th:text="'강수형태: ' + ${weatherDetails.pty}" class="weather-description">강수형태</p>
+                    <p th:text="'습도: ' + ${weatherDetails.reh} + '%'" class="weather-description">-</p>
                 </div>
                 <div class="hourly-forecast">
                     <div class="hour-item" th:each="weather : ${fcstWeather}">
@@ -57,10 +59,21 @@
                     </ul>
                 </div>
             </div>
+
             <div class="outfit-display">
-                <h2>상품 목록</h2>
-                <div class="outfit-images">
-                    <div class="outfit-item">옷 이미지</div>
+                <h2>추천 상품</h2>
+                <div class="product-categories" th:each="mainCategory : ${clothingProducts}">
+                    <h3 th:text="${mainCategory.key}" class="main-category-title"></h3>
+                    <div class="category-products" th:each="category : ${mainCategory.value}">
+                        <h4 th:text="${category.key}" class="sub-category-title"></h4>
+                        <div class="product-list" style="display: flex; flex-wrap: wrap; gap: 15px;">
+                            <div class="product-item" th:each="product : ${category.value}" style="width: 150px; height: 200px; text-align: center;">
+                                <a th:href="${product.link}" target="_blank" class="product-link">
+                                    <img th:src="${product.imageUrl}" th:alt="이미지" class="product-image" style="width: 100%; height: auto;">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

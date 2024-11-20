@@ -1,6 +1,7 @@
 package com.software_engineering.weather_clothes.controller;
 
 import com.software_engineering.weather_clothes.model.ClothingCategory;
+import com.software_engineering.weather_clothes.model.ClothingProduct;
 import com.software_engineering.weather_clothes.model.Weather;
 import com.software_engineering.weather_clothes.service.ClothingCategoryService;
 import com.software_engineering.weather_clothes.service.ImageService;
@@ -45,6 +46,12 @@ public class WeatherPageController {
         String nx = CookieUtil.getNxNyFromCookies(request)[0];
         String ny = CookieUtil.getNxNyFromCookies(request)[1];
 
+        // 사용자 위치명 { 시/도, 군/구, 읍/면/동 }
+        String[] userLocation = CookieUtil.getLocationFromCookies(request);
+        if(userLocation != null)
+            model.addAttribute("userLocation", userLocation); 
+
+        // 계절 정보
         String season = DateTimeUtil.getSeason();
         model.addAttribute("season", season);
 
@@ -60,6 +67,7 @@ public class WeatherPageController {
                 List<Weather> fcstWeather = weatherData.subList(1, weatherData.size()); // 예보된 날씨 정보 (5 rows)
 
                 Map<String, List<ClothingCategory>> clothingCategory = clothingCategoryService.getClothingCategory(nowWeather); // 추천된 옷 카테고리
+                Map<String, Map<String, List<ClothingProduct>>> clothingProducts = clothingCategoryService.getClothingProductsFromCategories(clothingCategory);
 
                 nowWeather.setIcon(imageService.selectWeatherIcon(nowWeather));
 
@@ -71,11 +79,19 @@ public class WeatherPageController {
                     weather.setFcstTime(formattedTime); // 포맷팅된 fcstTime 값으로 변경
                 });
 
-                // model 객체 전달
-                model.addAttribute("nowWeather", nowWeather);
-                model.addAttribute("fcstWeather", fcstWeather);
-                model.addAttribute("clothingCategory", clothingCategory);
-
+                // 추가 날씨 정보 (하늘 상태, 풍속, 강수 형태)
+                Map<String, String> weatherDetails = Map.of(
+                        "sky", weatherService.getSkyCondition(nowWeather.getSky()),
+                        "wsd", weatherService.getWindSpeedCondition(nowWeather.getWsd()),
+                        "pty", weatherService.getPrecipitationType(nowWeather.getPty()),
+                        "reh", String.valueOf(nowWeather.getReh())
+                );
+                
+                model.addAttribute("nowWeather", nowWeather); // 현재 날씨
+                model.addAttribute("weatherDetails", weatherDetails);
+                model.addAttribute("fcstWeather", fcstWeather); // 예보 날씨
+                model.addAttribute("clothingCategory", clothingCategory); // 추천 카테고리
+                model.addAttribute("clothingProducts", clothingProducts); // 추천 카테고리별 상품
             }
             return "mainPage";  // mainPage.css 템플릿 렌더링
         } else {
