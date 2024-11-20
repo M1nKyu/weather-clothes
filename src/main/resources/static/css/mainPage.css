@@ -74,8 +74,7 @@ main {
 }
 
 .weather-info {
-    background-color: #6a5acd;
-    color: white;
+    background-color: #58ACFA;
     padding: 20px;
     border-radius: 15px;
     width: 100%;
@@ -86,6 +85,7 @@ main {
 }
 
 .current-weather {
+    color: white;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -129,7 +129,6 @@ main {
 
 .hour-item {
     text-align: center;
-    font-size: 14px;
 }
 
 .hour-item p {
@@ -137,8 +136,20 @@ main {
 }
 
 .hour-item img {
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
+}
+
+.hour-item-time {
+    color: #E6E6E6;
+    font-size: 15px;
+    font-weight: lighter;
+}
+
+.hour-item-temp {
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
 }
 
 .category-suggestions, .outfit-display {
