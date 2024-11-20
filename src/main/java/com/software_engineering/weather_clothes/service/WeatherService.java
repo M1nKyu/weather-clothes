@@ -3,6 +3,7 @@ package com.software_engineering.weather_clothes.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.software_engineering.weather_clothes.api.WeatherApiClient;
+import com.software_engineering.weather_clothes.enums.WeatherStatusEnums.*;
 import com.software_engineering.weather_clothes.model.Weather;
 import com.software_engineering.weather_clothes.repository.WeatherRepository;
 import org.springframework.stereotype.Service;
@@ -128,57 +129,48 @@ public class WeatherService {
         return weatherRepository.findTop6ByBaseDateAndBaseTimeAndNxAndNyOrderByFcstDateAscFcstTimeAsc(baseDate, baseTime, nx, ny);
     }
 
-    public String getSkyCondition(int sky){
-        if (sky >= 0 && sky <= 5) {
-            return "맑음";
-        }
-        else if (sky >= 6 && sky <= 8) {
-            return "구름많음";
-        }
-        else if (sky >= 9 && sky <= 10) {
-            return "흐림";
-        }
-        else{
-            return "하늘상태 불러오기 실패";
-        }
+    public String getSkyCondition(int value){
+        SkyCondition sky = SkyCondition.from(value);
+        return switch(sky){
+            case CLEAR -> "맑음";
+            case MOSTLY_CLEAR ->  "대체로 맑음";
+            case MOSTLY_CLOUDY ->  "대체로 흐림";
+            case CLOUDY ->  "흐림";
+        };
     }
 
-    public String getWindSpeedCondition(int wsd) {
-        if (wsd < 4) {
-            return "약한 바람";
-        }
-        else if (wsd >= 4 && wsd < 9) {
-            return "약간 강한 바람";
-        }
-        else if (wsd >= 9 && wsd < 10) {
-            return "강한 바람";
-        }
-        else if (wsd >= 14) {
-            return "매우 강한 바람";
-        }
-        else {
-            return "풍속 불러오기 실패";  
-        }
+    public String getWindSpeedCondition(int value) {
+        WindSpeed wsd = WindSpeed.from(value);
+        return switch(wsd){
+            case LIGHT -> "약한 바람";
+            case LITTLE_STRONG -> "약간 강한 바람";
+            case STRONG -> "강한바람";
+            case VERY_STRONG -> "매우 강한 바람";
+        };
     }
 
-    public String getPrecipitationType(int pty) {
-        switch (pty) {
-            case 0:
-                return "";
-            case 1:
-                return "비";
-            case 2:
-                return "비/눈";
-            case 3:
-                return "눈";
-            case 5:
-                return "빗방울";
-            case 6:
-                return "빗방울눈날림";
-            case 7:
-                return "눈날림";
-            default:
-                return "강수형태 불러오기 실패";
-        }
+    public String getPrecipitationType(int value) {
+        PrecipitationType pty = PrecipitationType.from(value);
+        return switch(pty){
+            case NONE -> "없음";
+            case RAIN -> "비";
+            case RAIN_SNOW -> "진눈깨비";
+            case SNOW -> "눈";
+            case RAIN_DROP -> "빗방울";
+            case RAIN_SNOWFLAKE -> "빗방울, 눈날림";
+            case SNOWFLAKE -> "눈날림";
+        };
+
+    }
+
+    public String getRainfallOneHour(double value){
+        RainfallOneHour rn1 = RainfallOneHour.from(value);
+        return switch(rn1){
+            case NONE -> "없음";
+            case LIGHT -> "약한 비";
+            case NORMAL -> "비";
+            case STRONG -> "강한 비";
+            case VERY_STRONG -> "매우 강한 비";
+        };
     }
 }
