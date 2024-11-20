@@ -31,16 +31,33 @@
         <div class="main-content" th:if="${fcstWeather != null}">
             <!-- 날씨 정보  -->
             <div class="weather-info">
-                <div class="current-weather">
+                <div class="location">
                     <h2 th:text="${userLocation[1]} + ' ' + ${userLocation[2]}">서울</h2>
+                </div>
+                <div class="current-weather">
                     <div class="current-temperature">
                         <img th:src="@{${nowWeather.icon}}" class="weather-icon" alt="현재 날씨 아이콘">
                         <span class="temperature" th:text="${nowWeather.t1h} + '°'"></span>
                     </div>
-                    <p th:if="${weatherDetails['sky']}" th:text="'하늘상태: ' + ${weatherDetails['sky']}"></p>
-                    <p th:if="${weatherDetails['wsd']}" th:text="'풍속: ' + ${weatherDetails['wsd']}"></p>
-                    <p th:if="${weatherDetails['pty']}" th:text="'강수형태: ' + ${weatherDetails['pty']}"></p>
-                    <p th:if="${weatherDetails['reh']}" th:text="'습도: ' + ${weatherDetails['reh']} + '%'" class="weather-description"></p>
+                    <div class="pty-information">
+                        <p th:if="${weatherDetails['pty']}" class="weather-detail">
+                            <span th:text="${weatherDetails['pty']}"></span>
+                        </p>
+                    </div>
+                    <div class="weather-details">
+                        <p th:if="${weatherDetails['sky']}" class="weather-detail">
+                            <span class="label">하늘:</span>
+                            <span th:text="${weatherDetails['sky']}"></span>
+                        </p>
+                        <p th:if="${weatherDetails['wsd']}" class="weather-detail">
+                            <span class="label">풍속:</span>
+                            <span th:text="${weatherDetails['wsd']}"></span>
+                        </p>
+                        <p th:if="${weatherDetails['reh']}" class="weather-detail">
+                            <span class="label">습도:</span>
+                            <span th:text="${weatherDetails['reh']} + '%'"></span>
+                        </p>
+                    </div>
                 </div>
                 <div class="hourly-forecast">
                     <div class="hour-item" th:each="weather : ${fcstWeather}">
@@ -78,44 +95,6 @@
             </div>
         </div>
     </main>
-
-<!--    <table border="1">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>Base Date</th>-->
-<!--            <th>Base Time</th>-->
-<!--            <th>Forecast Date</th>-->
-<!--            <th>Forecast Time</th>-->
-<!--            <th>NX</th>-->
-<!--            <th>NY</th>-->
-<!--            <th>Temperature (°C)</th>-->
-<!--            <th>Precipitation (mm)</th>-->
-<!--            <th>Sky</th>-->
-<!--            <th>Humidity (%)</th>-->
-<!--            <th>Precipitation Type</th>-->
-<!--            <th>Wind Direction (°)</th>-->
-<!--            <th>Wind Speed (m/s)</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="weather : ${fcstWeather}">-->
-<!--            <td th:text="${weather.baseDate}"></td>-->
-<!--            <td th:text="${weather.baseTime}"></td>-->
-<!--            <td th:text="${weather.fcstDate}"></td>-->
-<!--            <td th:text="${weather.fcstTime}"></td>-->
-<!--            <td th:text="${weather.nx}"></td>-->
-<!--            <td th:text="${weather.ny}"></td>-->
-<!--            <td th:text="${weather.t1h}"></td>-->
-<!--            <td th:text="${weather.rn1}"></td>-->
-<!--            <td th:text="${weather.sky}"></td>-->
-<!--            <td th:text="${weather.reh}"></td>-->
-<!--            <td th:text="${weather.pty}"></td>-->
-<!--            <td th:text="${weather.vec}"></td>-->
-<!--            <td th:text="${weather.wsd}"></td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--    <span th:text="${clothingCategory}"></span>-->
 
 <!-- 날씨 데이터가 없을 때 -->
 <div th:if="${weatherData == null}" class="error-message">

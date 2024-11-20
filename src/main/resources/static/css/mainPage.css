@@ -84,39 +84,65 @@ main {
     align-items: center;
 }
 
+.location {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.location h2 {
+    color: white;
+    font-size: 20px;
+    text-align: left; /* 왼쪽 정렬 */
+    padding-left: 10px; /* 텍스트 여백 */
+    margin: 0; /* 기본 여백 제거 */
+}
+
 .current-weather {
     color: white;
     text-align: center;
-    margin-bottom: 20px;
+    font-size: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
 }
 
-.current-weather h2 {
-    font-size: 24px;
-    margin-bottom: 5px;
+.weather-icon {
+    width: 100px;
+    height: 100px;
 }
 
 .current-temperature {
     display: flex;
     align-items: center;
-    font-size: 48px;
+    font-size: 72px; /* 온도 텍스트 크기 */
     font-weight: bold;
 }
 
-.weather-icon {
-    width: 50px;
-    height: 50px;
-    margin-left: 10px;
-    margin-right: 15px;
+.label {
+    color: #D8D8D8;
 }
 
-.weather-description {
+.pty-information {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bolder;
+    color: #E0ECF8;
+}
+
+.weather-details {
+    padding: 10px;
+    text-align: left; /* 텍스트는 왼쪽 정렬 */
+    display: inline-block; /* 콘텐츠의 너비가 텍스트 길이에 맞게 자동으로 설정 */
+    align-items: center; /* 부모 컨테이너에서 중앙 정렬 */
+    width: auto; /* 가로 크기는 텍스트 길이에 맞게 자동 조정 */
     font-size: 18px;
-    margin-top: 5px;
+    color: white;
 }
 
-.high-low {
-    font-size: 16px;
-    color: #d3d3d3;
+.weather-detail {
+    margin-bottom: 8px; /* 요소 간 간격 */
+    text-align: left; /* 텍스트는 왼쪽 정렬 */
 }
 
 .hourly-forecast {
@@ -129,6 +155,9 @@ main {
 
 .hour-item {
     text-align: center;
+    text-align: center;
+    flex: 1;
+    padding: 10px;
 }
 
 .hour-item p {
@@ -136,19 +165,19 @@ main {
 }
 
 .hour-item img {
-    width: 50px;
-    height: 50px;
+    width:  70px;
+    height: 70px;
 }
 
 .hour-item-time {
     color: #E6E6E6;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: lighter;
 }
 
 .hour-item-temp {
     color: white;
-    font-size: 20px;
+    font-size: 28px;
     font-weight: bolder;
 }
 
