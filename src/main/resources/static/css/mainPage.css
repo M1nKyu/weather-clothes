@@ -13,11 +13,17 @@
 }
 
 header {
+    position: fixed; /* 화면 상단에 고정 */
+    top: 0; /* 상단에 위치 */
+    left: 0; /* 화면 왼쪽에 위치 */
+    width: 100%; /* 화면 전체 너비 */
+    background-color: #ffffff; /* 헤더 배경색 (필요에 따라 조정) */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과로 구분 */
+    z-index: 1000; /* 다른 요소 위에 표시되도록 z-index 설정 */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background-color: #f5f5f5;
+    padding: 10px 20px; /* 패딩 조정 */
 }
 
 .header-left h1 {
@@ -30,33 +36,64 @@ header {
     font-weight: bold;
 }
 
-.user-icon {
-    width: 30px;
-    height: 30px;
+/* 우측 메뉴 버튼 */
+.menu-toggle-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.menu-icon {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
 }
 
-nav {
+/* 우측 메뉴 */
+.menu-container {
+    position: fixed;
+    top: 0;
+    right: -300px; /* 처음에는 화면 밖에 숨김 */
+    width: 300px;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out; /* 애니메이션 효과 */
+    z-index: 1000;
     display: flex;
-    justify-content: flex-start;
-    background-color: #fff;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    padding-left: 20px;
+    flex-direction: column;
+    padding: 20px;
+    border-top-left-radius: 15px; /* 위쪽 끝을 둥글게 */
+    border-bottom-left-radius: 15px; /* 아래쪽 끝을 둥글게 */
+}
+
+.menu-container.active {
+    right: 0;
 }
 
 .menu {
-    display: flex;
     list-style: none;
-    padding: 10px 0;
+    padding: 0;
+    margin: 0;
 }
 
 .menu li {
-    margin: 0 15px;
-    color: #333;
-    cursor: pointer;
+    margin: 15px 0;
 }
 
+.menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    color: #6a5acd;
+}
+
+/* 메인 영역 */
 main {
     display: flex;
     justify-content: center;
@@ -73,6 +110,7 @@ main {
     gap: 30px;
 }
 
+/* 날씨 정보 표시 영역*/
 .weather-info {
     background-color: #58ACFA;
     padding: 20px;
@@ -84,6 +122,7 @@ main {
     align-items: center;
 }
 
+/* 지역 정보 표시 */
 .location {
     margin-bottom: 15px;
     width: 100%;
@@ -97,6 +136,7 @@ main {
     margin: 0; /* 기본 여백 제거 */
 }
 
+/* 현재 날씨 정보 표시 */
 .current-weather {
     color: white;
     text-align: center;
@@ -145,6 +185,7 @@ main {
     text-align: left; /* 텍스트는 왼쪽 정렬 */
 }
 
+/* 날씨 예보 표시 */
 .hourly-forecast {
     display: flex;
     justify-content: space-around;
@@ -181,6 +222,7 @@ main {
     font-weight: bolder;
 }
 
+/* 추천 카테고리 표시 */
 .category-suggestions, .outfit-display {
     background-color: #f5f5f5;
     padding: 30px;

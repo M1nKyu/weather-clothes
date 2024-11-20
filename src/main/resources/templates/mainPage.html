@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="apple-touch-icon" href="/images/otneul.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    
+<!--    <link rel="manifest" href="/manifest.json">-->
+<!--    <meta name="theme-color" content="#ffffff">-->
+<!--    <link rel="apple-touch-icon" href="/images/otneul.png">-->
+<!--    <meta name="apple-mobile-web-app-capable" content="yes">-->
+<!--    <meta name="apple-mobile-web-app-status-bar-style" content="black">-->
+
     <title>Otneul</title>
     <link rel="stylesheet" href="/css/mainPage.css">
 </head>
@@ -19,19 +20,21 @@
             <span class="subtitle">오늘 날씨엔 어떤 옷?</span>
         </div>
         <div class="header-right">
-            <img src="/images/profile.svg" alt="사용자 아이콘" class="user-icon">
+            <button class="menu-toggle-button">
+                <img src="/images/ui-icons/bx-menu.svg" alt="메뉴 아이콘" class="menu-icon">
+            </button>
         </div>
     </header>
 
-    <nav>
+    <div class="menu-container">
         <ul class="menu">
-            <span>지역 선택으로 이동:</span>
-            <a href="/location/select" class="button">Go</a>
+            <li><a href="/location/select" class="button">지역 선택으로 이동</a></li>
+            <li><a href="/about" class="button">서비스 소개</a></li>
+            <li><a href="/contact" class="button">문의하기</a></li>
         </ul>
-        <div th:if="${fcstWeather == null}" class="error-message">
-            <p th:text="${message}">Location data not found in cookies.</p>
-        </div>
-    </nav>
+    </div>
+
+    <script src="/js/menu-toggle.js"></script>
 
     <main>
         <div class="main-content" th:if="${fcstWeather != null}">
@@ -73,6 +76,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="category-suggestions">
                 <h2>지금 날씨에는</h2>
                 <div th:each="category : ${clothingCategory}" class="recommendation-category">
@@ -107,18 +111,7 @@
     <p th:text="${message}">Location data not found in cookies.</p>
 </div>
 
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then(registration => {
-                        console.log('ServiceWorker 등록 성공:', registration.scope);
-                    })
-                    .catch(err => {
-                        console.log('ServiceWorker 등록 실패:', err);
-                    });
-            });
-        }
-    </script>
+<!--<script src="/js/service-worker.js"></script>-->
+
 </body>
 </html>
