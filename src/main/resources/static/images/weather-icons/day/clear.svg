@@ -1,131 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- (c) ammap.com | SVG weather icons -->
-<svg width="56" height="48" version="1.1" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <filter id="blur" x="-.34167" y="-.34167" width="1.6833" height="1.85">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
-      <feOffset dx="0" dy="4" result="offsetblur" />
-      <feComponentTransfer>
-        <feFuncA slope="0.05" type="linear" />
-      </feComponentTransfer>
-      <feMerge>
-        <feMergeNode />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
-    <style type="text/css">
-      <![CDATA[
-      /*
-** SUN
-*/
-      @keyframes am-weather-sun {
-        0% {
-          -webkit-transform: rotate(0deg);
-          -moz-transform: rotate(0deg);
-          -ms-transform: rotate(0deg);
-          transform: rotate(0deg);
-        }
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
+    <defs>
+        <linearGradient id="a" x1="149.99" y1="119.24" x2="234.01" y2="264.76" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#fbbf24"/>
+            <stop offset="0.45" stop-color="#fbbf24"/>
+            <stop offset="1" stop-color="#f59e0b"/>
+        </linearGradient>
+        <symbol id="b" viewBox="0 0 384 384">
+            <!-- core -->
+            <circle cx="192" cy="192" r="84" stroke="#f8af18" stroke-miterlimit="10" stroke-width="6" fill="url(#a)"/>
 
-        100% {
-          -webkit-transform: rotate(360deg);
-          -moz-transform: rotate(360deg);
-          -ms-transform: rotate(360deg);
-          transform: rotate(360deg);
-        }
-      }
-
-      .am-weather-sun {
-        -webkit-animation-name: am-weather-sun;
-        -moz-animation-name: am-weather-sun;
-        -ms-animation-name: am-weather-sun;
-        animation-name: am-weather-sun;
-        -webkit-animation-duration: 9s;
-        -moz-animation-duration: 9s;
-        -ms-animation-duration: 9s;
-        animation-duration: 9s;
-        -webkit-animation-timing-function: linear;
-        -moz-animation-timing-function: linear;
-        -ms-animation-timing-function: linear;
-        animation-timing-function: linear;
-        -webkit-animation-iteration-count: infinite;
-        -moz-animation-iteration-count: infinite;
-        -ms-animation-iteration-count: infinite;
-        animation-iteration-count: infinite;
-      }
-
-      @keyframes am-weather-sun-shiny {
-        0% {
-          stroke-dasharray: 3px 10px;
-          stroke-dashoffset: 0px;
-        }
-
-        50% {
-          stroke-dasharray: 0.1px 10px;
-          stroke-dashoffset: -1px;
-        }
-
-        100% {
-          stroke-dasharray: 3px 10px;
-          stroke-dashoffset: 0px;
-        }
-      }
-
-      .am-weather-sun-shiny line {
-        -webkit-animation-name: am-weather-sun-shiny;
-        -moz-animation-name: am-weather-sun-shiny;
-        -ms-animation-name: am-weather-sun-shiny;
-        animation-name: am-weather-sun-shiny;
-        -webkit-animation-duration: 2s;
-        -moz-animation-duration: 2s;
-        -ms-animation-duration: 2s;
-        animation-duration: 2s;
-        -webkit-animation-timing-function: linear;
-        -moz-animation-timing-function: linear;
-        -ms-animation-timing-function: linear;
-        animation-timing-function: linear;
-        -webkit-animation-iteration-count: infinite;
-        -moz-animation-iteration-count: infinite;
-        -ms-animation-iteration-count: infinite;
-        animation-iteration-count: infinite;
-      }
-      ]]>
-    </style>
-  </defs>
-  <g transform="translate(16,-2)" filter="url(#blur)">
-    <g transform="translate(0,16)">
-      <g class="am-weather-sun"
-        style="-moz-animation-duration:9s;-moz-animation-iteration-count:infinite;-moz-animation-name:am-weather-sun;-moz-animation-timing-function:linear;-ms-animation-duration:9s;-ms-animation-iteration-count:infinite;-ms-animation-name:am-weather-sun;-ms-animation-timing-function:linear;-webkit-animation-duration:9s;-webkit-animation-iteration-count:infinite;-webkit-animation-name:am-weather-sun;-webkit-animation-timing-function:linear">
-        <line transform="translate(0,9)" y2="3" fill="none" stroke="#ffa500" stroke-linecap="round" stroke-width="2" />
-        <g transform="rotate(45)">
-          <line transform="translate(0,9)" y2="3" fill="none" stroke="#ffa500" stroke-linecap="round"
-            stroke-width="2" />
-        </g>
-        <g transform="rotate(90)">
-          <line transform="translate(0,9)" y2="3" fill="none" stroke="#ffa500" stroke-linecap="round"
-            stroke-width="2" />
-        </g>
-        <g transform="rotate(135)">
-          <line transform="translate(0,9)" y2="3" fill="none" stroke="#ffa500" stroke-linecap="round"
-            stroke-width="2" />
-        </g>
-        <g transform="scale(-1)">
-          <line transform="translate(0,9)" y2="3" fill="none" stroke="#ffa500" stroke-linecap="round"
-            stroke-width="2" />
-        </g>
-        <g transform="rotate(225)">
-          <line transform="translate(0,9)" y2="3" fill="none" stroke="#ffa500" stroke-linecap="round"
-            stroke-width="2" />
-        </g>
-        <g transform="rotate(-90)">
-          <line transform="translate(0,9)" y2="3" fill="none" stroke="#ffa500" stroke-linecap="round"
-            stroke-width="2" />
-        </g>
-        <g transform="rotate(-45)">
-          <line transform="translate(0,9)" y2="3" fill="none" stroke="#ffa500" stroke-linecap="round"
-            stroke-width="2" />
-        </g>
-        <circle r="5" fill="#ffa500" stroke="#ffa500" stroke-width="2" />
-      </g>
-    </g>
-  </g>
+            <!-- rays -->
+            <path d="M192,61.66V12m0,360V322.34M284.17,99.83l35.11-35.11M64.72,319.28l35.11-35.11m0-184.34L64.72,64.72M319.28,319.28l-35.11-35.11M61.66,192H12m360,0H322.34" fill="none" stroke="#fbbf24" stroke-linecap="round" stroke-miterlimit="10" stroke-width="24">
+                <animateTransform
+                    attributeName="transform"
+                    additive="sum"
+                    type="rotate"
+                    values="0 192 192; 45 192 192"
+                    dur="6s"
+                    repeatCount="indefinite"/>
+            </path>
+        </symbol>
+    </defs>
+    <use width="384" height="384" transform="translate(64 64)" xlink:href="#b"/>
 </svg>
