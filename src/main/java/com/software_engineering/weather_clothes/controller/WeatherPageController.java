@@ -45,11 +45,17 @@ public class WeatherPageController {
 
         String nx = CookieUtil.getNxNyFromCookies(request)[0];
         String ny = CookieUtil.getNxNyFromCookies(request)[1];
-
-        // 사용자 위치명 { 시/도, 군/구, 읍/면/동 }
         String[] userLocation = CookieUtil.getLocationFromCookies(request);
-        if(userLocation != null)
-            model.addAttribute("userLocation", userLocation); 
+
+        // 기본값으로 서울특별시 설정 (regionList.csv 기준: nx=60, ny=127)
+        if (nx == null || ny == null || userLocation == null) {
+            nx = "60";
+            ny = "127";
+            userLocation = new String[]{"서울특별시", "서울특별시", ""};  // 두 번째 요소를 서울특별시로 설정
+        }
+        
+        // 항상 위치 정보를 모델에 추가
+        model.addAttribute("userLocation", userLocation);
 
         // 계절 정보
         String season = DateTimeUtil.getSeason();
