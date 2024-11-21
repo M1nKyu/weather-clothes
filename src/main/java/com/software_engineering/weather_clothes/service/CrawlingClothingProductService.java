@@ -2,6 +2,7 @@ package com.software_engineering.weather_clothes.service;
 
 import com.software_engineering.weather_clothes.model.ClothingProduct;
 import com.software_engineering.weather_clothes.repository.ClothingProductRepository;
+import com.software_engineering.weather_clothes.util.ChromeDriverUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -43,11 +44,8 @@ public class CrawlingClothingProductService {
 
 
     public void process() {
-        // 크롬 드라이버 설정
-        System.setProperty("webdriver.chrome.driver", chromeDriverPath);
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
+        // 크롬드라이버 초기화
+        driver = ChromeDriverUtil.initializeDriver(chromeDriverPath);
 
         try {
             for (String categoryId : categories) {
@@ -58,9 +56,13 @@ public class CrawlingClothingProductService {
             System.out.println("크롤링 중 오류 발생: " + e.getMessage());
             e.printStackTrace();
         } finally {
+            if (driver != null) {
+                driver.quit(); // 드라이버 종료
+            }
             System.out.println("크롤링 작업이 완료되었습니다.");
         }
     }
+
 
     public void getDataList(String categoryUrl, String categoryId) throws InterruptedException {
         driver.get(categoryUrl);
