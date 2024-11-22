@@ -99,7 +99,7 @@ main {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    padding-top: 130px;
+    padding-top: 80px;
 }
 
 .main-content {
@@ -108,7 +108,7 @@ main {
     align-items: center;
     max-width: 1200px; /* 최대 너비 확대 */
     width: 100%;
-    gap: 30px;
+    gap: 0;
 }
 
 /* 날씨 정보 표시 영역*/
@@ -121,6 +121,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 /* 지역 정보 표시 */
@@ -280,4 +281,261 @@ main {
 
 .product-item a:hover {
     color: #6a5acd;
+}
+
+.recommendations-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.category-section {
+    margin-bottom: 30px;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.clothes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+}
+
+.clothes-item {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #e0e0e0;
+}
+
+.clothes-item:hover {
+    background-color: #e9ecef;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.item-name {
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.item-icon {
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+    color: #666;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .clothes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .clothes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 기존 스타일에 추가 */
+.clothesSwiper {
+    width: 100%;
+    height: 400px; /* 원하는 높이로 조정 */
+}
+
+.swiper-slide {
+    padding: 20px;
+}
+
+/* Swiper 네비게이션 버튼 스타일 커스터마이징 */
+.swiper-button-next,
+.swiper-button-prev {
+    color: #6a5acd;
+}
+
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+    background: #6a5acd;
+}
+
+/* 카테고리 섹션 스타일 수정 */
+.category-section {
+    height: 100%;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.clothes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+}
+
+/* 스크롤바 스타일링 */
+.category-section::-webkit-scrollbar {
+    width: 6px;
+}
+
+.category-section::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.category-section::-webkit-scrollbar-thumb {
+    background: #6a5acd;
+    border-radius: 3px;
+}
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+    .clothesSwiper {
+        height: 500px;
+    }
+    
+    .clothes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.outfit-display {
+    padding: 0 20px 20px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.productSwiper {
+    width: 100%;
+    height: 600px; /* 높이 조절 가능 */
+}
+
+.swiper-slide {
+    padding: 20px;
+}
+
+.product-categories {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.main-category-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.sub-category-title {
+    font-size: 1.2rem;
+    margin: 15px 0;
+    color: #666;
+}
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.product-item {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+}
+
+.product-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 스크롤바 스타일링 */
+.product-categories::-webkit-scrollbar {
+    width: 6px;
+}
+
+.product-categories::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.product-categories::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .product-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .productSwiper {
+        height: 500px;
+    }
+}
+
+/* 서브 카테고리 버튼 스타일 */
+.sub-category-button {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+.sub-category-button:hover {
+    background-color: #e9ecef;
+}
+
+.sub-category-button .arrow {
+    transition: transform 0.3s ease;
+}
+
+.sub-category-button.active .arrow {
+    transform: rotate(180deg);
+}
+
+/* 상품 목록 숨김/표시 */
+.product-list {
+    transition: all 0.3s ease;
+    max-height: 1000px;
+    overflow: hidden;
+}
+
+.product-list.hidden {
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+}
+
+/* 기존 스타일 수정 */
+.category-products {
+    margin-bottom: 10px;
 }
