@@ -12,6 +12,7 @@
 
     <title>Otneul</title>
     <link rel="stylesheet" href="/css/mainPage.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
     <header>
@@ -76,31 +77,29 @@
                     </div>
                 </div>
             </div>
-
-            <div class="category-suggestions">
-                <h2>지금 날씨에는</h2>
-                <div th:each="category : ${clothingCategory}" class="recommendation-category">
-                    <h3 th:text="${category.key}" class="category-title"></h3>
-                    <ul class="recommendation-list">
-                        <li th:each="clothing : ${category.value}" th:text="${clothing.categoryName}"></li> <!-- ClothingCategory의 CategoryName 출력 -->
-                    </ul>
-                </div>
-            </div>
-
-            <div class="outfit-display">
                 <h2>추천 상품</h2>
-                <div class="product-categories" th:each="mainCategory : ${clothingProducts}">
-                    <h3 th:text="${mainCategory.key}" class="main-category-title"></h3>
-                    <div class="category-products" th:each="category : ${mainCategory.value}">
-                        <h4 th:text="${category.key}" class="sub-category-title"></h4>
-                        <div class="product-list" style="display: flex; flex-wrap: wrap; gap: 15px;">
-                            <div class="product-item" th:each="product : ${category.value}" style="width: 150px; height: 200px; text-align: center;">
-                                <a th:href="${product.link}" target="_blank" class="product-link">
-                                    <img th:src="${product.imageUrl}" th:alt="이미지" class="product-image" style="width: 100%; height: auto;">
-                                </a>
+                <!-- Swiper -->
+                <div class="swiper productSwiper">
+                    <div class="swiper-wrapper">
+                        <div th:each="mainCategory : ${clothingProducts}" class="swiper-slide">
+                            <div class="product-categories">
+                                <h3 th:text="${mainCategory.key}" class="main-category-title"></h3>
+                                <div class="category-products" th:each="category : ${mainCategory.value}">
+                                    <h4 th:text="${category.key}" class="sub-category-title"></h4>
+                                    <div class="product-list">
+                                        <div class="product-item" th:each="product : ${category.value}">
+                                            <a th:href="${product.link}" target="_blank" class="product-link">
+                                                <img th:src="${product.imageUrl}" th:alt="이미지" class="product-image">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                 </div>
             </div>
         </div>
@@ -112,6 +111,31 @@
 </div>
 
 <!--<script src="/js/service-worker.js"></script>-->
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper(".clothesSwiper", {
+        pagination: {
+            el: ".swiper-pagination",
+            type: "progressbar",
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+
+    var productSwiper = new Swiper(".productSwiper", {
+        pagination: {
+            el: ".swiper-pagination",
+            type: "progressbar",
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+</script>
 
 </body>
 </html>
