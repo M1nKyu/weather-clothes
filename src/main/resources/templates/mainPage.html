@@ -84,13 +84,28 @@
                         <div th:each="mainCategory : ${clothingProducts}" class="swiper-slide">
                             <div class="product-categories">
                                 <h3 th:text="${mainCategory.key}" class="main-category-title"></h3>
-                                <div class="category-products" th:each="category : ${mainCategory.value}">
-                                    <h4 th:text="${category.key}" class="sub-category-title"></h4>
-                                    <div class="product-list">
-                                        <div class="product-item" th:each="product : ${category.value}">
-                                            <a th:href="${product.link}" target="_blank" class="product-link">
-                                                <img th:src="${product.imageUrl}" th:alt="이미지" class="product-image">
-                                            </a>
+                                <div class="outfit-display">
+                                    <div class="category-container">
+                                        <!-- 서브 카테고리 버튼들 -->
+                                        <div class="sub-category-buttons">
+                                            <button th:each="category : ${mainCategory.value}" 
+                                                    class="sub-category-button"
+                                                    th:data-category="${category.key}"
+                                                    onclick="showProducts(this.getAttribute('data-category'))">
+                                                <span th:text="${category.key}"></span>
+                                            </button>
+                                        </div>
+                                        <!-- 상품 표시 영역 -->
+                                        <div class="products-display-area">
+                                            <div th:each="category : ${mainCategory.value}"
+                                                 th:id="'products-' + ${#strings.replace(category.key, ' ', '-')}"
+                                                 class="product-list hidden">
+                                                <div class="product-item" th:each="product : ${category.value}">
+                                                    <a th:href="${product.link}" target="_blank" class="product-link">
+                                                        <img th:src="${product.imageUrl}" th:alt="상품이미지" class="product-image">
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -114,17 +129,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-    var swiper = new Swiper(".clothesSwiper", {
-        pagination: {
-            el: ".swiper-pagination",
-            type: "progressbar",
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-    });
-
     var productSwiper = new Swiper(".productSwiper", {
         pagination: {
             el: ".swiper-pagination",
@@ -134,8 +138,13 @@
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
         },
+        slidesPerView: 1,
+        spaceBetween: 30,
+        allowTouchMove: true
     });
 </script>
+
+<script src="/js/product-toggle.js"></script>
 
 </body>
 </html>
