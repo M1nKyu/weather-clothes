@@ -253,7 +253,7 @@ public class ClothingCategoryService {
                                 return 0;
                             }
                         })
-                        .limit(10)
+                        .limit(12)
                         .collect(Collectors.toList());
 
                 // 결과가 있는 경우만 맵에 추가
