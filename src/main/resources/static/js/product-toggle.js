@@ -48,4 +48,4 @@ document.addEventListener('DOMContentLoaded', function() {
             showProducts(firstCategory);
         }
     }
-}); 
+});

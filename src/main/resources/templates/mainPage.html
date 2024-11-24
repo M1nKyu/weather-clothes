@@ -4,6 +4,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <!--    <link rel="manifest" href="/manifest.json">-->
     <!--    <meta name="theme-color" content="#ffffff">-->
     <!--    <link rel="apple-touch-icon" href="/images/otneul.png">-->
@@ -36,6 +37,7 @@
 
 <script src="/js/menu-toggle.js"></script>
 
+<!-- 날씨 정보 영역 -->
 <main>
     <div class="main-content" th:if="${fcstWeather != null}">
         <!-- 날씨 정보  -->
@@ -89,30 +91,58 @@
 
         <div class="outfit-display">
             <h2>추천 상품</h2>
-            <div class="product-categories" th:each="mainCategory : ${clothingProducts}">
-                <h3 th:text="${mainCategory.key}" class="main-category-title"></h3>
-                <div class="category-products" th:each="category : ${mainCategory.value}">
-                    <h4 th:text="${category.key}" class="sub-category-title"></h4>
-                    <div class="product-list" style="display: flex; flex-wrap: wrap; gap: 15px;">
-                        <div class="product-item" th:each="product : ${category.value}" style="width: 150px; height: 200px; text-align: center;">
-                            <a th:href="${product.link}" target="_blank" class="product-link">
-                                <img th:src="${product.imageUrl}" th:alt="이미지" class="product-image" style="width: 100%; height: auto;">
-                            </a>
+            <!-- Swiper -->
+            <div class="swiper productSwiper">
+                <div class="swiper-wrapper">
+                    <div th:each="mainCategory : ${clothingProducts}" class="swiper-slide">
+                        <div class="product-categories">
+                            <h3 th:text="${mainCategory.key}" class="main-category-title"></h3>
+                            <div class="category-container">
+                                <!-- 서브 카테고리 버튼들 -->
+                                <div class="sub-category-buttons">
+                                    <button th:each="category : ${mainCategory.value}"
+                                            class="sub-category-button"
+                                            th:data-category="${category.key}"
+                                            onclick="showProducts(this.getAttribute('data-category'))">
+                                        <span th:text="${category.key}"></span>
+                                    </button>
+                                </div>
+                                <!-- 상품 표시 영역 -->
+                                <div class="products-display-area">
+                                    <div th:each="category : ${mainCategory.value}"
+                                         th:id="'products-' + ${#strings.replace(category.key, ' ', '-')}"
+                                         class="product-list hidden">
+                                        <div class="product-item" th:each="product : ${category.value}">
+                                            <a th:href="${product.link}" target="_self" class="product-link">
+                                                <img th:src="${product.imageUrl}" th:alt="상품이미지" class="product-image">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
         </div>
     </div>
 </main>
+
 
 <!-- 날씨 데이터가 없을 때 -->
 <div th:if="${weatherData == null}" class="error-message">
     <p th:text="${message}">Location data not found in cookies.</p>
 </div>
 
-<script src="/js/outfit-display-tabs.js"></script>
+<!--<script src="/js/outfit-display-tabs.js"></script>-->
 <!--<script src="/js/service-worker.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="/js/productSwiper.js"></script>
+<script src="/js/product-toggle.js"></script>
+
 
 </body>
 </html>
