@@ -4,147 +4,145 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--    <link rel="manifest" href="/manifest.json">-->
-<!--    <meta name="theme-color" content="#ffffff">-->
-<!--    <link rel="apple-touch-icon" href="/images/otneul.png">-->
-<!--    <meta name="apple-mobile-web-app-capable" content="yes">-->
-<!--    <meta name="apple-mobile-web-app-status-bar-style" content="black">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!--    <link rel="manifest" href="/manifest.json">-->
+    <!--    <meta name="theme-color" content="#ffffff">-->
+    <!--    <link rel="apple-touch-icon" href="/images/otneul.png">-->
+    <!--    <meta name="apple-mobile-web-app-capable" content="yes">-->
+    <!--    <meta name="apple-mobile-web-app-status-bar-style" content="black">-->
 
     <title>Otneul</title>
     <link rel="stylesheet" href="/css/mainPage.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
-    <header>
-        <div class="header-left">
-            <h1>옷늘</h1>
-            <span class="subtitle">오늘 날씨엔 어떤 옷?</span>
-        </div>
-        <div class="header-right">
-            <button class="menu-toggle-button">
-                <img src="/images/ui-icons/bx-menu.svg" alt="메뉴 아이콘" class="menu-icon">
-            </button>
-        </div>
-    </header>
-
-    <div class="menu-container">
-        <ul class="menu">
-            <li><a href="/location/select" class="button">지역 선택으로 이동</a></li>
-            <li><a href="/about" class="button">서비스 소개</a></li>
-            <li><a href="/contact" class="button">문의하기</a></li>
-        </ul>
+<header>
+    <div class="header-left">
+        <h1>옷늘</h1>
+        <span class="subtitle">오늘 날씨엔 어떤 옷?</span>
     </div>
+    <div class="header-right">
+        <button class="menu-toggle-button">
+            <img src="/images/ui-icons/bx-menu.svg" alt="메뉴 아이콘" class="menu-icon">
+        </button>
+    </div>
+</header>
 
-    <script src="/js/menu-toggle.js"></script>
+<div class="menu-container">
+    <ul class="menu">
+        <li><a href="/location/select" class="button">지역 선택으로 이동</a></li>
+        <li><a href="/about" class="button">서비스 소개</a></li>
+        <li><a href="/contact" class="button">문의하기</a></li>
+    </ul>
+</div>
 
-    <main>
-        <div class="main-content" th:if="${fcstWeather != null}">
-            <!-- 날씨 정보  -->
-            <div class="weather-info">
-                <div class="location">
-                    <h2 th:text="${userLocation[1]} + ' ' + ${userLocation[2]}">서울</h2>
+<script src="/js/menu-toggle.js"></script>
+
+<!-- 날씨 정보 영역 -->
+<main>
+    <div class="main-content" th:if="${fcstWeather != null}">
+        <!-- 날씨 정보  -->
+        <div class="weather-info">
+            <div class="location">
+                <h2 th:text="${userLocation[1]} + ' ' + ${userLocation[2]}">서울</h2>
+            </div>
+            <div class="current-weather">
+                <div class="current-temperature">
+                    <img th:src="@{${nowWeather.icon}}" class="weather-icon" alt="현재 날씨 아이콘">
+                    <span class="temperature" th:text="${nowWeather.t1h} + '°'"></span>
                 </div>
-                <div class="current-weather">
-                    <div class="current-temperature">
-                        <img th:src="@{${nowWeather.icon}}" class="weather-icon" alt="현재 날씨 아이콘">
-                        <span class="temperature" th:text="${nowWeather.t1h} + '°'"></span>
-                    </div>
-                    <div class="pty-information">
-                        <p th:if="${weatherDetails['pty']}" class="weather-detail">
-                            <span th:text="${weatherDetails['pty']}"></span>
-                        </p>
-                    </div>
-                    <div class="weather-details">
-                        <p th:if="${weatherDetails['sky']}" class="weather-detail">
-                            <span class="label">하늘:</span>
-                            <span th:text="${weatherDetails['sky']}"></span>
-                        </p>
-                        <p th:if="${weatherDetails['wsd']}" class="weather-detail">
-                            <span class="label">풍속:</span>
-                            <span th:text="${weatherDetails['wsd']}"></span>
-                        </p>
-                        <p th:if="${weatherDetails['reh']}" class="weather-detail">
-                            <span class="label">습도:</span>
-                            <span th:text="${weatherDetails['reh']} + '%'"></span>
-                        </p>
-                    </div>
+                <div class="pty-information">
+                    <p th:if="${weatherDetails['pty']}" class="weather-detail">
+                        <span th:text="${weatherDetails['pty']}"></span>
+                    </p>
                 </div>
-                <div class="hourly-forecast">
-                    <div class="hour-item" th:each="weather : ${fcstWeather}">
-                        <p class="hour-item-time" th:text="${weather.fcstTime}">10시</p>
-                        <img th:src="@{${weather.icon}}" alt="날씨 아이콘">
-                        <p class="hour-item-temp" th:text="${weather.t1h} + '°'">15°</p>
-                    </div>
+                <div class="weather-details">
+                    <p th:if="${weatherDetails['sky']}" class="weather-detail">
+                        <span class="label">하늘:</span>
+                        <span th:text="${weatherDetails['sky']}"></span>
+                    </p>
+                    <p th:if="${weatherDetails['wsd']}" class="weather-detail">
+                        <span class="label">풍속:</span>
+                        <span th:text="${weatherDetails['wsd']}"></span>
+                    </p>
+                    <p th:if="${weatherDetails['reh']}" class="weather-detail">
+                        <span class="label">습도:</span>
+                        <span th:text="${weatherDetails['reh']} + '%'"></span>
+                    </p>
                 </div>
             </div>
-                <h2>추천 상품</h2>
-                <!-- Swiper -->
-                <div class="swiper productSwiper">
-                    <div class="swiper-wrapper">
-                        <div th:each="mainCategory : ${clothingProducts}" class="swiper-slide">
-                            <div class="product-categories">
-                                <h3 th:text="${mainCategory.key}" class="main-category-title"></h3>
-                                <div class="outfit-display">
-                                    <div class="category-container">
-                                        <!-- 서브 카테고리 버튼들 -->
-                                        <div class="sub-category-buttons">
-                                            <button th:each="category : ${mainCategory.value}" 
-                                                    class="sub-category-button"
-                                                    th:data-category="${category.key}"
-                                                    onclick="showProducts(this.getAttribute('data-category'))">
-                                                <span th:text="${category.key}"></span>
-                                            </button>
-                                        </div>
-                                        <!-- 상품 표시 영역 -->
-                                        <div class="products-display-area">
-                                            <div th:each="category : ${mainCategory.value}"
-                                                 th:id="'products-' + ${#strings.replace(category.key, ' ', '-')}"
-                                                 class="product-list hidden">
-                                                <div class="product-item" th:each="product : ${category.value}">
-                                                    <a th:href="${product.link}" target="_blank" class="product-link">
-                                                        <img th:src="${product.imageUrl}" th:alt="상품이미지" class="product-image">
-                                                    </a>
-                                                </div>
-                                            </div>
+            <div class="hourly-forecast">
+                <div class="hour-item" th:each="weather : ${fcstWeather}">
+                    <p class="hour-item-time" th:text="${weather.fcstTime}">10시</p>
+                    <img th:src="@{${weather.icon}}" alt="날씨 아이콘">
+                    <p class="hour-item-temp" th:text="${weather.t1h} + '°'">15°</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-suggestions">
+            <h2>지금 날씨에는</h2>
+            <div th:each="category : ${clothingCategory}" class="recommendation-category">
+                <h3 th:text="${category.key}" class="category-title"></h3>
+                <ul class="recommendation-list">
+                    <li th:each="clothing : ${category.value}" th:text="${clothing.categoryName}"></li> <!-- ClothingCategory의 CategoryName 출력 -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="outfit-display">
+            <h2>추천 상품</h2>
+            <!-- Swiper -->
+            <div class="swiper productSwiper">
+                <div class="swiper-wrapper">
+                    <div th:each="mainCategory : ${clothingProducts}" class="swiper-slide">
+                        <div class="product-categories">
+                            <h3 th:text="${mainCategory.key}" class="main-category-title"></h3>
+                            <div class="category-container">
+                                <!-- 서브 카테고리 버튼들 -->
+                                <div class="sub-category-buttons">
+                                    <button th:each="category : ${mainCategory.value}"
+                                            class="sub-category-button"
+                                            th:data-category="${category.key}"
+                                            onclick="showProducts(this.getAttribute('data-category'))">
+                                        <span th:text="${category.key}"></span>
+                                    </button>
+                                </div>
+                                <!-- 상품 표시 영역 -->
+                                <div class="products-display-area">
+                                    <div th:each="category : ${mainCategory.value}"
+                                         th:id="'products-' + ${#strings.replace(category.key, ' ', '-')}"
+                                         class="product-list hidden">
+                                        <div class="product-item" th:each="product : ${category.value}">
+                                            <a th:href="${product.link}" target="_self" class="product-link">
+                                                <img th:src="${product.imageUrl}" th:alt="상품이미지" class="product-image">
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
                 </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
         </div>
-    </main>
+    </div>
+</main>
+
 
 <!-- 날씨 데이터가 없을 때 -->
 <div th:if="${weatherData == null}" class="error-message">
     <p th:text="${message}">Location data not found in cookies.</p>
 </div>
 
+<!--<script src="/js/outfit-display-tabs.js"></script>-->
 <!--<script src="/js/service-worker.js"></script>-->
-
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-    var productSwiper = new Swiper(".productSwiper", {
-        pagination: {
-            el: ".swiper-pagination",
-            type: "progressbar",
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-        slidesPerView: 1,
-        spaceBetween: 30,
-        allowTouchMove: true
-    });
-</script>
-
+<script src="/js/productSwiper.js"></script>
 <script src="/js/product-toggle.js"></script>
+
 
 </body>
 </html>
