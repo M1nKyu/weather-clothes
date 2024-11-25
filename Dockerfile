@@ -15,5 +15,8 @@ WORKDIR /app
 # 빌드된 JAR 파일 복사
 COPY target/weather-clothes-0.0.1-SNAPSHOT.jar weather-clothes.jar
 
+# .env 파일을 컨테이너에 복사
+COPY .env /home/ubuntu/weather-clothes/.env
+
 # 애플리케이션 실행
 ENTRYPOINT ["java", "-jar", "weather-clothes.jar"]
