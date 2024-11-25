@@ -26,29 +26,48 @@ header {
     padding: 10px 20px; /* 패딩 조정 */
 }
 
-.header-left h1 {
-    color: #58ACFA;
+.header-left {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.header-left img {
+    width: 20px;
+    height: auto;
     margin-right: 10px;
 }
 
+.header-left h1 {
+    color: #42C0E8;
+    font-size: 30px;
+    margin-right: 5px;
+}
+
 .subtitle {
-    color: #58ACFA;
+    color: #42C0E8;
     font-weight: bold;
 }
 
-/* 우측 메뉴 버튼 */
 .menu-toggle-button {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .menu-icon {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
+    display: block;
 }
+
 
 /* 우측 메뉴 */
 .menu-container {
@@ -85,12 +104,12 @@ header {
 .menu a {
     text-decoration: none;
     color: #333;
-    font-size: 18px;
+    font-size: 25px;
     font-weight: bold;
 }
 
 .menu a:hover {
-    color: #6a5acd;
+    color: #58ACFA;
 }
 
 /* 메인 영역 */
@@ -611,6 +630,9 @@ main {
 }
 
 @media screen and (max-width: 768px) {
+    .header-left img {
+        font-size: 1.2rem;
+    }
 
     .header-left h1 {
         font-size: 1.2rem;
