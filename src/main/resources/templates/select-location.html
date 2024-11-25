@@ -8,28 +8,51 @@
     <script src="/js/select-location.js"></script>
 </head>
 <body>
-<div class="location-form">
-    <h2>지역 선택</h2>
-    <div class="form-group">
-        <label for="region">시/도</label>
-        <select id="region" name="region">
-            <option value="">선택하세요</option>
-            <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>
-        </select>
+    <header>
+        <a href="/" class="header-left">
+            <img src="/images/otneul-logo2.png" alt="로고" class="logo">
+            <h1>옷늘</h1>
+        </a>
+
+        <div class="header-right">
+            <button class="menu-toggle-button">
+                <img src="/images/ui-icons/bx-menu.svg" alt="메뉴 아이콘" class="menu-icon">
+            </button>
+        </div>
+    </header>
+
+    <div class="menu-container">
+        <ul class="menu">
+            <li><a href="/location/select" class="button">지역 선택으로 이동</a></li>
+            <li><a href="https://github.com/M1nKyu/weather-clothes" class="button">서비스 소개 (GitHub)</a></li>
+        </ul>
     </div>
-    <div class="form-group">
-        <label for="district">구/군</label>
-        <select id="district" name="district" disabled>
-            <option value="">선택하세요</option>
-        </select>
+
+<main>
+    <div class="location-form">
+        <h2>지역 선택</h2>
+        <div class="form-group">
+            <label for="region">시/도</label>
+            <select id="region" name="region">
+                <option value="">선택하세요</option>
+                <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="district">구/군</label>
+            <select id="district" name="district" disabled>
+                <option value="">선택하세요</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="town">동/읍/면</label>
+            <select id="town" name="town" disabled>
+                <option value="">선택하세요</option>
+            </select>
+        </div>
+        <button id="saveButton" disabled>확인</button>
     </div>
-    <div class="form-group">
-        <label for="town">동/읍/면</label>
-        <select id="town" name="town" disabled>
-            <option value="">선택하세요</option>
-        </select>
-    </div>
-    <button id="saveButton" disabled>확인</button>
-</div>
+</main>
+
 </body>
 </html>

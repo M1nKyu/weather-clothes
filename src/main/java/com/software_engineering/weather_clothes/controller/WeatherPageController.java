@@ -53,7 +53,7 @@ public class WeatherPageController {
         if (nx == null || ny == null || userLocation == null) {
             nx = "60";
             ny = "127";
-            userLocation = new String[]{"서울특별시", "서울특별시", ""};  // 두 번째 요소를 서울특별시로 설정
+            userLocation = new String[]{"default", "서울특별시", "종로구"};  // 두 번째 요소를 서울특별시로 설정
         }
         
         // 항상 위치 정보를 모델에 추가
