@@ -308,7 +308,6 @@ main {
     gap: 16px;
 }
 
-
 .clothes-item {
     background-color: #f8f9fa;
     padding: 15px;
@@ -336,18 +335,6 @@ main {
     color: #666;
 }
 
-/* 반응형 디자인 */
-@media (max-width: 768px) {
-    .clothes-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    }
-}
-
-@media (max-width: 480px) {
-    .clothes-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
 
 /* 기존 스타일에 추가 */
 .clothesSwiper {
@@ -403,17 +390,6 @@ main {
 .category-section::-webkit-scrollbar-thumb {
     background: #6a5acd;
     border-radius: 3px;
-}
-
-/* 반응형 조정 */
-@media (max-width: 768px) {
-    .clothesSwiper {
-        height: 500px;
-    }
-
-    .clothes-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
 }
 
 .productSwiper {
@@ -488,17 +464,6 @@ main {
     border-radius: 3px;
 }
 
-/* 반응형 */
-@media (max-width: 768px) {
-    .product-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .productSwiper {
-        height: 500px;
-    }
-}
-
 /* 서브 카테고리 버튼 스타일 */
 .sub-category-button {
     width: 100%;
@@ -529,7 +494,7 @@ main {
 /* 상품 목록 숨김/표시 */
 .product-list {
     transition: all 0.3s ease;
-    max-height: 1000px;
+    height:auto;
     overflow: hidden;
 }
 
@@ -595,7 +560,23 @@ main {
     overflow: hidden;    /* 부모 요소 밖으로 나가는 부분 숨기기 */
 }
 
+/* 반응형 조정 */
+@media (max-width: 768px) {
+    .clothesSwiper {
+        height: 500px;
+    }
 
+    .clothes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .clothes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 3fr));
+    }
+}
 
 @media screen and (max-width: 768px) {
 
@@ -617,5 +598,46 @@ main {
 
     .hour-item {
         min-width: 50px;
+    }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .product-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .productSwiper {
+        height: 500px;
+    }
+}
+
+/* 460px 이하일 경우 1개씩 표시 */
+@media (max-width: 460px) {
+    .product-list {
+        grid-template-columns: repeat(2, 1fr); /* 1개의 상품을 표시 */
+    }
+}
+
+/* 화면 비율에 따라 텍스트 크기 조정 */
+@media (max-width: 768px) {
+    .current-temperature {
+        font-size: 10vw; /* 화면 너비에 비례하여 텍스트 크기 조정 */
+    }
+
+    .weather-info {
+        width: 90%; /* 날씨 정보 영역이 화면 크기에 맞게 90% 차지 */
+    }
+
+    .category-suggestions {
+        padding: 20px; /* 작은 화면에서 여백을 줄임 */
+    }
+}
+
+/* 화면 높이에 비례하여 이미지 크기 조정 */
+@media (max-height: 600px) {
+    .product-item img {
+        height: 50vh; /* 화면 높이에 비례하여 이미지 크기 설정 */
+        object-fit: cover; /* 이미지를 비율에 맞게 잘라서 채우기 */
     }
 }
