@@ -3,7 +3,7 @@ const urlsToCache = [
   '/',
   '/css/mainPage.css',
   '/manifest.json',
-  '/images/otneul.png',
+  '/images/otneul-logo.png',
 ];
 
 self.addEventListener('install', event => {
