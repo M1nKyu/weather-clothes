@@ -156,6 +156,14 @@ main {
     margin: 0; /* 기본 여백 제거 */
 }
 
+.location a {
+    color: #D8D8D8;
+    font-size: 20px;
+    text-align: left; /* 왼쪽 정렬 */
+    padding-left: 10px; /* 텍스트 여백 */
+    margin: 0; /* 기본 여백 제거 */
+}
+
 /* 현재 날씨 정보 표시 */
 .current-weather {
     color: white;
