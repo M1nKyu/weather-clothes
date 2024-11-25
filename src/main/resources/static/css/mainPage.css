@@ -27,12 +27,12 @@ header {
 }
 
 .header-left h1 {
-    color: #6a5acd;
+    color: #58ACFA;
     margin-right: 10px;
 }
 
 .subtitle {
-    color: #6a5acd;
+    color: #58ACFA;
     font-weight: bold;
 }
 
@@ -302,6 +302,12 @@ main {
     margin-bottom: 10px;
 }
 
+.outfit-display-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .clothes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -346,19 +352,24 @@ main {
     padding: 20px;
 }
 
+.swiper-buttons {
+    display: flex;
+    align-items: center;
+}
+
 /* Swiper 네비게이션 버튼 스타일 커스터마이징 */
 .swiper-button-next, .swiper-button-prev {
-    position: absolute;
-    padding: 8px; /* 버튼 크기 */
-    z-index: 10; /* 다른 요소 위에 오도록 설정 */
+    position: relative;
+    padding: 8px;
+    z-index: 10;
 }
 
 .swiper-button-next {
-    right: 10px; /* 오른쪽 버튼 */
+    margin-left: 20px; /* Swiper 버튼 간격 */
 }
 
 .swiper-button-prev {
-    left: 10px; /* 왼쪽 버튼 */
+    margin-right: 20px; /* Swiper 버튼 간격 */
 }
 
 .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
