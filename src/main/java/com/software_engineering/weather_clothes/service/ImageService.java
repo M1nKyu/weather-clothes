@@ -48,4 +48,26 @@ public class ImageService {
         return pty == PrecipitationType.SNOW || pty == PrecipitationType.SNOWFLAKE ||
                 pty == PrecipitationType.RAIN_SNOWFLAKE;
     }
+
+    public String selectBackgroundImage(Weather weather){
+
+        String backgroundImage = "";
+
+        int ptyValue = weather.getPty();
+        boolean isDaytime = DateTimeUtil.isDaytime(weather.getFcstTime());
+
+        PrecipitationType pty = PrecipitationType.from(ptyValue);
+
+        if(pty == PrecipitationType.NONE){
+            if(isDaytime)
+                backgroundImage = "/images/background/day1.png";
+            else
+                backgroundImage = "/images/background/day1.png";
+        }
+        else {
+            backgroundImage = "/image/background/rainSnow.png";
+        }
+
+        return backgroundImage;
+    }
 }
