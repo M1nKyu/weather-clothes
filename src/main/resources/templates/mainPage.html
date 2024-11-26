@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <!-- -->
+
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/mainPage/category-suggestions.css">
     <link rel="stylesheet" href="/css/mainPage/outfit-display.css">
@@ -171,6 +171,22 @@
 <script src="/js/footer-buttons.js"></script>
 <script src="/service-worker.js"></script>
 
+<!-- PWA 서비스워커 등록 -->
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                    console.log('ServiceWorker 등록 성공:', registration);
+                })
+                .catch(err => {
+                    console.log('ServiceWorker 등록 실패:', err);
+                });
+        });
+    }
+</script>
+
+<script src="/js/weather-update.js"></script>
 
 <!-- PWA 서비스워커 등록 -->
 <script>
