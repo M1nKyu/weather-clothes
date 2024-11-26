@@ -149,6 +149,14 @@
     </div>
 </main>
 
+<footer class="footer">
+    <div class="container">
+        <button onclick="scrollToSection('weather-info')">날씨 정보</button>
+        <button onclick="scrollToSection('category-suggestions')">추천 카테고리</button>
+        <button onclick="scrollToSection('outfit-display')">추천 의상</button>
+    </div>
+</footer>
+
 
 <!-- 날씨 데이터가 없을 때 -->
 <div th:if="${weatherData == null}" class="error-message">
@@ -160,6 +168,7 @@
 <script src="/js/productSwiper.js"></script>
 <script src="/js/product-toggle.js"></script>
 <script src="/js/scroll-buttons.js"></script>
+<script src="/js/footer.js"></script>
 
 
 </body>
