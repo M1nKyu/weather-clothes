@@ -7,13 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class WeatherClothesApplication {
 
-	public static void main(String[] args) {
-		Dotenv dotenv = Dotenv.load();  // .env 파일 로드
-		// 환경 변수를 시스템에 등록
-		dotenv.entries().forEach(entry ->
-				System.setProperty(entry.getKey(), entry.getValue())
-		);
+        public static void main(String[] args) {
 
-		SpringApplication.run(WeatherClothesApplication.class, args);
-	}
+		
+                SpringApplication.run(WeatherClothesApplication.class, args);
+        }
 }
