@@ -60,12 +60,12 @@ public class ImageService {
 
         if(pty == PrecipitationType.NONE){
             if(isDaytime)
-                backgroundImage = "/images/background/day1.png";
+                backgroundImage = "/images/background/day.png";
             else
-                backgroundImage = "/images/background/day1.png";
+                backgroundImage = "/images/background/night.png";
         }
         else {
-            backgroundImage = "/image/background/rainSnow.png";
+            backgroundImage = "/images/background/rainSnow.png";
         }
 
         return backgroundImage;

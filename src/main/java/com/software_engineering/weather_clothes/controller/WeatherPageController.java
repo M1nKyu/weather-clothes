@@ -96,9 +96,13 @@ public class WeatherPageController {
                 weatherDetails.put("reh", String.valueOf(nowWeather.getReh()));
                 weatherDetails.entrySet().removeIf(entry -> "없음".equals(entry.getValue()));
 
+                // 날씨에 따른 배경화면 지정
+                String weatherInfoBackground = imageService.selectBackgroundImage(nowWeather);
+                logger.info(weatherInfoBackground);
 
                 model.addAttribute("nowWeather", nowWeather); // 현재 날씨
                 model.addAttribute("weatherDetails", weatherDetails);
+                model.addAttribute("weatherInfoBackground", weatherInfoBackground);
                 model.addAttribute("fcstWeather", fcstWeather); // 예보 날씨
                 model.addAttribute("clothingCategory", clothingCategory); // 추천 카테고리
                 model.addAttribute("clothingProducts", clothingProducts); // 추천 카테고리별 상품

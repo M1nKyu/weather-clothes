@@ -10,6 +10,7 @@
     align-items: center;
     background-size: cover; /* 이미지 크기 조정 */
     background-position: center; /* 이미지 위치 조정 */
+    background-repeat: no-repeat; /* 배경 이미지 반복 안 함 */
 }
 
 /* 지역 정보 표시 */
