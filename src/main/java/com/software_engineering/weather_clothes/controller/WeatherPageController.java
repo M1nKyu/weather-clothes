@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 
 @Controller
 public class WeatherPageController {
+    Logger logger = Logger.getLogger(ClothingProductController.class.getName()); // Logger 선언
+
     private final WeatherService weatherService;
     private final ImageService imageService;
     private final ClothingCategoryService clothingCategoryService;
@@ -37,7 +40,7 @@ public class WeatherPageController {
      *
      * @param request HTTP 요청 객체
      * @param model   모델 객체
-     * @return 날씨 데이터를 포함한 mainPage.css 페이지
+     * @return 날씨 데이터를 포함한 global.css 페이지
      */
     @GetMapping("/")
     public String fetchWeather(HttpServletRequest request, Model model) throws Exception {
@@ -96,14 +99,18 @@ public class WeatherPageController {
                 weatherDetails.put("reh", String.valueOf(nowWeather.getReh()));
                 weatherDetails.entrySet().removeIf(entry -> "없음".equals(entry.getValue()));
 
+                // 날씨에 따른 배경화면 지정
+                String weatherInfoBackground = imageService.selectBackgroundImage(nowWeather);
+                logger.info(weatherInfoBackground);
 
                 model.addAttribute("nowWeather", nowWeather); // 현재 날씨
                 model.addAttribute("weatherDetails", weatherDetails);
+                model.addAttribute("weatherInfoBackground", weatherInfoBackground);
                 model.addAttribute("fcstWeather", fcstWeather); // 예보 날씨
                 model.addAttribute("clothingCategory", clothingCategory); // 추천 카테고리
                 model.addAttribute("clothingProducts", clothingProducts); // 추천 카테고리별 상품
             }
-            return "mainPage";  // mainPage.css 템플릿 렌더링
+            return "mainPage";  // global.css 템플릿 렌더링
         } else {
             model.addAttribute("message", "지역 정보를 설정해야 합니다!");
             return "mainPage";

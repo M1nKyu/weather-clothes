@@ -1,0 +1,277 @@
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'NEXON Lv1 Gothic OTF', Arial, sans-serif;
+}
+
+header {
+    position: fixed; /* 화면 상단에 고정 */
+    top: 0; /* 상단에 위치 */
+    left: 0; /* 화면 왼쪽에 위치 */
+    width: 100%; /* 화면 전체 너비 */
+    background-color: #ffffff; /* 헤더 배경색 (필요에 따라 조정) */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과로 구분 */
+    z-index: 1000; /* 다른 요소 위에 표시되도록 z-index 설정 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* 패딩 조정 */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.header-left img {
+    width: 20px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.header-left h1 {
+    color: #42C0E8;
+    font-size: 30px;
+    margin-right: 5px;
+}
+
+.subtitle {
+    color: #42C0E8;
+    font-weight: bold;
+}
+
+.menu-toggle-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: block;
+}
+
+
+/* 우측 메뉴 */
+.menu-container {
+    position: fixed;
+    top: 0;
+    right: -300px; /* 처음에는 화면 밖에 숨김 */
+    width: 300px;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out; /* 애니메이션 효과 */
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-top-left-radius: 15px; /* 위쪽 끝을 둥글게 */
+    border-bottom-left-radius: 15px; /* 아래쪽 끝을 둥글게 */
+}
+
+.menu-container.active {
+    right: 0;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    margin: 15px 0;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    color: #58ACFA;
+}
+
+/* 메인 영역 */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    padding-top: 130px;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px; /* 최대 너비 확대 */
+    width: 100%;
+    gap: 30px;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .header-left img {
+        font-size: 1.2rem;
+    }
+
+    .header-left h1 {
+        font-size: 1.2rem;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+    }
+
+    .current-weather {
+        padding: 5px 0;
+    }
+
+    .weather-details {
+        font-size: 0.9rem;
+    }
+
+    .hour-item {
+        min-width: 50px;
+    }
+}
+
+
+/* 화면 비율에 따라 텍스트 크기 조정 */
+@media (max-width: 768px) {
+    .current-temperature {
+        font-size: 10vw; /* 화면 너비에 비례하여 텍스트 크기 조정 */
+    }
+
+    .weather-info {
+        width: 100%; /* 날씨 정보 영역이 화면 크기에 맞게 90% 차지 */
+    }
+
+    .category-suggestions {
+        padding: 20px; /* 작은 화면에서 여백을 줄임 */
+    }
+}
+
+/* 점 깜박이는 로딩 */
+.spinner {
+    display: flex;
+    gap: 5px;
+}
+
+.spinner div {
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    border-radius: 50%;
+    animation: blink 1.5s infinite ease-in-out;
+}
+
+.spinner div:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.spinner div:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.spinner div:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* 푸터 스타일 */
+.footer {
+    display: none;
+    position: fixed; /* 화면 하단에 고정 */
+    bottom: 0; /* 화면 하단에 위치 */
+    left: 0; /* 화면 왼쪽에 고정 */
+    width: 100%;
+    background-color: #ffffff; /* 배경 색상 설정 */
+    z-index: 1000; /* 다른 요소들 위에 위치하도록 z-index 설정 */
+    border-top: 1px solid #e0e0e0;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+}
+
+/* 컨테이너 스타일 */
+.footer .container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* 데스크톱 화면에서는 푸터 숨김 */
+@media (min-width: 1024px) {
+    .footer {
+        display: none;
+    }
+}
+
+/* 모바일 화면에서 푸터 표시 */
+@media (max-width: 1023px) {
+    .footer {
+        display: block;
+    }
+    .footer .container {
+        display: flex;
+    }
+}
+
+/* 푸터 버튼 스타일 */
+.footer button {
+    flex: 1; /* 버튼들이 동일한 너비로 확장 */
+    background-color: #ffffff;
+    color: #333;
+    border: none;
+    padding: 15px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 버튼 호버 시 스타일 */
+.footer button:hover {
+    background-color: #f5f5f5;
+    color: #007bff;
+}
+
+/* 버튼 활성화 시 스타일 */
+.footer button:active {
+    background-color: #e0e0e0;
+    color: #0056b3;
+}
+
+/* 스크롤 애니메이션 */
+html {
+    scroll-behavior: smooth;
+}
