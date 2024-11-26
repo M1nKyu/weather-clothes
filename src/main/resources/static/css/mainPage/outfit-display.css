@@ -104,7 +104,10 @@
 /* Swiper 네비게이션 버튼 스타일 커스터마이징 */
 .swiper-button-next, .swiper-button-prev {
     position: relative;
-    padding: 8px;
+    padding: 4px; /* 기존 8px에서 줄임 */
+    font-size: 12px; /* 버튼 내부 텍스트/아이콘 크기 조정 */
+    width: 24px; /* 버튼의 고정 너비 */
+    height: 24px; /* 버튼의 고정 높이 */
     z-index: 10;
 }
 
@@ -342,4 +345,24 @@
     object-fit: contain; /* 원본 비율을 유지하며 이미지 표시 */
     object-position: center center; /* 중앙 정렬 */
     overflow: hidden;    /* 부모 요소 밖으로 나가는 부분 숨기기 */
+}
+
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+    .clothesSwiper {
+        height: 500px;
+    }
+
+    .clothes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .product-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .productSwiper {
+        height: 500px;
+    }
 }
