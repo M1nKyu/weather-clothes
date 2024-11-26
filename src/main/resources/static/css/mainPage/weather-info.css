@@ -150,7 +150,11 @@
     }
 
     .weather-details {
-        font-size: 14px; /* 상세 정보 폰트 크기 축소 */
+        font-size: 16px; /* 상세 정보 폰트 크기 축소 */
+    }
+
+    .pty-information {
+        font-size: 17px;
     }
 
     .hour-item img {
