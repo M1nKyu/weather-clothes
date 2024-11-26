@@ -193,7 +193,7 @@ main {
 
 .pty-information {
     text-align: center;
-    font-size: 25px;
+    font-size: 21px;
     font-weight: bolder;
     color: #E0ECF8;
 }
@@ -442,6 +442,13 @@ main {
 .product-categories {
     height: 100%;
     overflow-y: auto;
+    overflow: auto; /* 스크롤 동작 유지 */
+    -ms-overflow-style: none; /* IE 및 Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.product-categories::-webkit-scrollbar {
+    display: none;
 }
 
 .main-category-title {
