@@ -154,8 +154,8 @@ public class WeatherService {
         PrecipitationType pty = PrecipitationType.from(value);
         return switch(pty){
             case NONE -> "없음";
-            case RAIN -> "비가 오고 있어요";
-            case RAIN_SNOW -> "진눈깨비가 내리고 있어요";
+            case RAIN -> "비가 내리고 있어요";
+            case RAIN_SNOW -> "비 섞인 눈이 내리고 있어요";
             case SNOW -> "눈이 내리고 있어요";
             case RAIN_DROP -> "빗방울이 떨어지고 있어요";
             case RAIN_SNOWFLAKE -> "빗방울과 눈날림이 함께 있어요";
