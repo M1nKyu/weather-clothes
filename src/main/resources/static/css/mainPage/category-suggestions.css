@@ -18,7 +18,7 @@
 }
 
 .recommendation-category {
-    margin-bottom: 20px;  /* 각 카테고리 간격 */
+    margin-bottom: 30px;  /* 각 카테고리 간격 */
 }
 
 .category-title {
@@ -32,15 +32,6 @@
     padding-bottom: 5px;
 }
 
-.recommendation-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));  /* 반응형 그리드 */
-    gap: 15px;
-}
-
 .recommendation-list li {
     background-color: #fff;
     padding: 15px;
@@ -49,6 +40,25 @@
     font-size: 16px;
     color: #555;
     transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;  /* 텍스트가 한 줄로 유지되도록 함 */
+    overflow: hidden;  /* 텍스트가 넘칠 경우 숨김 처리 */
+    text-overflow: ellipsis;  /* 넘칠 경우 '...' 표시 */
+    min-width: 180px;  /* 최소 너비를 설정하여 개행 방지 */
+    margin-left: 10px;  /* 좌측 여백 추가 */
+    margin-right: 10px;  /* 우측 여백 추가 */
+}
+
+/* 그리드 레이아웃에 여백을 반영 */
+.recommendation-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));  /* 최소 너비를 180px로 설정 */
+    gap: 15px;
 }
 
 .recommendation-list li:hover {
@@ -75,7 +85,7 @@
         font-size: 18px;
         margin-bottom: 10px;
         padding-bottom: 3px;
-        border-bottom: 1px solid #58ACFA; /* 제목 아래선 축소 */
+        border-bottom: 1px solid #58ACFA;
     }
 
     .recommendation-list {
@@ -86,5 +96,6 @@
     .recommendation-list li {
         padding: 10px;
         font-size: 14px;
+        min-width: 110px;
     }
 }

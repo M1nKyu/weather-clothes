@@ -11,6 +11,8 @@ const STATIC_CACHE = [
   '/images/ui-icons/bx-menu.svg',
   '/images/ui-icons/arrow-left.svg',
   '/images/ui-icons/arrow-right.svg',
+  '/images/ui-icons/arrow-right-bold.svg',
+  '/images/ui-icons/arrow-right-bold.svg',
   'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
   'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'
 ];
