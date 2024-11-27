@@ -27,26 +27,21 @@ public class ImageService {
                 case CLOUDY -> icon = "extreme";
             }
         }
-        // 비 또는 비/눈 형태일 경우
-        else if(t1hValue >= 0 && isRainOrRainSnow(pty)) {
+        else if(pty == PrecipitationType.RAIN || pty == PrecipitationType.RAIN_DROP){
             icon = "rain";
         }
-        // 눈 또는 눈/비 형태일 경우
-        else if(t1hValue < 0 && isSnowOrSnowRain(pty)) {
+        else if(pty == PrecipitationType.SNOW || pty == PrecipitationType.SNOWFLAKE){
             icon = "snow";
         }
-
+        else{
+            if(t1hValue > 0){
+                icon = "rain";
+            }
+            else{
+                icon = "snow";
+            }
+        }
         return "/images/weather-icons/" + (isDaytime ? "day/" : "night/") + icon + ".svg";
-    }
-
-    private boolean isRainOrRainSnow(PrecipitationType pty) {
-        return pty == PrecipitationType.RAIN || pty == PrecipitationType.RAIN_DROP ||
-                pty == PrecipitationType.RAIN_SNOWFLAKE || pty == PrecipitationType.RAIN_SNOW;
-    }
-
-    private boolean isSnowOrSnowRain(PrecipitationType pty) {
-        return pty == PrecipitationType.SNOW || pty == PrecipitationType.SNOWFLAKE ||
-                pty == PrecipitationType.RAIN_SNOWFLAKE;
     }
 
     public String selectBackgroundImage(Weather weather){
