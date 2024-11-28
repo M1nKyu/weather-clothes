@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/mainPage/category-suggestions.css">
     <link rel="stylesheet" href="/css/mainPage/outfit-display.css">
     <link rel="stylesheet" href="/css/mainPage/weather-info.css">
+    <link rel="stylesheet" href="/css/mainPage/clothing-combination.css">
 
     <!-- PWA 관련 -->
     <link rel="manifest" href="/manifest.json">
@@ -95,6 +96,35 @@
             </div>
         </div>
 
+        <div class="clothing-combination">
+            <h2>추천 조합</h2>
+            <div class="content-wrapper">
+                <div class="combination-container">
+                    <div th:each="combination : ${clothingCombination}" class="combination">
+                        <ul>
+                            <li th:each="entry : ${combination.entrySet()}" class="combination-item">
+                                <span class="category-name" th:text="${entry.key}"></span>:
+                                <span class="clothing-name" th:text="${entry.value.categoryName}"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="color-recommendations">
+                    <h2>추천 색상</h2>
+                    <div>
+                        <div class="color-item">
+                            <span class="category-name"></span>:
+                            <svg width="50" height="50">
+                                <rect width="50" height="50"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         <div class="outfit-display">
             <div class="outfit-display-header">
                 <h2>추천 상품</h2>
@@ -153,7 +183,8 @@
 <footer class="footer">
     <div class="container">
         <button onclick="scrollToSectionByClass('weather-info')">날씨 정보</button>
-        <button onclick="scrollToSectionByClass('category-suggestions')">추천 카테고리</button>
+        <button onclick="scrollToSectionByClass('category-suggestions')">카테고리</button>
+        <button onclick="scrollToSectionByClass('clothing-combination')">추천 조합</button>
         <button onclick="scrollToSectionByClass('outfit-display')">추천 의상</button>
     </div>
 </footer>
@@ -169,24 +200,9 @@
 <script src="/js/product-toggle.js"></script>
 <script src="/js/scroll-buttons.js"></script>
 <script src="/js/footer-buttons.js"></script>
+
+
 <script src="/service-worker.js"></script>
-
-<!-- PWA 서비스워커 등록 -->
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then(registration => {
-                    console.log('ServiceWorker 등록 성공:', registration);
-                })
-                .catch(err => {
-                    console.log('ServiceWorker 등록 실패:', err);
-                });
-        });
-    }
-</script>
-
-<script src="/js/weather-update.js"></script>
 
 <!-- PWA 서비스워커 등록 -->
 <script>

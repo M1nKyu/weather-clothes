@@ -1,0 +1,170 @@
+.clothing-combination {
+    background-color: #f5f5f5;
+    padding: 30px;
+    border-radius: 15px;
+    width: 100%;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    max-height: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* 세로 배치로 설정 */
+}
+
+.clothing-combination h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: left;
+    font-weight: 600;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: row; /* 수평 배치로 설정 */
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.combination-container {
+    display: flex;
+    flex-direction: column; /* 세로 배치로 설정 */
+    gap: 20px;
+    flex: 1;
+}
+
+.color-recommendations {
+    margin-top: 0; /* 상단 여백 제거 */
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+
+
+.combination {
+    margin-bottom: 30px;  /* 각 카테고리 간격 */
+}
+
+.combination:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.combination ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 15px;
+}
+
+
+
+.combination-item {
+    background-color: #fefefe;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.combination-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.combination-item:active {
+    transform: translateY(2px);
+}
+
+.category-name {
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+    text-transform: capitalize;
+}
+
+.clothing-name {
+    font-style: italic;
+    color: #58ACFA;
+}
+
+
+
+.color-recommendations h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.color-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.color-item .category-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+    color: #555;
+}
+
+.color-item svg {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+    .clothing-combination {
+        padding: 20px;
+        border-radius: 10px;
+        flex-direction: column; /* 세로 배치로 변경 */
+    }
+
+    .clothing-combination h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .combination ul {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+    }
+
+    .combination-item {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .category-name {
+        margin-right: 5px;
+    }
+
+    .clothing-name {
+        font-size: 13px;
+    }
+
+    .color-recommendations {
+        margin-top: 20px;
+        flex-basis: 100%;
+    }
+
+    .content-wrapper {
+        flex-direction: column; /* 세로 배치로 변경 */
+    }
+}

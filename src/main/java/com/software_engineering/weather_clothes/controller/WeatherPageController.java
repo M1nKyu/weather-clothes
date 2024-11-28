@@ -4,6 +4,7 @@ import com.software_engineering.weather_clothes.model.ClothingCategory;
 import com.software_engineering.weather_clothes.model.ClothingProduct;
 import com.software_engineering.weather_clothes.model.Weather;
 import com.software_engineering.weather_clothes.service.ClothingCategoryService;
+import com.software_engineering.weather_clothes.service.ClothingCombinationService;
 import com.software_engineering.weather_clothes.service.ImageService;
 import com.software_engineering.weather_clothes.service.WeatherService;
 import com.software_engineering.weather_clothes.util.CookieUtil;
@@ -27,12 +28,15 @@ public class WeatherPageController {
     private final WeatherService weatherService;
     private final ImageService imageService;
     private final ClothingCategoryService clothingCategoryService;
+    private final ClothingCombinationService clothingCombinationService;
 
     @Autowired
-    public WeatherPageController(WeatherService weatherService, ImageService imageService, ClothingCategoryService clothingCategoryService){
+    public WeatherPageController(WeatherService weatherService, ImageService imageService,
+                                 ClothingCategoryService clothingCategoryService, ClothingCombinationService clothingCombinationService){
         this.weatherService = weatherService;
         this.imageService = imageService;
         this.clothingCategoryService = clothingCategoryService;
+        this.clothingCombinationService = clothingCombinationService;
     }
 
     /**
@@ -78,6 +82,7 @@ public class WeatherPageController {
                 List<Weather> fcstWeather = weatherData.subList(1, weatherData.size()); // 예보된 날씨 정보 (5 rows)
 
                 Map<String, List<ClothingCategory>> clothingCategory = clothingCategoryService.getClothingCategory(nowWeather); // 추천된 옷 카테고리
+                List<Map<String, ClothingCategory>> clothingCombination = clothingCombinationService.generateCombinations(clothingCategory, nowWeather.getT1h());
                 Map<String, Map<String, List<ClothingProduct>>> clothingProducts = clothingCategoryService.getClothingProductsFromCategories(clothingCategory);
 
                 nowWeather.setIcon(imageService.selectWeatherIcon(nowWeather));
@@ -102,12 +107,15 @@ public class WeatherPageController {
                 // 날씨에 따른 배경화면 지정
                 String weatherInfoBackground = imageService.selectBackgroundImage(nowWeather);
                 logger.info(weatherInfoBackground);
+                logger.info(clothingCombination.toString());
+
 
                 model.addAttribute("nowWeather", nowWeather); // 현재 날씨
                 model.addAttribute("weatherDetails", weatherDetails);
                 model.addAttribute("weatherInfoBackground", weatherInfoBackground);
                 model.addAttribute("fcstWeather", fcstWeather); // 예보 날씨
                 model.addAttribute("clothingCategory", clothingCategory); // 추천 카테고리
+                model.addAttribute("clothingCombination", clothingCombination); // 추천 조합
                 model.addAttribute("clothingProducts", clothingProducts); // 추천 카테고리별 상품
             }
             return "mainPage";  // global.css 템플릿 렌더링
