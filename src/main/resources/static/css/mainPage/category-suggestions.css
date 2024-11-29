@@ -60,7 +60,7 @@
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
+    font-size: 18px;
     color: #555;
     transition: transform 0.3s, box-shadow 0.3s;
     display: flex;
@@ -70,8 +70,6 @@
     overflow: hidden;  /* 텍스트가 넘칠 경우 숨김 처리 */
     text-overflow: ellipsis;  /* 넘칠 경우 '...' 표시 */
     min-width: 180px;  /* 최소 너비를 설정하여 개행 방지 */
-    margin-left: 10px;  /* 좌측 여백 추가 */
-    margin-right: 10px;  /* 우측 여백 추가 */
 }
 
 /* 그리드 레이아웃에 여백을 반영 */
@@ -121,7 +119,7 @@
     }
 
     .recommendation-list li {
-        padding: 8px; /* 항목 내부 여백 축소 */
+        padding: 10px; /* 항목 내부 여백 축소 */
         font-size: 16px; /* 글자 크기 조정 */
         white-space: normal;
         word-break: break-word;
@@ -151,7 +149,7 @@
      }
 
      .recommendation-list li {
-         padding: 6px; /* 항목 내부 여백 축소 */
+         padding: 8px; /* 항목 내부 여백 축소 */
          font-size: 14px; /* 글자 크기 축소 */
          white-space: normal;
          word-break: break-word;

@@ -89,8 +89,8 @@
 }
 
 .color-circle {
-    width: 200px;  /* 사각형의 너비 */
-    height: 40px; /* 사각형의 높이 */
+    width: 140px;  /* 사각형의 너비 */
+    height: 50px; /* 사각형의 높이 */
     border-radius: 10px;  /* 모서리를 둥글게 만듬 (적당한 값을 설정) */
     margin-top: 5px; /* 텍스트와 색상 원 간 여백 */
     padding: 5px;  /* 사각형의 안쪽 여백 */
@@ -99,9 +99,10 @@
 
 /* '(선택)' 텍스트 스타일링 */
 .no-circle {
+    padding 10px;
     font-size: 25px; /* 텍스트 크기 */
     color: #333; /* 텍스트 색상 */
-    margin-top:10px;
+    margin-top:20px;
 }
 
 @media (max-width: 768px) {
@@ -123,6 +124,7 @@
     .combination-item {
         width: 100%; /* 전체 너비 사용 */
         border-right: none !important; /* 세로선 없애기 */
+        font-size: 16px;
     }
     .combination-item li {
         display: flex;
@@ -131,12 +133,13 @@
         align-items: center;
     }
     .color-circle {
-        width: 180px; /* 색상 동그라미 크기 축소 */
+        width: 120px; /* 색상 동그라미 크기 축소 */
         height: 30px;
     }
 
     .no-circle {
         font-size: 20px;
+        margin-top:10px;
     }
 }
 
@@ -159,6 +162,7 @@
     .combination-item {
         width: 100%; /* 전체 너비 사용 */
         border-right: none !important; /* 세로선 없애기 */
+        font-size: 16px;
     }
 
     .clothing-name {
@@ -166,11 +170,11 @@
     }
 
     .color-circle {
-        width: 130px; /* 색상 동그라미 크기 축소 */
+        width: 110px; /* 색상 동그라미 크기 축소 */
         height: 30px;
     }
 
     .no-circle {
-        font-size: 14px; /* "(선택)" 텍스트 크기 축소 */
+        font-size: 16px; /* "(선택)" 텍스트 크기 축소 */
     }
 }
