@@ -99,29 +99,31 @@
         <div class="clothing-combination">
             <h2>추천 조합</h2>
             <div class="content-wrapper">
+                <!-- 추천 조합 출력 -->
                 <div class="combination-container">
                     <div th:each="combination : ${clothingCombination}" class="combination">
                         <ul>
-                            <li th:each="entry : ${combination.entrySet()}" class="combination-item">
-                                <span class="category-name" th:text="${entry.key}"></span>:
-                                <span class="clothing-name" th:text="${entry.value.categoryName}"></span>
+                            <li>
+                                <span class="category-name" th:text="${combination.mainCategory}"></span>:
+                                <span class="clothing-name" th:text="${combination.clothingCategory.categoryName}"></span>
                             </li>
                         </ul>
                     </div>
                 </div>
+
+                <!-- 추천 색상 출력 -->
                 <div class="color-recommendations">
                     <h2>추천 색상</h2>
-                    <div>
-                        <div class="color-item">
-                            <span class="category-name"></span>:
-                            <svg width="50" height="50">
-                                <rect width="50" height="50"/>
-                            </svg>
-                        </div>
+                    <div th:each="combination : ${clothingCombination}" class="color-item">
+                        <span class="category-name" th:text="${combination.mainCategory}"></span>:
+                        <svg width="50" height="50">
+                            <rect width="50" height="50" th:attr="fill=${combination.color}"></rect>
+                        </svg>
                     </div>
                 </div>
             </div>
         </div>
+
 
 
 

@@ -1,5 +1,6 @@
 package com.software_engineering.weather_clothes.controller;
 
+import com.software_engineering.weather_clothes.dto.ClothingCombinationDto;
 import com.software_engineering.weather_clothes.model.ClothingCategory;
 import com.software_engineering.weather_clothes.model.ClothingProduct;
 import com.software_engineering.weather_clothes.model.Weather;
@@ -67,8 +68,8 @@ public class WeatherPageController {
         model.addAttribute("userLocation", userLocation);
 
         // 계절 정보
-        String season = DateTimeUtil.getSeason();
-        model.addAttribute("season", season);
+//        String season = DateTimeUtil.getSeason();
+//        model.addAttribute("season", season);
 
         if (nx != null && ny != null) {
 
@@ -82,7 +83,7 @@ public class WeatherPageController {
                 List<Weather> fcstWeather = weatherData.subList(1, weatherData.size()); // 예보된 날씨 정보 (5 rows)
 
                 Map<String, List<ClothingCategory>> clothingCategory = clothingCategoryService.getClothingCategory(nowWeather); // 추천된 옷 카테고리
-                List<Map<String, ClothingCategory>> clothingCombination = clothingCombinationService.generateCombinations(clothingCategory, nowWeather.getT1h());
+                List<ClothingCombinationDto> clothingCombination = clothingCombinationService.generateCombinations(clothingCategory, nowWeather.getT1h());
                 Map<String, Map<String, List<ClothingProduct>>> clothingProducts = clothingCategoryService.getClothingProductsFromCategories(clothingCategory);
 
                 nowWeather.setIcon(imageService.selectWeatherIcon(nowWeather));
