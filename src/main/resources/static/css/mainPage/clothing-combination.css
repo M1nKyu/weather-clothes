@@ -114,8 +114,8 @@
 }
 
 .color-item svg {
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    position: relative;
+    z-index: 0;
 }
 
 /* 반응형 스타일 */

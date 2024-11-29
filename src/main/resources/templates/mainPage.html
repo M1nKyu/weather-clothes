@@ -114,9 +114,9 @@
                     <h2>색상 조합</h2>
                     <div th:each="combination : ${clothingCombination}" class="color-item">
                         <span class="category-name" th:text="${combination.mainCategory}"></span>:
-                        <svg width="50" height="50">
+                        <svg>
                             <!-- 아우터: 자켓 모양 -->
-                            <svg th:if="${combination.mainCategory == '아우터'}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="50" height="50">
+                            <svg th:if="${combination.mainCategory == '아우터'}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                 <g>
                                     <rect x="165.003" y="57.534" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -16.5617 165.5928)" width="53.208" height="90.508" th:attr="fill=${combination.color}"></rect>
                                     <polygon points="219.153,38.4 256,75.247 292.847,38.4" th:attr="fill=${combination.color}"></polygon>
@@ -127,16 +127,29 @@
                             </svg>
 
                             <!-- 상의: 티셔츠 모양 -->
-                            <svg th:if="${combination.mainCategory == '상의'}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="50" height="50">
-                                <g>
-                                    <path d="M509.681,228.36L412.159,59.425c-0.001-0.001-0.002-0.002-0.002-0.003c-12.211-21.14-34.959-34.274-59.367-34.274h-30.415 c-5.51,0-10.693,2.624-13.955,7.065l-35.401,48.204c-8.447,11.5-25.591,11.5-34.037,0l-35.402-48.204 c-3.262-4.442-8.443-7.065-13.955-7.065h-30.415c-24.408,0-47.156,13.133-59.37,34.278L2.32,228.36 c-4.779,8.281-1.937,18.873,6.339,23.651l83.751,48.344c6.526,3.768,14.487,2.803,19.908-1.829v171.014 c0,9.562,7.752,17.314,17.314,17.314h252.737c9.562,0,17.314-7.752,17.314-17.314V298.526c5.42,4.631,13.383,5.596,19.908,1.83 l83.751-48.344C511.621,247.231,514.457,236.638,509.681,228.36z" th:attr="fill=${combination.color}"/>
+                            <svg th:if="${combination.mainCategory == '상의'}" th:attr="fill=${combination.color}" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 304.43 304.43" xml:space="preserve">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path d="M302.819,177.89l-84.082-85.638c-4.173-4.25-9.878-6.644-15.834-6.644h-15.689V64.044c0-3.104-2.517-5.621-5.621-5.621h-60.425c-3.104,0-5.621,2.517-5.621,5.621v21.564h-14.022c-5.956,0-11.661,2.394-15.834,6.644L1.61,177.89c-2.045,2.083-2.155,5.385-0.254,7.6l17.714,20.631c1.903,2.216,5.186,2.606,7.555,0.896l58.162-41.983l-6.998,74.828c-0.147,1.575,0.376,3.139,1.441,4.309c1.065,1.169,2.574,1.836,4.155,1.836h137.658c1.582,0,3.09-0.667,4.156-1.836c1.065-1.169,1.588-2.734,1.441-4.309l-6.998-74.828l58.162,41.983c2.368,1.71,5.652,1.32,7.555-0.896l17.714-20.631C304.975,183.275,304.865,179.973,302.819,177.89z"></path>
                                 </g>
                             </svg>
 
+
                             <!-- 바지: 바지 모양 -->
-                            <svg th:if="${combination.mainCategory == '바지'}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="50" height="50">
-                                <path d="M2 16L3 0H13L14 16H9L8.375 6H7.625L7 16H2Z" th:attr="fill=${combination.color}"/>
+                            <svg th:if="${combination.mainCategory == '바지'}" fill="#6c3d3d" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.004 512.004" xml:space="preserve" stroke="#6c3d3d">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path d="M475.366,281.783L366.753,173.171c-3.328-3.337-8.73-3.337-12.066,0l-22.613,22.622l120.67,120.678l22.622-22.622 C478.702,290.513,478.702,285.12,475.366,281.783z"></path>
+                                    <path d="M264.533,263.326V68.271H87.543l-52.25,89.566c-1.007,1.741-1.374,3.789-1.033,5.768l59.733,341.333 c0.717,4.087,4.267,7.066,8.405,7.066h153.6c4.181,0,7.484-3.055,8.226-7.014l176.452-176.452L319.999,207.859L264.533,263.326z M213.333,128.004v8.533c0,4.71-3.814,8.533-8.533,8.533s-8.533-3.823-8.533-8.533v-8.533h-68.267 c-4.719,0-8.533-3.823-8.533-8.533c0-4.71,3.814-8.533,8.533-8.533h68.267c0-4.71,3.814-8.533,8.533-8.533 s8.533,3.823,8.533,8.533c4.719,0,8.533,3.823,8.533,8.533C221.866,124.181,218.051,128.004,213.333,128.004z"></path>
+                                    <rect x="162.133" y="0" width="34.133" height="51.2"></rect>
+                                    <path d="M264.533,8.538c0-4.71-3.814-8.533-8.533-8.533h-42.667v51.2h51.2V8.538z"></path>
+                                    <path d="M145.066,0.004h-42.667c-4.719,0-8.533,3.823-8.533,8.533v42.667h51.2V0.004z"></path>
+                                </g>
                             </svg>
+
+
                             <!-- 스커트: 스커트 모양 -->
                             <path th:if="${combination.mainCategory == '스커트'}" d="M15,5 L35,5 L30,35 L20,35 Z" th:attr="fill=${combination.color}"></path>
                         </svg>
