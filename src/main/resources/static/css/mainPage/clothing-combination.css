@@ -1,6 +1,6 @@
-.clothing-combination {
+.combination-suggestion {
     background-color: #f5f5f5;
-    padding: 30px;
+    padding: 20px;
     border-radius: 15px;
     width: 100%;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
@@ -10,7 +10,7 @@
     flex-direction: column; /* 세로 배치로 설정 */
 }
 
-.clothing-combination h2 {
+.combination-suggestion h2 {
     font-size: 26px;
     margin-bottom: 20px;
     color: #333;
@@ -20,141 +20,157 @@
 
 .content-wrapper {
     display: flex;
-    flex-direction: row; /* 수평 배치로 설정 */
+    flex-direction: column; /* 수평 배치로 설정 */
     justify-content: space-between;
     gap: 20px;
 }
 
-.combination-container {
+.combination h2 {
+    margin-bottom: 20px; /* 제목과 조합 간 여백 */
+}
+
+.combination-items {
     display: flex;
-    flex-direction: column; /* 세로 배치로 설정 */
-    gap: 20px;
-    flex: 1;
-
-    margin-top: 0; /* 상단 여백 제거 */
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    flex: 1;
+    flex-wrap: nowrap; /* 항목이 한 줄에 배치되도록 설정 */
+    width: 100%;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    gap: 15px; /* 아이템 간 간격 추가 */
 }
-
-.color-recommendations {
-    margin-top: 0; /* 상단 여백 제거 */
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    flex: 1;
-}
-
-
-
-.combination {
-    margin-bottom: 30px;  /* 각 카테고리 간격 */
-}
-
-.combination:hover {
-
-}
-
-.combination ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 15px;
-}
-
-
 
 .combination-item {
-    background-color: #fefefe;
-    border-radius: 10px;
-    padding: 15px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    flex: 1;
     align-items: center;
+    border-right: 2px solid #ccc;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
+    font-size: 20px;
+    font-weight:bold;
     color: #555;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
+.combination-item:last-child {
+    border-right: none; /* 마지막 아이템에는 경계선 없애기 */
+}
+
+/* Hover 효과 */
 .combination-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.category-name {
-    font-weight: bold;
-    color: #333;
-    margin-right: 10px;
-    text-transform: capitalize;
+/* Active 클릭 시 효과 */
+.combination-item:active {
+    transform: translateY(2px);  /* 클릭 시 눌리는 효과 */
 }
 
-.color-recommendations h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.color-item {
+.combination-item ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
+    flex-direction: column; /* 세로로 배치 */
+    align-items: center; /* 텍스트와 색상 원이 수평으로 정렬되도록 설정 */
+}
+
+.combination-item li {
+    display: flex;
+    flex-direction: column; /* 세로로 나열 */
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* 항목 간 여백 */
 }
 
-.color-item .category-name {
-    font-size: 18px;
-    font-weight: bold;
-    margin-right: 10px;
-    color: #555;
+.clothing-name{
+    margin-bottom: 5px; /* 텍스트 간 여백 */
 }
 
-.color-item svg {
-    position: relative;
-    z-index: 0;
+.color-circle {
+    width: 200px;  /* 사각형의 너비 */
+    height: 40px; /* 사각형의 높이 */
+    border-radius: 10px;  /* 모서리를 둥글게 만듬 (적당한 값을 설정) */
+    margin-top: 5px; /* 텍스트와 색상 원 간 여백 */
+    padding: 5px;  /* 사각형의 안쪽 여백 */
+
 }
 
-/* 반응형 스타일 */
+/* '(선택)' 텍스트 스타일링 */
+.no-circle {
+    font-size: 25px; /* 텍스트 크기 */
+    color: #333; /* 텍스트 색상 */
+    margin-top:10px;
+}
+
 @media (max-width: 768px) {
-    .clothing-combination {
+    .combination-suggestion {
         padding: 20px;
-        border-radius: 10px;
-        flex-direction: column; /* 세로 배치로 변경 */
     }
 
-    .clothing-combination h2 {
-        font-size: 20px;
-        margin-bottom: 15px;
+    .combination h2 {
+        font-size: 18px;
+        margin-bottom: 20px;
     }
 
-    .combination ul {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 10px;
+    .combination-items {
+        gap: 10px; /* 간격 축소 */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 한 줄에 2개 배치 */
     }
 
     .combination-item {
-        padding: 10px;
-        font-size: 14px;
+        width: 100%; /* 전체 너비 사용 */
+        border-right: none !important; /* 세로선 없애기 */
+    }
+    .combination-item li {
+        display: flex;
+        align-items: flex-start; /* 아이템 내부 왼쪽 정렬 */
+        text-align: left; /* 텍스트 왼쪽 정렬 */
+        align-items: center;
+    }
+    .color-circle {
+        width: 180px; /* 색상 동그라미 크기 축소 */
+        height: 30px;
     }
 
-    .category-name {
-        margin-right: 5px;
+    .no-circle {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+.combination-suggestion {
+        padding: 13px;
+    }
+
+    .combination h2 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .combination-items {
+        gap: 8px; /* 간격 축소 */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 한 줄에 2개 배치 */
+    }
+
+    .combination-item {
+        width: 100%; /* 전체 너비 사용 */
+        border-right: none !important; /* 세로선 없애기 */
     }
 
     .clothing-name {
-        font-size: 13px;
+        font-size: 14px; /* 글자 크기 축소 */
     }
 
-    .color-recommendations {
-        margin-top: 20px;
-        flex-basis: 100%;
+    .color-circle {
+        width: 130px; /* 색상 동그라미 크기 축소 */
+        height: 30px;
     }
 
-    .content-wrapper {
-        flex-direction: column; /* 세로 배치로 변경 */
+    .no-circle {
+        font-size: 14px; /* "(선택)" 텍스트 크기 축소 */
     }
 }
