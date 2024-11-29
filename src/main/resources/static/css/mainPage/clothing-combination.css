@@ -30,6 +30,13 @@
     flex-direction: column; /* 세로 배치로 설정 */
     gap: 20px;
     flex: 1;
+
+    margin-top: 0; /* 상단 여백 제거 */
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
 }
 
 .color-recommendations {
@@ -48,8 +55,7 @@
 }
 
 .combination:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+
 }
 
 .combination ul {
@@ -79,12 +85,6 @@
 }
 
 .combination-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-.combination-item:active {
-    transform: translateY(2px);
 }
 
 .category-name {
@@ -93,13 +93,6 @@
     margin-right: 10px;
     text-transform: capitalize;
 }
-
-.clothing-name {
-    font-style: italic;
-    color: #58ACFA;
-}
-
-
 
 .color-recommendations h2 {
     font-size: 24px;
@@ -124,9 +117,6 @@
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-
-
-
 
 /* 반응형 스타일 */
 @media (max-width: 768px) {

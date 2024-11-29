@@ -13,38 +13,27 @@ public class ClothingCombinationService {
 
     private final ClothingCategoryRepository clothingCategoryRepository;
 
-    public ClothingCombinationService (ClothingCategoryRepository clothingCategoryRepository){
+    public ClothingCombinationService(ClothingCategoryRepository clothingCategoryRepository) {
         this.clothingCategoryRepository = clothingCategoryRepository;
     }
 
+    // 상의와 하의(바지, 스커트)의 색상 조합
     private static final Map<String, List<String>> TOP_BOTTOM_COLOR_COMBINATIONS = Map.of(
-            "White", List.of("Black", "Navy", "Gray", "Beige"),
-            "Blue", List.of("White", "Gray", "Beige"),
-            "Red", List.of("Black", "White"),
-            "Yellow", List.of("Blue", "Gray"),
-            "Green", List.of("White", "Brown")
-    );
-
-    private static final Map<String, List<String>> TOP_SKIRT_COLOR_COMBINATIONS = Map.of(
-            "White", List.of("Black", "Navy", "Gray", "Pink"),
-            "Blue", List.of("White", "Pink"),
-            "Red", List.of("Black", "Gray"),
-            "Yellow", List.of("Blue", "White"),
-            "Green", List.of("Brown", "Beige")
+            "#eaeaea", List.of("#000000", "#003666", "#c9c9c9", "#8ab0df", "#e6c18e", "#003666", "#636b2f"), // WHITE
+            "#000000", List.of("#000000", "#003666"), // BLACK
+            "#e6c18e", List.of("#5b3700", "#c9c9c9", "#000000", "#8ab0df"), // BEIGE
+            "#5b3700", List.of("#7a7a7a", "#e6c18e", "#003666", "#000000"), // BROWN
+            "#30bf2b", List.of("#8ab0df", "#eaeaea", "#c9c9c9", "#e6c18e", "#000000"), // GREEN
+            "#7a7a7a", List.of("#000000", "#e6c18e"), // GRAY
+            "#c9c9c9", List.of("#000000", "#e6c18e"), // LIGHT_GRAY
+            "#881824", List.of("#7a7a7a"), // WINE
+            "#8ab0df", List.of("#105b9c") // LIGHT_BLUE
     );
 
     private String generateTopBottomColorCombination(String topColor) {
         List<String> possibleColors = TOP_BOTTOM_COLOR_COMBINATIONS.getOrDefault(topColor, Collections.emptyList());
         if (possibleColors.isEmpty()) {
-            return "Black"; // 기본값
-        }
-        return possibleColors.get(new Random().nextInt(possibleColors.size()));
-    }
-
-    private String generateTopSkirtColorCombination(String topColor) {
-        List<String> possibleColors = TOP_SKIRT_COLOR_COMBINATIONS.getOrDefault(topColor, Collections.emptyList());
-        if (possibleColors.isEmpty()) {
-            return "Black"; // 기본값
+            return "#000000"; // 기본값 BLACK
         }
         return possibleColors.get(new Random().nextInt(possibleColors.size()));
     }
@@ -52,18 +41,15 @@ public class ClothingCombinationService {
     private String generateColorCombination(String mainCategory, List<ClothingCombinationDto> existingCombinations) {
         Random random = new Random();
 
-        // 색상 정의
-        String[] outerColors = {"Black", "Gray", "Navy", "Beige"};
-        String[] topColors = {"White", "Blue", "Red", "Yellow", "Green"};
-
         // "아우터"는 독립적인 색상 지정
         if ("아우터".equals(mainCategory)) {
-            return outerColors[random.nextInt(outerColors.length)];
+            return "#000000"; // 기본값 BLACK
         }
 
         // "상의"는 독립적으로 랜덤 색상 선택
         if ("상의".equals(mainCategory)) {
-            return topColors[random.nextInt(topColors.length)];
+            List<String> topColors = new ArrayList<>(TOP_BOTTOM_COLOR_COMBINATIONS.keySet());
+            return topColors.get(random.nextInt(topColors.size()));
         }
 
         // "바지"는 상의 색상 기반으로 조합 생성
@@ -88,7 +74,7 @@ public class ClothingCombinationService {
                     .orElse(null);
 
             if (topColor != null) {
-                return generateTopSkirtColorCombination(topColor);
+                return generateTopBottomColorCombination(topColor); // 스커트도 같은 방식으로 조합
             }
         }
 
@@ -125,7 +111,6 @@ public class ClothingCombinationService {
             }
         }
     }
-
 
     /**
      * 조합이 유효한지 확인하는 로직
