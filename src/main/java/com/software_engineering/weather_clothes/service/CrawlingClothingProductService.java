@@ -121,7 +121,7 @@ public class CrawlingClothingProductService {
                     try {
                         likes = productElement.findElement(By.xpath(".//div[2]/div[1]/span")).getText();
 
-                        if (likes.equals("남성") || likes.equals("여성")) {
+                        if (likes.equals("남성") || likes.equals("여성")) { // 좋아요수가 0이면 "남성", "여성" 문구가 추출되는 경우가 있음
                             likes = "0";
                         }
                     } catch (Exception e) {
