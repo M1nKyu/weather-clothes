@@ -279,6 +279,19 @@ html {
 
 /* 모바일 환경을 위한 스타일 */
 @media (max-width: 768px) {
+    html, body {
+        overflow: auto; /* 스크롤은 가능 */
+    }
+
+    /* 모든 스크롤바를 숨김 */
+    ::-webkit-scrollbar {
+        display: none; /* 웹킷 기반 브라우저에서 스크롤바 숨기기 */
+    }
+
+    * {
+        -ms-overflow-style: none;  /* IE와 Edge에서 스크롤바 숨기기 */
+        scrollbar-width: none;    /* Firefox에서 스크롤바 숨기기 */
+    }
     main {
         margin-top:50px;
         padding:20px;
