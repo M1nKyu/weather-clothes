@@ -14,6 +14,15 @@ public class ClothingCombinationDto {
         this.color = color;
     }
 
+    @Override
+    public String toString() {
+        return "ClothingCombinationDto{" +
+                "mainCategory='" + mainCategory + '\'' +
+                ", clothingCategory=" + clothingCategory.toString() +
+                ", color='" + color + '\'' +
+                '}';
+    }
+
     // Getter와 Setter
     public String getMainCategory() {
         return mainCategory;
