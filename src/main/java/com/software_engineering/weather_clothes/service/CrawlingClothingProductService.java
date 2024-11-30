@@ -1,5 +1,6 @@
 package com.software_engineering.weather_clothes.service;
 
+import com.software_engineering.weather_clothes.sheduler.ClothingProductScheduler;
 import com.software_engineering.weather_clothes.model.ClothingProduct;
 import com.software_engineering.weather_clothes.repository.ClothingProductRepository;
 import com.software_engineering.weather_clothes.util.ChromeDriverUtil;
@@ -7,12 +8,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -20,9 +20,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.logging.Logger;
 
 @Service
 public class CrawlingClothingProductService {
+    Logger logger = Logger.getLogger(ClothingProductScheduler.class.getName()); // Logger 선언
+
+    @Async
+    public CompletableFuture<Void> processAsync() throws InterruptedException {
+        process();
+        return CompletableFuture.completedFuture(null);
+    }
 
     @Value("${chrome.driver.path}")
     private String chromeDriverPath;
@@ -34,13 +43,12 @@ public class CrawlingClothingProductService {
 
     private static final String BASE_URL = "https://www.musinsa.com/category/";
 
-    // 카테고리 ID 리스트 (샘플)
+    // 카테고리 ID 리스트
     private static final List<String> categories = List.of(
             "001001", "001011", "001003", "001002", "001010", "001005", "001004", "001006", // 상의
             "003009", "003002", "003007", "003008", // 바지
             "002022", "002006", "002021", "002002", "002004", "002017", "002023", "002007", "002024", "002013", "002012", "002016", "002014", "002008", // 아우터
-//          "100001", "100002", "100004", "100005", "100003", "100006", // 원피스/스커트
-            "101008", "101004007" // 기타 (액세서리)
+            "101008", "101004007" // 기타 (장갑, 머플러 등)
     );
 
 
@@ -54,13 +62,13 @@ public class CrawlingClothingProductService {
                 getDataList(categoryUrl, categoryId);
             }
         } catch (Exception e) {
-            System.out.println("크롤링 중 오류 발생: " + e.getMessage());
+            logger.info("크롤링 중 오류 발생: " + e.getMessage());
             e.printStackTrace();
         } finally {
             if (driver != null) {
                 driver.quit(); // 드라이버 종료
             }
-            System.out.println("크롤링 작업이 완료되었습니다.");
+            logger.info("크롤링 작업이 완료되었습니다.");
         }
     }
 
@@ -96,7 +104,6 @@ public class CrawlingClothingProductService {
         WebElement firstProduct = driver.findElement(By.xpath("//*[@id='commonLayoutContents']/div[3]/div/div/div/div[2]/div/div[1]"));
 
         int productHeight = firstProduct.getSize().getHeight();  // 상품 한 줄의 높이를 측정
-        System.out.println(productHeight);
 
         int totalProducts = 0;
         int row = 1;
@@ -138,7 +145,7 @@ public class CrawlingClothingProductService {
                     clothingProduct.setLink(productLink);
                     clothingProduct.setImageUrl(productImageUrl);
                     clothingProduct.setCategoryId(categoryId);
-                    clothingProduct.setCategoryName(categoryName);  // 카테고리명을 저장
+                    clothingProduct.setCategoryName(categoryName);  
                     clothingProduct.setLikes(likes);
                     clothingProduct.setLastUpdated(lastUpdated);
 
@@ -146,11 +153,11 @@ public class CrawlingClothingProductService {
                     clothingProductRepository.save(clothingProduct);
 
                     // 데이터 출력 (디버깅용)
-                    System.out.println("상품 ID: " + productId + ", 상품링크: " + productLink + ", 카테고리: " + categoryId + ", 이미지: " + productImageUrl + ", 좋아요: " + likes);
+                    logger.info("ID: " + productId + ", 링크: " + productLink + ", 카테고리: " + categoryId + ", 이미지: " + productImageUrl + ", 좋아요: " + likes);
                     totalProducts++;
 
                 } catch (Exception e) {
-                    System.out.println("크롤링 오류 발생: " + e.getMessage());
+                    logger.info("크롤링 오류 발생: " + e.getMessage());
                     e.printStackTrace();
                 }
             }
@@ -161,7 +168,7 @@ public class CrawlingClothingProductService {
             }
 
             js.executeScript("window.scrollBy(0, " + productHeight + ");");
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         }
     }
 

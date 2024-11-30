@@ -6,14 +6,22 @@ import com.software_engineering.weather_clothes.model.Weather;
 import com.software_engineering.weather_clothes.repository.ClothingCategoryRepository;
 import com.software_engineering.weather_clothes.repository.ClothingProductRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import com.software_engineering.weather_clothes.enums.WeatherStatusEnums.TemperatureRange;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @Service
 public class ClothingCategoryService {
+
+    @Async
+    public CompletableFuture<Void> syncCategoriesAsync() {
+        syncCategories();
+        return CompletableFuture.completedFuture(null);
+    }
 
     private final ClothingProductRepository clothingProductRepository;
     private final ClothingCategoryRepository clothingCategoryRepository;
