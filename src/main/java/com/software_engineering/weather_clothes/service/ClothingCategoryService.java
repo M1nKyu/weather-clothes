@@ -85,11 +85,11 @@ public class ClothingCategoryService {
         // 바지
         addClothingCategory(recommendations, "바지", "003009"); // 숏 팬츠
 
-        // 원피스/스커트
-        addClothingCategory(recommendations, "기타", "100001"); // 미니원피스
-        addClothingCategory(recommendations, "기타", "100002"); // 미디원피스
-        addClothingCategory(recommendations, "기타", "100004"); // 미니스커트
-        addClothingCategory(recommendations, "기타", "100005"); // 미디스커트
+//        // 원피스/스커트
+//        addClothingCategory(recommendations, "원피스/스커트", "100001"); // 미니원피스
+//        addClothingCategory(recommendations, "원피스/스커트", "100002"); // 미디원피스
+//        addClothingCategory(recommendations, "원피스/스커트", "100004"); // 미니스커트
+//        addClothingCategory(recommendations, "원피스/스커트", "100005"); // 미디스커트
     }
     private void addHotClothing(Map<String, List<ClothingCategory>> recommendations){
         // 상의
@@ -102,13 +102,13 @@ public class ClothingCategoryService {
         addClothingCategory(recommendations, "바지", "003008"); // 슈트 팬츠/슬랙스
         addClothingCategory(recommendations, "바지", "003009"); // 숏 팬츠
 
-        // 원피스/스커트
-        addClothingCategory(recommendations, "원피스/스커트", "100001"); // 미니원피스
-        addClothingCategory(recommendations, "원피스/스커트", "100002"); // 미디원피스
-        addClothingCategory(recommendations, "원피스/스커트", "100003"); // 맥시원피스
-        addClothingCategory(recommendations, "원피스/스커트", "100004"); // 미니스커트
-        addClothingCategory(recommendations, "원피스/스커트", "100005"); // 미디스커트
-        addClothingCategory(recommendations, "원피스/스커트", "100006"); // 롱스커트
+//        // 원피스/스커트
+//        addClothingCategory(recommendations, "원피스/스커트", "100001"); // 미니원피스
+//        addClothingCategory(recommendations, "원피스/스커트", "100002"); // 미디원피스
+//        addClothingCategory(recommendations, "원피스/스커트", "100003"); // 맥시원피스
+//        addClothingCategory(recommendations, "원피스/스커트", "100004"); // 미니스커트
+//        addClothingCategory(recommendations, "원피스/스커트", "100005"); // 미디스커트
+//        addClothingCategory(recommendations, "원피스/스커트", "100006"); // 롱스커트
     }
     private void addWarmClothing(Map<String, List<ClothingCategory>> recommendations){
         addClothingCategory(recommendations, "아우터", "002022"); // 후드 집업

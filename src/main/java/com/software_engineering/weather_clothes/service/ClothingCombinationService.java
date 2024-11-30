@@ -65,19 +65,6 @@ public class ClothingCombinationService {
             }
         }
 
-        // "스커트"는 상의 색상 기반으로 조합 생성
-        if ("원피스/스커트".equals(mainCategory)) {
-            String topColor = existingCombinations.stream()
-                    .filter(comb -> "상의".equals(comb.getMainCategory()))
-                    .map(ClothingCombinationDto::getColor)
-                    .findFirst()
-                    .orElse(null);
-
-            if (topColor != null) {
-                return generateTopBottomColorCombination(topColor); // 스커트도 같은 방식으로 조합
-            }
-        }
-
         // "기타"는 색상 지정 없음
         return null;
     }
