@@ -10,7 +10,7 @@ public class ChromeDriverUtil {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*"); // 원격 리소스 허용
-        options.addArguments("--headless"); // 헤드리스 모드 (UI 없이 실행)
+//        options.addArguments("--headless"); // 헤드리스 모드 (UI 없이 실행)
         options.addArguments("--no-sandbox"); // 샌드박스 비활성화 (권한 문제 해결)
         options.addArguments("--disable-dev-shm-usage"); // /dev/shm 파티션 문제 해결
         options.addArguments("--disable-gpu"); // GPU 가속 비활성화 (필요 없을 경우)

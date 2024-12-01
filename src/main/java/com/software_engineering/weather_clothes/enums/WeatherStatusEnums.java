@@ -76,6 +76,34 @@ public class WeatherStatusEnums {
         }
     }
 
+    // 기온
+    public enum TemperatureRange {
+        VERY_HOT(28, 99),
+        HOT(23, 27),
+        WARM(20, 22),
+        MILD(16, 19),
+        COOL(11, 15),
+        COLD(5, 10),
+        VERY_COLD(-99, 4);
+
+        private final int minTemp;
+        private final int maxTemp;
+
+        TemperatureRange(int minTemp, int maxTemp) {
+            this.minTemp = minTemp;
+            this.maxTemp = maxTemp;
+        }
+
+        public static TemperatureRange getRange(int temperature) {
+            for (TemperatureRange range : values()) {
+                if (temperature >= range.minTemp && temperature <= range.maxTemp) {
+                    return range;
+                }
+            }
+            throw new IllegalArgumentException("Temperature out of defined ranges");
+        }
+    }
+
     public enum RainfallOneHour {
         NONE(0, 1),
         LIGHT(1, 3),
@@ -100,5 +128,6 @@ public class WeatherStatusEnums {
             throw new IllegalArgumentException("잘못된 RN1 값 :" + value);
         }
     }
+
 
 }
