@@ -18,23 +18,29 @@
     <div class="location-form">
         <h2>지역 선택</h2>
         <div class="form-group">
-            <label for="region">시/도</label>
-            <select id="region" name="region">
-                <option value="">선택하세요</option>
-                <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>
-            </select>
+            <div class="select-container">
+                <label for="region">시/도</label>
+                <select id="region" name="region">
+                    <option value="">선택하세요</option>
+                    <option th:each="region : ${regions}" th:value="${region}" th:text="${region}"></option>
+                </select>
+            </div>
         </div>
         <div class="form-group">
-            <label for="district">구/군</label>
-            <select id="district" name="district" disabled>
-                <option value="">선택하세요</option>
-            </select>
+            <div class="select-container">
+                <label for="district">구/군</label>
+                <select id="district" name="district" disabled>
+                    <option value="">선택하세요</option>
+                </select>
+            </div>
         </div>
         <div class="form-group">
-            <label for="town">동/읍/면</label>
-            <select id="town" name="town" disabled>
-                <option value="">선택하세요</option>
-            </select>
+            <div class="select-container">
+                <label for="town">동/읍/면</label>
+                <select id="town" name="town" disabled>
+                    <option value="">선택하세요</option>
+                </select>
+            </div>
         </div>
         <button id="saveButton" disabled>확인</button>
     </div>
