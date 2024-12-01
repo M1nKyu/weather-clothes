@@ -70,15 +70,13 @@ public class WeatherPageController {
         // 항상 위치 정보를 모델에 추가
         model.addAttribute("userLocation", userLocation);
 
-        // 계절 정보
-//        String season = DateTimeUtil.getSeason();
-//        model.addAttribute("season", season);
 
         if (nx != null && ny != null) {
 
             // 날씨 정보를 데이터베이스에 저장하고 weatherData로 가져옴.
             weatherService.fetchAndStoreWeatherData(nx, ny);
             List<Weather> weatherData = weatherService.getWeatherData(baseDate, baseTime, Integer.parseInt(nx), Integer.parseInt(ny));
+
 
             // 성공적으로 가져왔을 때
             if (!weatherData.isEmpty()) {
@@ -137,6 +135,9 @@ public class WeatherPageController {
                 model.addAttribute("clothingCategory", clothingCategory); // 추천 카테고리
                 model.addAttribute("clothingCombination", clothingCombination); // 추천 조합
                 model.addAttribute("clothingProducts", clothingProducts); // 추천 카테고리별 상품
+            }
+            else{
+                logger.info("no weather data");
             }
             return "mainPage";  // global.css 템플릿 렌더링
         } else {
