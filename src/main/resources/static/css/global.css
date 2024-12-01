@@ -36,7 +36,7 @@ header {
 }
 
 .header-left img {
-    width: 20px;
+    width: 100px;
     height: auto;
     margin-right: 10px;
 }
@@ -131,85 +131,6 @@ main {
     gap: 30px;
 }
 
-
-
-@media screen and (max-width: 768px) {
-    .header-left img {
-        font-size: 1.2rem;
-    }
-
-    .header-left h1 {
-        font-size: 1.2rem;
-    }
-
-    .subtitle {
-        font-size: 0.8rem;
-    }
-
-    .current-weather {
-        padding: 5px 0;
-    }
-
-    .weather-details {
-        font-size: 0.9rem;
-    }
-
-    .hour-item {
-        min-width: 50px;
-    }
-}
-
-
-/* 화면 비율에 따라 텍스트 크기 조정 */
-@media (max-width: 768px) {
-    .current-temperature {
-        font-size: 10vw; /* 화면 너비에 비례하여 텍스트 크기 조정 */
-    }
-
-    .weather-info {
-        width: 100%; /* 날씨 정보 영역이 화면 크기에 맞게 90% 차지 */
-    }
-
-    .category-suggestions {
-        padding: 20px; /* 작은 화면에서 여백을 줄임 */
-    }
-}
-
-/* 점 깜박이는 로딩 */
-.spinner {
-    display: flex;
-    gap: 5px;
-}
-
-.spinner div {
-    width: 10px;
-    height: 10px;
-    background-color: #333;
-    border-radius: 50%;
-    animation: blink 1.5s infinite ease-in-out;
-}
-
-.spinner div:nth-child(1) {
-    animation-delay: 0s;
-}
-
-.spinner div:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.spinner div:nth-child(3) {
-    animation-delay: 0.4s;
-}
-
-@keyframes blink {
-    0%, 100% {
-        opacity: 0.2;
-    }
-    50% {
-        opacity: 1;
-    }
-}
-
 /* 푸터 스타일 */
 .footer {
     display: none;
@@ -228,23 +149,6 @@ main {
     display: flex;
     justify-content: space-between;
     width: 100%;
-}
-
-/* 데스크톱 화면에서는 푸터 숨김 */
-@media (min-width: 1024px) {
-    .footer {
-        display: none;
-    }
-}
-
-/* 모바일 화면에서 푸터 표시 */
-@media (max-width: 1023px) {
-    .footer {
-        display: block;
-    }
-    .footer .container {
-        display: flex;
-    }
 }
 
 /* 푸터 버튼 스타일 */
@@ -277,6 +181,7 @@ html {
     scroll-behavior: smooth;
 }
 
+
 /* 모바일 환경을 위한 스타일 */
 @media (max-width: 768px) {
     html, body {
@@ -307,8 +212,7 @@ html {
     }
 
     .header-left img {
-        width: 16px;
-        margin-right: 8px;
+        width: 60px;
     }
 
     .menu-toggle-button {
@@ -322,5 +226,9 @@ html {
 
     .menu a {
         font-size: 20px;
+    }
+
+    .footer {
+        display: block;
     }
 }

@@ -1,133 +1,10 @@
-@font-face {
-    font-family: 'NEXON Lv1 Gothic OTF';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'NEXON Lv1 Gothic OTF', Arial, sans-serif;
-}
-header {
-    position: fixed; /* 화면 상단에 고정 */
-    top: 0; /* 상단에 위치 */
-    left: 0; /* 화면 왼쪽에 위치 */
-    width: 100%; /* 화면 전체 너비 */
-    background-color: #ffffff; /* 헤더 배경색 (필요에 따라 조정) */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과로 구분 */
-    z-index: 1000; /* 다른 요소 위에 표시되도록 z-index 설정 */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px; /* 패딩 조정 */
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    text-decoration: none;
-    padding: 5px;
-}
-
-.header-left img {
-    width: 20px;
-    height: auto;
-    margin-right: 10px;
-}
-
-.header-left h1 {
-    color: #42C0E8;
-    font-size: 30px;
-    margin-right: 5px;
-}
-
-.subtitle {
-    color: #42C0E8;
-    font-weight: bold;
-}
-
-.menu-toggle-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.menu-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: block;
-}
-
-
-/* 우측 메뉴 */
-.menu-container {
-    position: fixed;
-    top: 0;
-    right: -300px; /* 처음에는 화면 밖에 숨김 */
-    width: 300px;
-    height: 100%;
-    background-color: #ffffff;
-    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);
-    transition: right 0.3s ease-in-out; /* 애니메이션 효과 */
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    border-top-left-radius: 15px; /* 위쪽 끝을 둥글게 */
-    border-bottom-left-radius: 15px; /* 아래쪽 끝을 둥글게 */
-}
-
-.menu-container.active {
-    right: 0;
-}
-
-.menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.menu li {
-    margin: 15px 0;
-}
-
-.menu a {
-    text-decoration: none;
-    color: #333;
-    font-size: 25px;
-    font-weight: bold;
-}
-
-.menu a:hover {
-    color: #58ACFA;
-}
-
-/* 메인 영역 */
-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    padding-top: 130px;
-}
-
 .location-form {
     background-color: #f5f5f5;
-    max-width: 1200px; /* 최대 너비 확대 */
+    max-width: 1200px;
     width: 100%;
     gap: 30px;
     padding: 20px;
     border-radius: 15px;
-    width: 100%;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
@@ -146,7 +23,7 @@ label {
 }
 
 select {
-    width: 300px; /* 고정된 너비 */
+    width: 300px;
     max-width: 400px;
     height: 50px;
     padding: 10px;
@@ -172,4 +49,34 @@ button {
 button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .location-form {
+        width: 100%;
+        padding: 30px;
+        gap: 40px;
+    }
+
+    .form-group {
+        margin-bottom: 70px;
+        width: 100%;
+        height: 30px;
+    }
+
+    label {
+        font-size: 24px;
+    }
+
+    select {
+        width: 100%;
+        font-size: 18px;
+        height: 60px;
+        padding: 15px;
+    }
+
+    button {
+        font-size: 20px;
+        padding: 20px;
+    }
 }
