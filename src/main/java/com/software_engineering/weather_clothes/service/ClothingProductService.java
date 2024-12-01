@@ -3,12 +3,20 @@ package com.software_engineering.weather_clothes.service;
 import com.software_engineering.weather_clothes.model.ClothingProduct;
 import com.software_engineering.weather_clothes.repository.ClothingProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class ClothingProductService {
+
+    @Async
+    public CompletableFuture<Void> updateLikesForAllProductsAsync() {
+        updateLikesForAllProducts();
+        return CompletableFuture.completedFuture(null);
+    }
 
     @Autowired
     private ClothingProductRepository clothingProductRepository;
@@ -26,6 +34,7 @@ public class ClothingProductService {
         }
         return likes;  // 변환 불필요한 경우 그대로 반환
     }
+
 
     // DB의 모든 데이터에 대해 좋아요 변환 적용
     public void updateLikesForAllProducts() {

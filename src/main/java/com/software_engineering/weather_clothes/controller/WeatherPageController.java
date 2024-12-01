@@ -1,15 +1,19 @@
 package com.software_engineering.weather_clothes.controller;
 
+import com.software_engineering.weather_clothes.dto.ClothingCombinationDto;
 import com.software_engineering.weather_clothes.model.ClothingCategory;
 import com.software_engineering.weather_clothes.model.ClothingProduct;
 import com.software_engineering.weather_clothes.model.Weather;
 import com.software_engineering.weather_clothes.service.ClothingCategoryService;
+import com.software_engineering.weather_clothes.service.ClothingCombinationService;
 import com.software_engineering.weather_clothes.service.ImageService;
 import com.software_engineering.weather_clothes.service.WeatherService;
+import com.software_engineering.weather_clothes.sheduler.ClothingProductScheduler;
 import com.software_engineering.weather_clothes.util.CookieUtil;
 import com.software_engineering.weather_clothes.util.DateTimeUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,18 +25,22 @@ import java.util.logging.Logger;
 
 
 @Controller
+@EnableScheduling // 스케줄링 활성화
 public class WeatherPageController {
-    Logger logger = Logger.getLogger(ClothingProductController.class.getName()); // Logger 선언
+    Logger logger = Logger.getLogger(ClothingProductScheduler.class.getName()); // Logger 선언
 
     private final WeatherService weatherService;
     private final ImageService imageService;
     private final ClothingCategoryService clothingCategoryService;
+    private final ClothingCombinationService clothingCombinationService;
 
     @Autowired
-    public WeatherPageController(WeatherService weatherService, ImageService imageService, ClothingCategoryService clothingCategoryService){
+    public WeatherPageController(WeatherService weatherService, ImageService imageService,
+                                 ClothingCategoryService clothingCategoryService, ClothingCombinationService clothingCombinationService){
         this.weatherService = weatherService;
         this.imageService = imageService;
         this.clothingCategoryService = clothingCategoryService;
+        this.clothingCombinationService = clothingCombinationService;
     }
 
     /**
@@ -63,8 +71,8 @@ public class WeatherPageController {
         model.addAttribute("userLocation", userLocation);
 
         // 계절 정보
-        String season = DateTimeUtil.getSeason();
-        model.addAttribute("season", season);
+//        String season = DateTimeUtil.getSeason();
+//        model.addAttribute("season", season);
 
         if (nx != null && ny != null) {
 
@@ -78,6 +86,7 @@ public class WeatherPageController {
                 List<Weather> fcstWeather = weatherData.subList(1, weatherData.size()); // 예보된 날씨 정보 (5 rows)
 
                 Map<String, List<ClothingCategory>> clothingCategory = clothingCategoryService.getClothingCategory(nowWeather); // 추천된 옷 카테고리
+                List<ClothingCombinationDto> clothingCombination = clothingCombinationService.generateCombinations(clothingCategory, nowWeather.getT1h());
                 Map<String, Map<String, List<ClothingProduct>>> clothingProducts = clothingCategoryService.getClothingProductsFromCategories(clothingCategory);
 
                 nowWeather.setIcon(imageService.selectWeatherIcon(nowWeather));
@@ -101,13 +110,32 @@ public class WeatherPageController {
 
                 // 날씨에 따른 배경화면 지정
                 String weatherInfoBackground = imageService.selectBackgroundImage(nowWeather);
+
                 logger.info(weatherInfoBackground);
+                logger.info(clothingCombination.toString());
+
+                // 상품 정보를 같은 카테고리, 타입별로 한 줄에 출력
+                clothingProducts.forEach((category, productsByType) -> {
+                    logger.info("Category: " + category);
+                    productsByType.forEach((type, products) -> {
+                        StringBuilder productInfo = new StringBuilder("  Type: " + type + " -> ");
+                        products.forEach(product -> {
+                            productInfo.append(String.format("[ID: %s, Name: %s, Link: %s] ",
+                                    product.getCategoryId(),
+                                    product.getCategoryName(),
+                                    product.getLink()));
+                        });
+                        logger.info(productInfo.toString());
+                    });
+                });
+
 
                 model.addAttribute("nowWeather", nowWeather); // 현재 날씨
                 model.addAttribute("weatherDetails", weatherDetails);
                 model.addAttribute("weatherInfoBackground", weatherInfoBackground);
                 model.addAttribute("fcstWeather", fcstWeather); // 예보 날씨
                 model.addAttribute("clothingCategory", clothingCategory); // 추천 카테고리
+                model.addAttribute("clothingCombination", clothingCombination); // 추천 조합
                 model.addAttribute("clothingProducts", clothingProducts); // 추천 카테고리별 상품
             }
             return "mainPage";  // global.css 템플릿 렌더링
@@ -116,4 +144,5 @@ public class WeatherPageController {
             return "mainPage";
         }
     }
+
 }
