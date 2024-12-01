@@ -2,31 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Select Location</title>
+
+    <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/select-location.css">
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/select-location.js"></script>
+
+    <title>Select Location</title>
 </head>
 <body>
-    <header>
-        <a href="/" class="header-left">
-            <img src="/images/otneul-logo2.png" alt="로고" class="logo">
-            <h1>옷늘</h1>
-        </a>
-
-        <div class="header-right">
-            <button class="menu-toggle-button">
-                <img src="/images/ui-icons/bx-menu.svg" alt="메뉴 아이콘" class="menu-icon">
-            </button>
-        </div>
-    </header>
-
-    <div class="menu-container">
-        <ul class="menu">
-            <li><a href="/location/select" class="button">지역 선택으로 이동</a></li>
-            <li><a href="https://github.com/M1nKyu/weather-clothes" class="button">서비스 소개 (GitHub)</a></li>
-        </ul>
-    </div>
+<div th:replace="~{/global/header.html :: header}"></div>
 
 <main>
     <div class="location-form">
