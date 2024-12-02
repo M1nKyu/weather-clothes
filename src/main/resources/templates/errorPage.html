@@ -2,14 +2,38 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
-    <title>Error</title>
+    <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/errorPage.css">
+
+    <title>Error</title>
 </head>
 <body>
-<div class="error-container">
-    <h1>Something went wrong!</h1>
-    <p th:text="${message}"></p>
-    <p>Please try again later.</p>
+<header>
+    <a href="/" class="header-left">
+        <img src="/images/otneul-logo3.png" alt="로고" class="logo">
+    </a>
+    <div class="header-right">
+        <button class="menu-toggle-button">
+            <img src="/images/ui-icons/bx-menu.svg" alt="메뉴 아이콘" class="menu-icon">
+        </button>
+    </div>
+</header>
+
+<div class="menu-container">
+    <ul class="menu">
+        <li><a href="/location/select" class="button">지역 선택으로 이동</a></li>
+        <li><a href="https://github.com/M1nKyu/weather-clothes" class="button">서비스 소개 (GitHub)</a></li>
+        <li><a href="https://github.com/M1nKyu/weather-clothes/discussions/64" class="button">의견 남기기</a></li>
+    </ul>
+</div><div class="error-container">
+    <h1>Oops! Something Went Wrong</h1>
+    <p th:text="${message}">An unexpected error occurred while processing your request.</p>
+    <p>Please try refreshing the page or visit us again later.</p>
+    <div class="error-actions">
+        <a href="/" class="btn">Go to Homepage</a>
+        <a href="/contact" class="btn">Contact Support</a>
+    </div>
+    <p class="support">If the issue persists, please email us at <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>.</p>
 </div>
 </body>
 </html>

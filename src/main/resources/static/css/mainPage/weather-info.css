@@ -163,10 +163,56 @@
     }
 
     .hour-item-time {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .hour-item-temp {
         font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .weather-info {
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .location h2, .location a {
+        font-size: 14px;
+        padding-left: 8px; /* 여백을 조금 더 작게 */
+    }
+
+    .current-weather {
+        font-size: 24px; /* 더 작은 폰트 크기 */
+    }
+
+    .weather-icon {
+        width: 60px; /* 더 작은 아이콘 크기 */
+        height: 60px;
+    }
+
+    .current-temperature {
+        font-size: 36px; /* 더 작은 온도 텍스트 크기 */
+    }
+
+    .weather-details {
+        font-size: 14px; /* 상세 정보 폰트 크기 축소 */
+    }
+
+    .pty-information {
+        font-size: 14px; /* 강수량 정보 폰트 크기 축소 */
+    }
+
+    .hour-item img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .hour-item-time {
+        font-size: 10px;
+    }
+
+    .hour-item-temp {
+        font-size: 18px;
     }
 }

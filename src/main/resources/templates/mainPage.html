@@ -9,11 +9,12 @@
     <link rel="stylesheet" href="/css/mainPage/category-suggestions.css">
     <link rel="stylesheet" href="/css/mainPage/outfit-display.css">
     <link rel="stylesheet" href="/css/mainPage/weather-info.css">
+    <link rel="stylesheet" href="/css/mainPage/clothing-combination.css">
 
     <!-- PWA 관련 -->
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#ffffff">
-    <link rel="apple-touch-icon" href="/images/otneul-logo.png">
+    <link rel="apple-touch-icon" href="/images/otneul-logo4.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
@@ -22,10 +23,8 @@
 <body>
 <header>
     <a href="/" class="header-left">
-        <img src="/images/otneul-logo2.png" alt="로고" class="logo">
-        <h1>옷늘</h1>
+        <img src="/images/otneul-logo3.png" alt="로고" class="logo">
     </a>
-
     <div class="header-right">
         <button class="menu-toggle-button">
             <img src="/images/ui-icons/bx-menu.svg" alt="메뉴 아이콘" class="menu-icon">
@@ -37,6 +36,14 @@
     <ul class="menu">
         <li><a href="/location/select" class="button">지역 선택으로 이동</a></li>
         <li><a href="https://github.com/M1nKyu/weather-clothes" class="button">서비스 소개 (GitHub)</a></li>
+        <li><a href="https://github.com/M1nKyu/weather-clothes/discussions/64" class="button">의견 남기기</a></li>
+    </ul>
+</div>
+<div class="menu-container">
+    <ul class="menu">
+        <li><a href="/location/select" class="button">지역 선택으로 이동</a></li>
+        <li><a href="https://github.com/M1nKyu/weather-clothes" class="button">서비스 소개 (GitHub)</a></li>
+        <li><a href="https://github.com/M1nKyu/weather-clothes/discussions/64" class="button">의견 남기기</a></li>
     </ul>
 </div>
 
@@ -87,11 +94,32 @@
 
         <div class="category-suggestions">
             <h2>지금 날씨에는</h2>
-            <div th:each="category : ${clothingCategory}" class="recommendation-category">
-                <h3 th:text="${category.key}" class="category-title"></h3>
-                <ul class="recommendation-list">
-                    <li th:each="clothing : ${category.value}" th:text="${clothing.categoryName}"></li> <!-- ClothingCategory의 CategoryName 출력 -->
-                </ul>
+            <div class="content-wrapper">
+                <div th:each="category : ${clothingCategory}" class="recommendation-category">
+                    <h3 th:text="${category.key}" class="category-title"></h3>
+                    <ul class="recommendation-list">
+                        <li th:each="clothing : ${category.value}" th:text="${clothing.categoryName}"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="combination-suggestion">
+            <div class="content-wrapper">
+                <div class="combination">
+                    <h2>이 조합은 어때요?</h2>
+                    <div class="combination-items">
+                        <div th:each="combinationItem : ${clothingCombination}" class="combination-item">
+                            <ul>
+                                <li>
+                                    <span class="clothing-name" th:text="${combinationItem.clothingCategory.categoryName}"></span>
+                                    <span th:if="${combinationItem.color != null}" class="color-circle" th:style="'background-color: ' + ${combinationItem.color}"></span>
+                                    <span th:if="${combinationItem.color == null}" class="no-circle">(선택)</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -153,7 +181,8 @@
 <footer class="footer">
     <div class="container">
         <button onclick="scrollToSectionByClass('weather-info')">날씨 정보</button>
-        <button onclick="scrollToSectionByClass('category-suggestions')">추천 카테고리</button>
+        <button onclick="scrollToSectionByClass('category-suggestions')">카테고리</button>
+        <button onclick="scrollToSectionByClass('combination-suggestion')">추천 조합</button>
         <button onclick="scrollToSectionByClass('outfit-display')">추천 의상</button>
     </div>
 </footer>
@@ -169,6 +198,7 @@
 <script src="/js/product-toggle.js"></script>
 <script src="/js/scroll-buttons.js"></script>
 <script src="/js/footer-buttons.js"></script>
+
 
 <!-- PWA 서비스워커 등록 -->
 <script>
@@ -188,6 +218,7 @@
 </script>
 
 <!-- 다른 스크립트들 위에 추가 -->
+
 
 
 </body>

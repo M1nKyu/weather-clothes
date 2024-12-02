@@ -17,13 +17,14 @@ header {
     top: 0; /* 상단에 위치 */
     left: 0; /* 화면 왼쪽에 위치 */
     width: 100%; /* 화면 전체 너비 */
-    background-color: #ffffff; /* 헤더 배경색 (필요에 따라 조정) */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과로 구분 */
-    z-index: 1000; /* 다른 요소 위에 표시되도록 z-index 설정 */
+    background-color: #ffffff; /* 헤더 배경색 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    z-index: 1000; /* 다른 요소 위에 표시 */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px; /* 패딩 조정 */
+    padding: 5px 15px;
+    height: 70px;
 }
 
 .header-left {
@@ -35,7 +36,7 @@ header {
 }
 
 .header-left img {
-    width: 20px;
+    width: 100px;
     height: auto;
     margin-right: 10px;
 }
@@ -130,85 +131,6 @@ main {
     gap: 30px;
 }
 
-
-
-@media screen and (max-width: 768px) {
-    .header-left img {
-        font-size: 1.2rem;
-    }
-
-    .header-left h1 {
-        font-size: 1.2rem;
-    }
-
-    .subtitle {
-        font-size: 0.8rem;
-    }
-
-    .current-weather {
-        padding: 5px 0;
-    }
-
-    .weather-details {
-        font-size: 0.9rem;
-    }
-
-    .hour-item {
-        min-width: 50px;
-    }
-}
-
-
-/* 화면 비율에 따라 텍스트 크기 조정 */
-@media (max-width: 768px) {
-    .current-temperature {
-        font-size: 10vw; /* 화면 너비에 비례하여 텍스트 크기 조정 */
-    }
-
-    .weather-info {
-        width: 100%; /* 날씨 정보 영역이 화면 크기에 맞게 90% 차지 */
-    }
-
-    .category-suggestions {
-        padding: 20px; /* 작은 화면에서 여백을 줄임 */
-    }
-}
-
-/* 점 깜박이는 로딩 */
-.spinner {
-    display: flex;
-    gap: 5px;
-}
-
-.spinner div {
-    width: 10px;
-    height: 10px;
-    background-color: #333;
-    border-radius: 50%;
-    animation: blink 1.5s infinite ease-in-out;
-}
-
-.spinner div:nth-child(1) {
-    animation-delay: 0s;
-}
-
-.spinner div:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.spinner div:nth-child(3) {
-    animation-delay: 0.4s;
-}
-
-@keyframes blink {
-    0%, 100% {
-        opacity: 0.2;
-    }
-    50% {
-        opacity: 1;
-    }
-}
-
 /* 푸터 스타일 */
 .footer {
     display: none;
@@ -227,23 +149,6 @@ main {
     display: flex;
     justify-content: space-between;
     width: 100%;
-}
-
-/* 데스크톱 화면에서는 푸터 숨김 */
-@media (min-width: 1024px) {
-    .footer {
-        display: none;
-    }
-}
-
-/* 모바일 화면에서 푸터 표시 */
-@media (max-width: 1023px) {
-    .footer {
-        display: block;
-    }
-    .footer .container {
-        display: flex;
-    }
 }
 
 /* 푸터 버튼 스타일 */
@@ -274,4 +179,56 @@ main {
 /* 스크롤 애니메이션 */
 html {
     scroll-behavior: smooth;
+}
+
+
+/* 모바일 환경을 위한 스타일 */
+@media (max-width: 768px) {
+    html, body {
+        overflow: auto; /* 스크롤은 가능 */
+    }
+
+    /* 모든 스크롤바를 숨김 */
+    ::-webkit-scrollbar {
+        display: none; /* 웹킷 기반 브라우저에서 스크롤바 숨기기 */
+    }
+
+    * {
+        -ms-overflow-style: none;  /* IE와 Edge에서 스크롤바 숨기기 */
+        scrollbar-width: none;    /* Firefox에서 스크롤바 숨기기 */
+    }
+    main {
+        margin-top:50px;
+        padding:20px;
+    }
+
+    header {
+        padding: 6px 12px;
+        height: 50px;
+    }
+
+    .header-left h1 {
+        font-size: 24px;
+    }
+
+    .header-left img {
+        width: 60px;
+    }
+
+    .menu-toggle-button {
+        padding: 8px;
+    }
+
+    .menu-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .menu a {
+        font-size: 20px;
+    }
+
+    .footer {
+        display: block;
+    }
 }
