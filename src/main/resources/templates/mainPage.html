@@ -200,24 +200,26 @@
 <script src="/js/footer-buttons.js"></script>
 
 
-<script src="/service-worker.js"></script>
-
 <!-- PWA 서비스워커 등록 -->
 <script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then(registration => {
-                    console.log('ServiceWorker 등록 성공:', registration);
-                })
-                .catch(err => {
-                    console.log('ServiceWorker 등록 실패:', err);
-                });
+            navigator.serviceWorker.register('/service-worker.js', {
+                scope: '/'  // 스코프를 루트로 지정
+            })
+            .then(registration => {
+                console.log('ServiceWorker 등록 성공:', registration);
+            })
+            .catch(err => {
+                console.log('ServiceWorker 등록 실패:', err);
+            });
         });
     }
 </script>
 
-<script src="/js/weather-update.js"></script>
+<!-- 다른 스크립트들 위에 추가 -->
+
+
 
 </body>
 </html>
