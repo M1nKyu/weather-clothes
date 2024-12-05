@@ -181,23 +181,6 @@ html {
     scroll-behavior: smooth;
 }
 
-
-.install-button {
-    background-color: #2196f3;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    margin-left: 10px; /* 메뉴 버튼과 간격 */
-}
-
-.install-button:hover {
-    background-color: #1976d2;
-}
-
-
 /* 모바일 환경을 위한 스타일 */
 @media (max-width: 768px) {
     html, body {
