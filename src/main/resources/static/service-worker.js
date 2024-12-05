@@ -10,12 +10,12 @@ const STATIC_CACHE = [
   '/css/mainPage/category-suggestions.css',
   '/css/mainPage/outfit-display.css',
   '/css/mainPage/weather-info.css',
-  '/images/otneul-logo.png',
-  '/images/otneul-logo2.png',
+  '/images/otneul-logo3.png',
+  '/images/otneul-logo4.png',
   '/images/ui-icons/bx-menu.svg',
   '/images/ui-icons/arrow-left.svg',
   '/images/ui-icons/arrow-right.svg',
-  '/images/ui-icons/arrow-right-bold.svg',
+  '/images/ui-icons/arrow-left-bold.svg',
   '/images/ui-icons/arrow-right-bold.svg',
   'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
   'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'
@@ -23,8 +23,8 @@ const STATIC_CACHE = [
 
 // 동적 콘텐츠를 위한 네트워크 우선 전략 적용
 const DYNAMIC_ROUTES = [
-    '/',
-    '/location/select'
+  '/',
+  '/location/select'
 ];
 
 self.addEventListener('install', event => {
