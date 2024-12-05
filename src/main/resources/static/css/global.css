@@ -181,6 +181,18 @@ html {
     scroll-behavior: smooth;
 }
 
+
+#install-button {
+    display: block; /* 버튼을 항상 표시 */
+    pointer-events: none; /* 기본적으로 클릭 비활성화 */
+}
+
+.menu-container.active #install-button,
+#install-button:hover {
+    pointer-events: auto; /* 클릭 활성화 */
+}
+
+
 /* 모바일 환경을 위한 스타일 */
 @media (max-width: 768px) {
     html, body {
