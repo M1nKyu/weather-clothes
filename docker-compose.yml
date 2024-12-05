@@ -4,11 +4,12 @@ services:
     build: .
     image: weather-clothes
     ports:
-      - "8080:8080"
+      - "80:80"
     environment:
       - SPRING_DATASOURCE_URL=${MYSQL_URL}
       - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}
       - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
       - WEATHER_API_KEY=${WEATHER_API_KEY}
       - CHROME_DRIVER_PATH=${CHROME_DRIVER_PATH}
+      - PORT=80
 
