@@ -35,70 +35,77 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('fetch', event => {
-    // POST 요청은 캐시 네트워크로 전달
-    if (event.request.method !== 'GET') {
-        event.respondWith(fetch(event.request));
-        return;
-    }
+  const url = new URL(event.request.url);
 
-    const url = new URL(event.request.url);
-    
-    // 동적 라우트인 경우 네트워크 우선 전략 사용
-    if (DYNAMIC_ROUTES.includes(url.pathname)) {
-        event.respondWith(
-            fetch(event.request)
-                .then(response => {
-                    const responseToCache = response.clone();
-                    caches.open(CACHE_NAME)
-                        .then(cache => {
-                            if (event.request.method === 'GET') {
-                                cache.put(event.request, responseToCache);
-                            }
-                        });
-                    return response;
-                })
-                .catch(() => {
-                    return caches.match(event.request);
-                })
-        );
-    } else {
-        // 정적 리소스는 캐시 우선 전략 사용
-        event.respondWith(
-            caches.match(event.request)
-                .then(response => {
-                    if (response) {
-                        return response;
-                    }
-                    return fetch(event.request)
-                        .then(response => {
-                            if (!response || response.status !== 200) {
-                                return response;
-                            }
-                            const responseToCache = response.clone();
-                            caches.open(CACHE_NAME)
-                                .then(cache => {
-                                    if (event.request.method === 'GET') {
-                                        cache.put(event.request, responseToCache);
-                                    }
-                                });
-                            return response;
-                        });
-                })
-        );
-    }
-});
+  // chrome-extension://로 시작하는 요청은 캐시하지 않음
+  if (url.protocol === 'chrome-extension:') {
+    event.respondWith(fetch(event.request));
+    return;
+  }
 
-// 새로운 서비스 워커 활성화시 이전 캐시 삭제
-self.addEventListener('activate', event => {
-    event.waitUntil(
-        caches.keys().then(cacheNames => {
-            return Promise.all(
-                cacheNames.map(cacheName => {
-                    if (cacheName !== CACHE_NAME) {
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
+  // POST 요청은 네트워크로 직접 전달
+  if (event.request.method !== 'GET') {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
+  // 동적 라우트인 경우 네트워크 우선 전략 사용
+  if (DYNAMIC_ROUTES.includes(url.pathname)) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME)
+            .then(cache => {
+              try {
+                cache.put(event.request, responseToCache);
+              } catch (err) {
+                console.error('Failed to cache dynamic route:', err);
+              }
+            });
+          return response;
+        })
+        .catch(() => caches.match(event.request)) // 네트워크 실패 시 캐시에서 반환
+    );
+  } else {
+    // 정적 리소스는 캐시 우선 전략 사용
+    event.respondWith(
+      caches.match(event.request)
+        .then(response => {
+          if (response) {
+            return response;
+          }
+          return fetch(event.request)
+            .then(response => {
+              if (!response || response.status !== 200) {
+                return response;
+              }
+              const responseToCache = response.clone();
+              caches.open(CACHE_NAME)
+                .then(cache => {
+                  try {
+                    cache.put(event.request, responseToCache);
+                  } catch (err) {
+                    console.error('Failed to cache static resource:', err);
+                  }
+                });
+              return response;
+            })
         })
     );
+  }
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
 });
