@@ -95,7 +95,6 @@
 
 .hour-item {
     text-align: center;
-    flex: 1;
     padding: 10px;
 
     /* Flexbox로 중앙 정렬 */
@@ -121,9 +120,12 @@
 }
 
 .hour-item-temp {
+    margin-left:8px;
     color: white;
     font-size: 28px;
     font-weight: bolder;
+    text-align: center;
+    transform: translateX(3px); /* 오른쪽으로 10px 이동 */
 }
 
 @media (max-width: 768px) {
