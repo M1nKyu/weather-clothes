@@ -11,7 +11,8 @@ window.addEventListener('beforeinstallprompt', (event) => {
     installButton.style.pointerEvents = 'auto'; // 클릭 가능하도록 설정
 
     // 버튼 클릭 시 PWA 설치 요청
-    installButton.addEventListener('click', () => {
+    installButton.addEventListener('click', (e) => {
+        e.preventDefault(); // 기본 a 태그 링크 동작 막기
         // PWA 설치 알림을 표시
         deferredPrompt.prompt();
 
@@ -28,8 +29,3 @@ window.addEventListener('beforeinstallprompt', (event) => {
     });
 });
 
-// 이미 설치된 경우, 아이콘 추가 버튼 숨기기
-window.addEventListener('appinstalled', (event) => {
-    console.log('설치되었습니다.');
-    installButton.style.display = 'none'; // 설치 후 버튼 숨기기
-});

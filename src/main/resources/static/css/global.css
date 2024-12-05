@@ -181,7 +181,6 @@ html {
     scroll-behavior: smooth;
 }
 
-
 #install-button {
     display: block; /* 버튼을 항상 표시 */
     pointer-events: none; /* 기본적으로 클릭 비활성화 */
