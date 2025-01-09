@@ -21,6 +21,17 @@
 - 실시간 날씨 정보를 기반으로 적합한 의류 스타일과 실제 상품까지 추천하는 웹 서비스입니다. <br><br>
 
 ## 📱 Demo 
+### 첫 화면
+<img src="images/첫화면_낮_PC.png" alt="Example" width="600" height="300"> <img src="images/첫화면_낮_M.png" alt="Example" width="170" height="300">
+
+### 지역 선택
+<img src="images/지역선택_PC.png" alt="Example" width="600" height="300"> <img src="images/지역선택_M.png" alt="Example" width="170" height="300">
+
+### 카테고리 추천
+<img src="images/카테고리_PC.png" alt="Example" width="600" height="300"> <img src="images/카테고리_M.png" alt="Example" width="170" height="300">
+
+### 조합 및 상품 추천
+<img src="images/조합_상품_PC.png" alt="Example" width="600" height="350"> <img src="images/조합_상품_M.png" alt="Example" width="170" height="350">
 
 <br><br>
 
