@@ -17,28 +17,32 @@
 
 
 
-- 사진
-## Description 🌟
-- 실시간 날씨 정보를 기반으로 적합한 의류 스타일과 실제 상품까지 추천하는 웹 서비스입니다.
+## 🌟 Description 
+- 실시간 날씨 정보를 기반으로 적합한 의류 스타일과 실제 상품까지 추천하는 웹 서비스입니다. <br><br>
 
-## Demo 📱
+## 📱 Demo 
 
+<br><br>
 
-## Main Feature 🔧
+## 🔧 Main Feature 
 
+<br><br>
 
-## Technology Stack 💻
+## 💻 Technology Stack 
 - **Front-end**: 
 - **Back-end**:
 - **Database**:
-- 
 
-## Development Timeline ⏳
+<br><br>
+
+## ⏳ Development Timeline 
 - **Start Date**: 
 - **End Date**:
 - **Duration**: 
 
-## Team Member 👥
+<br><br>
+
+## 👥 Team Member 
 - **강민규** ([M1nkyu](https://github.com/M1nKyu)):
 	- roles
 - **전재억** ([eokjae](https://github.com/eokjae)):
@@ -46,10 +50,15 @@
 - **최강희** ([kangheechoi](https://github.com/kangheechoi)):
 	- roles
 
-## Insatll ⚙️
-### Prerequisites 📦
 
-### Getting Started 🚀
+<br><br>
 
-## Wiki 📖
+## ⚙️ Insatll 
+### 📦 Prerequisites 
+
+<br><br>
+
+### 🚀 Getting Started 
+
+## 📖 Wiki 
 - [Developer Menual](https://github.com/M1nKyu/weather-clothes/wiki/%F0%9F%91%A8%F0%9F%8F%BC%E2%80%8D%F0%9F%92%BB-Developer-Menual)
