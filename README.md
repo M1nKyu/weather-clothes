@@ -27,7 +27,7 @@
 ### 지역 선택
 <img src="images/지역선택_PC.png" alt="Example" width="600" height="300"> <img src="images/지역선택_M.png" alt="Example" width="170" height="300">
 
-### 카테고리 추천
+### 의류 목록
 <img src="images/카테고리_PC.png" alt="Example" width="600" height="300"> <img src="images/카테고리_M.png" alt="Example" width="170" height="300">
 
 ### 조합 및 상품 추천
@@ -36,6 +36,15 @@
 <br><br>
 
 ## 🔧 Main Feature 
+#### 실시간 날씨 정보 제공
+- 사용자의 지역 정보의 실시간 날씨 정보를 제공합니다.
+
+#### 기온에 따른 의류 목록 제공
+- 현재 온도에 입기 적절한 의류 목록을 표시합니다.
+
+#### 조합 및 실제 상품 추천
+- 추천 의류-색상 조합을 생성하여 제공합니다. 
+- 제공된 의류 목록에 해당하는 추천 상품 목록을 제공합니다.  
 
 <br><br>
 
