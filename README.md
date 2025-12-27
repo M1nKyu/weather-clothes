@@ -67,11 +67,7 @@
  	- cloudflare를 사용하여 HTTPS 연결
 - **버전관리**: GitHub 레포지토리 생성 및 관리, 커밋 규칙 설정
 - **문서화**: README 작성, GitHub Wiki 작성
-#### **전재억** ([eokjae](https://github.com/eokjae)):
-- 
-- 
-#### **최강희** ([kangheechoi](https://github.com/kangheechoi)):
-- 
+
 
 
 <br><br>
